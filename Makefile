@@ -22,11 +22,12 @@ RANLIB = /usr/bin/ranlib
 LIBS = $(ROOT)/lib/libft.a
 			# -ltermcap
 
-SRC = ft_printf.c
+SRC = ft_printf.c \
+			demo.c
 
 OBJ = $(patsubst %.c, $(OPATH)/%.o, $(SRC))
 
-CFLAGS = -I $(HPATH) -Wall -Wextra -Werror -I $(HPATH)
+CFLAGS = -Wall -Wextra -Werror
 
 ROOT =		$(shell /bin/pwd)
 OPATH =		$(ROOT)/objs
@@ -45,6 +46,7 @@ pre-check:
 	@-mkdir lib
 	@git submodule init
 	@git submodule update
+	@echo "$(HPATH) for HEADER"
 
 libclean: fclean
 	@echo "$(showStartRule) for libraries"
@@ -83,13 +85,13 @@ $(NAME): $(OBJ)
 	@echo " \033[33m\033[4m\033[1m → Make rule \033[0m"
 	@echo "Creating OBJ files if they do not exist or have changed"
 	@echo "Building $@"
-	@$(CC) -o $@ $(CFLAGS) $(OBJ) $(LIBS)
+	@$(CC) -o $@ $(CFLAGS) $(OBJ) $(LIBS) -I./include
 	@echo "\033[32m ╔════════════════╗"
 	@echo " ║  All is done ! ║"
 	@echo " ╚════════════════╝\033[0m"
 
 $(OPATH)/%.o: $(CPATH)/%.c
-	@$(CC) $(CFLAGS) -c $< -o $@
+	@$(CC) $(CFLAGS) -c $< -o $@ -I./include
 
 $(OPATH):
 	@echo " \033[33m\033[4m\033[1m → Pre Make rule \033[0m"

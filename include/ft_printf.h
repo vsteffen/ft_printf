@@ -1,19 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_select.h                                        :+:      :+:    :+:   */
+/*   ft_printf.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vsteffen <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: vsteffen <vsteffen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/10/27 18:52:35 by vsteffen          #+#    #+#             */
-/*   Updated: 2016/11/18 19:31:18 by vsteffen         ###   ########.fr       */
+/*   Created: 2015/12/22 20:42:40 by vsteffen          #+#    #+#             */
+/*   Updated: 2016/11/22 16:15:05 by vsteffen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ft_printf_H
-# define ft_printf_H
+#ifndef FT_PRINTF_H
+# define FT_PRINTF_H
 
 # include "libft.h"
+# include <stdarg.h>
 
 typedef struct		s_elem {
 	struct s_elem	*prec;
@@ -25,5 +26,7 @@ typedef struct		s_data {
 	t_elem			*current;
 	t_elem			*last;
 }					t_data;
+
+void			demoFunctions(const char *string);
 
 #endif

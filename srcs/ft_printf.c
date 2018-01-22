@@ -19,5 +19,8 @@ int			main(int ac, char **av, char **env)
 	(void)ac;
 	(void)av;
 	(void)env;
+
+	demoFunctions("LOL MDR");
+
 	return (1);
 }
