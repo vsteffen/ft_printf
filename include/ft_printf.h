@@ -16,17 +16,22 @@
 # include "libft.h"
 # include <stdarg.h>
 
-typedef struct		s_elem {
-	struct s_elem	*prec;
-	struct s_elem	*next;
-}					t_elem;
+typedef struct		s_part {
+	struct s_part	*next;
+	struct s_part	*padding;
+	struct s_part	*hashFlag;
+	struct s_part	*zeroFlag;
+	struct s_part	*lessFlag;
+	struct s_part	*spaceFlag;
+	struct s_part	*result;
+}					t_part;
 
 typedef struct		s_data {
-	t_elem			*elem;
-	t_elem			*current;
-	t_elem			*last;
+	const char * restrict			format;
+	va_list										ap;
+	size_t										formatPos;
+	t_part										*first;
+	t_part										*current;
 }					t_data;
-
-void			demoFunctions(const char *string);
 
 #endif

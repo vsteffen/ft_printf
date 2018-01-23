@@ -22,12 +22,11 @@ RANLIB = /usr/bin/ranlib
 LIBS = $(ROOT)/lib/libft.a
 			# -ltermcap
 
-SRC = ft_printf.c \
-			demo.c
+SRC = ft_printf.c
 
 OBJ = $(patsubst %.c, $(OPATH)/%.o, $(SRC))
 
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -g
 
 ROOT =		$(shell /bin/pwd)
 OPATH =		$(ROOT)/objs
@@ -85,13 +84,13 @@ $(NAME): $(OBJ)
 	@echo " \033[33m\033[4m\033[1m → Make rule \033[0m"
 	@echo "Creating OBJ files if they do not exist or have changed"
 	@echo "Building $@"
-	@$(CC) -o $@ $(CFLAGS) $(OBJ) $(LIBS) -I./include
+	@$(CC) -o $@ $(CFLAGS) $(OBJ) $(LIBS) -I $(HPATH)
 	@echo "\033[32m ╔════════════════╗"
 	@echo " ║  All is done ! ║"
 	@echo " ╚════════════════╝\033[0m"
 
 $(OPATH)/%.o: $(CPATH)/%.c
-	@$(CC) $(CFLAGS) -c $< -o $@ -I./include
+	@$(CC) $(CFLAGS) -c $< -o $@ -I $(HPATH)
 
 $(OPATH):
 	@echo " \033[33m\033[4m\033[1m → Pre Make rule \033[0m"
