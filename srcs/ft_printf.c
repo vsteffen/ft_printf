@@ -12,9 +12,40 @@
 
 #include "ft_printf.h"
 
+int		detect_pattern(t_data *data, char charAnalyse) {
+	char		*str;
+
+	printf("Trying to find [%c] ...\n", charAnalyse);
+	if (charAnalyse == 'd') {
+		// printf("inside d --> [%d]\n", va_arg(data->ap, int));
+		printf("'d' conversion detected\n");
+		data->current->type = malloc(sizeof(int));
+		*((int *)data->current->type) = va_arg(data->ap, int);
+		printf("inside d --> [%d]\n", *((int *)data->current->type));
+		return (0);
+	}
+	else if (charAnalyse == 'c') {
+		printf("'c' conversion detected\n");
+		data->current->type = malloc(sizeof(int));
+		*((int *)data->current->type) = va_arg(data->ap, int);
+		printf("inside c --> [%c]\n", *((char *)data->current->type));
+		return (0);
+	}
+	else if (charAnalyse == 's') {
+		str = va_arg(data->ap, char *);
+		printf("inside str --> [%s]\n", str);
+		printf("'s' conversion detected\n");
+		data->current->type = (char *)malloc(sizeof(char *) * ft_strlen(str));
+		*((char **)data->current->type) = str;
+		printf("inside s --> [%s]\n", *((char **)data->current->type));
+		return (0);
+	}
+	else
+		return (1);
+}
+
 int			parse_and_move_format(t_data *data)
 {
-		data->formatMod[data->formatPos] = '\0';
 		if (data->first == NULL)
 		{
 			data->first = createStructArg(data);
@@ -22,6 +53,10 @@ int			parse_and_move_format(t_data *data)
 		}
 		else
 			data->current = data->first;
+		data->formatMod[data->formatPos] = '\0'; // use to improve speed
+		data->formatPos++;
+		while(detect_pattern(data, data->format[data->formatPos]) == -1)
+			(void)data;
 		return (0);
 }
 

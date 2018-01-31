@@ -10,13 +10,23 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "ft_printf.h"
+
 int			main(int ac, char **av, char **env)
 {
 	(void)ac;
 	(void)av;
 	(void)env;
 
-	ft_printf("ANTI-CONSITUTIONNELLEMENT");
+	printf("-------------------\n");
+	if (ac > 1)
+		printf("Trying to send this string %d -> [%s]\n\n", ac, av[1]);
+	if (ac == 1)
+		ft_printf("ANTI-CONSTITUTIONNELLEMENT");
+	else if (ac ==  3)
+		ft_printf(av[1], av[2]);
+	else if (ac >  1)
+		ft_printf(av[1], 42);
 	printf("-------------------\n");
 
 	int number = 6;
@@ -30,7 +40,7 @@ int			main(int ac, char **av, char **env)
 	printf("|%10d| --> |%%10d|\n", number);
 	printf("|%010d| --> |%%010d|\n", number);
 	// printf("|%-010d| --> \n", number); flag '0' is ignored when flag '-' is present
-	printf("|%-#10x| --> ç%%-#10x|\n", number);
+	printf("|%-#10x| --> |%%-#10x|\n", number);
 	printf("|%#10x| --> |%%#10x|\n", number);
 	printf("|%#x| --> |%%#x|\n", number);
 	printf("| %       d| --> | %%       d|\n", number);
@@ -39,6 +49,7 @@ int			main(int ac, char **av, char **env)
 
 	printf("\nMinimum width field\n");
 	printf("Here is a number|%4d|and a|%10s|word + |%04d| weird and this |%-5d| also .\n", number, string, number, number);
+	printf("|%-15.10s| --> |%%-15.10s|\n", string);
 
 	return (1);
 }

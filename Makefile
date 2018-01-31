@@ -23,7 +23,8 @@ LIBS = $(ROOT)/lib/libft.a
 			# -ltermcap
 
 SRC = ft_printf.c \
-			arg_list.c
+			arg_list.c \
+			main.c
 
 OBJ = $(patsubst %.c, $(OPATH)/%.o, $(SRC))
 

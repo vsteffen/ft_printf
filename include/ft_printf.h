@@ -23,7 +23,8 @@ typedef struct		s_arg { // Chained list for every arguments
 	char					zeroFlag;
 	char					lessFlag;
 	char					spaceFlag;
-	size_t				beforeArg; // text before the argument we want to print
+	size_t				beforeArg; // text pos before the argument we want to print
+	void					*type;
 	char					*outputArg;
 }					t_arg;
 
