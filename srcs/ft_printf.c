@@ -13,31 +13,34 @@
 #include "ft_printf.h"
 
 int		detect_pattern(t_data *data, char charAnalyse) {
-	char		*str;
+	double 				dl;
+	int64_t				d;
 
 	printf("Trying to find [%c] ...\n", charAnalyse);
 	if (charAnalyse == 'd') {
 		// printf("inside d --> [%d]\n", va_arg(data->ap, int));
 		printf("'d' conversion detected\n");
-		data->current->type = malloc(sizeof(int));
-		*((int *)data->current->type) = va_arg(data->ap, int);
-		printf("inside d --> [%d]\n", *((int *)data->current->type));
+
+		d = va_arg(data->ap, int);
+		printf("inside d --> [%d]\n", (int)d);
 		return (0);
 	}
 	else if (charAnalyse == 'c') {
 		printf("'c' conversion detected\n");
-		data->current->type = malloc(sizeof(int));
-		*((int *)data->current->type) = va_arg(data->ap, int);
+		data->current->type = va_arg(data->ap, void *);
 		printf("inside c --> [%c]\n", *((char *)data->current->type));
 		return (0);
 	}
 	else if (charAnalyse == 's') {
-		str = va_arg(data->ap, char *);
-		printf("inside str --> [%s]\n", str);
+		data->current->type = va_arg(data->ap, void *);
 		printf("'s' conversion detected\n");
-		data->current->type = (char *)malloc(sizeof(char *) * ft_strlen(str));
-		*((char **)data->current->type) = str;
-		printf("inside s --> [%s]\n", *((char **)data->current->type));
+		printf("inside s --> [%s]\n", data->current->type);
+		return (0);
+	}
+	else if (charAnalyse == 'f') {
+		d = (int64_t)(0 | va_arg(data->ap, double));
+		printf("'f' conversion detected\n");
+		printf("inside f --> [%f]\n", dl);
 		return (0);
 	}
 	else
