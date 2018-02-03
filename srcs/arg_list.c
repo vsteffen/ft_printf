@@ -12,24 +12,30 @@
 
 #include "ft_printf.h"
 
-void			freeArgList(t_data *data) {
+void			printArgAndFree(t_data *data) {
 		t_arg		*argPtrNext;
 		t_arg		*argPtrCurrent;
+		size_t	argNumber = 1;
 
 		argPtrCurrent = data->first;
 		while (argPtrCurrent)
 		{
-			argPtrNext = data->first->next;
+			argPtrNext = argPtrCurrent->next;
 			// Free all variables inside
+			printf("Arg n°%lu -> [%s] at %lu + [%s]\n",  argNumber, data->formatMod + argPtrCurrent->beforeArg, argPtrCurrent->beforeArg, argPtrCurrent->outputArg);
+			// printf("%s%s", data->formatMod + argPtrCurrent->beforeArg, argPtrCurrent->outputArg);
+			free(argPtrCurrent->outputArg);
 			free(argPtrCurrent);
 			argPtrCurrent = argPtrNext;
+			argNumber++;
 		}
-		printf("All arg list free\n");
+		printf("Rest of the strring -> [%s]\n", data->format + data->tmpFormatPos);
 }
 
 t_arg	*createStructArg(t_data *data) {
 		t_arg		*structPtr;
 
+		// printf("STRUCT ARG CREATED\n");
 		structPtr = (t_arg*)malloc(sizeof(t_arg));
 		structPtr->next = NULL;
 		structPtr->padding = 0;
@@ -39,6 +45,5 @@ t_arg	*createStructArg(t_data *data) {
 		structPtr->spaceFlag = 0;
 		structPtr->beforeArg = data->tmpFormatPos;
 		structPtr->outputArg = NULL;
-		printf("Arg list created\n");
 		return (structPtr);
 }
