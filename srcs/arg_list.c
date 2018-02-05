@@ -15,14 +15,14 @@
 void			printArgAndFree(t_data *data) {
 		t_arg		*argPtrNext;
 		t_arg		*argPtrCurrent;
-		size_t	argNumber = 1;
+		size_t		argNumber = 1;
 
 		argPtrCurrent = data->first;
 		while (argPtrCurrent)
 		{
 			argPtrNext = argPtrCurrent->next;
 			// Free all variables inside
-			printf("Arg n°%lu -> [%s] at %lu + [%s]\n",  argNumber, data->formatMod + argPtrCurrent->beforeArg, argPtrCurrent->beforeArg, argPtrCurrent->outputArg);
+			printf("Arg n°%lu -> [%s] at %lu + [%s] ||| precision = %hhu\n",  argNumber, data->formatMod + argPtrCurrent->beforeArg, argPtrCurrent->beforeArg, argPtrCurrent->outputArg, argPtrCurrent->precision);
 			// printf("%s%s", data->formatMod + argPtrCurrent->beforeArg, argPtrCurrent->outputArg);
 			free(argPtrCurrent->outputArg);
 			free(argPtrCurrent);
@@ -37,6 +37,7 @@ t_arg	*createStructArg(t_data *data) {
 
 		// printf("STRUCT ARG CREATED\n");
 		structPtr = (t_arg*)malloc(sizeof(t_arg));
+		bzero(structPtr, sizeof(t_arg)); // to remove
 		structPtr->next = NULL;
 		structPtr->padding = 0;
 		structPtr->hashFlag = 0;

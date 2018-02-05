@@ -22,11 +22,12 @@ RANLIB = /usr/bin/ranlib
 LIBS = $(ROOT)/lib/libft.a
 			# -ltermcap
 
-SRC = ft_printf.c \
-			transformArg.c \
-			arg_list.c \
-			flag.c \
-			main.c
+SRC =	ft_printf.c \
+		parser.c \
+		transformArg.c \
+		arg_list.c \
+		flag.c \
+		main.c
 
 OBJ = $(patsubst %.c, $(OPATH)/%.o, $(SRC))
 

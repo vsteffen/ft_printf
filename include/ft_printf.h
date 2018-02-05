@@ -20,13 +20,14 @@
 typedef struct		s_arg { // Chained list for every arguments
 	struct s_arg	*next;
 	char					padding;
-	uint8_t				precision;
-	char					hashFlag; // All Flags we need
-	char					zeroFlag;
-	char					lessFlag;
-	char					spaceFlag;
+	uint8_t					precision;
+	int8_t					hashFlag; // All Flags we need
+	int8_t					zeroFlag;
+	int8_t					lessFlag;
+	int8_t					spaceFlag;
+	int8_t					dotFlag;
 	size_t				beforeArg; // text pos before the argument we want to print
-	char					type;
+	int8_t					type;
 	char					*outputArg;
 }					t_arg;
 
@@ -37,13 +38,15 @@ typedef struct		s_data {
 	size_t										formatPos;
 	size_t										tmpFormatPos; // use for beforeArg
 	size_t										moveInArg; // length of character read in
-	size_t										error;
+	int8_t										error;
 	char											*output;
 	t_arg										*first;
 	t_arg										*current;
 }									t_data;
 
 int				ft_printf(const char * restrict format, ...);
+
+int				parse_and_move_format(t_data *data);
 
 t_arg			*createStructArg(t_data *data);
 void			printArgAndFree(t_data *data);
@@ -55,7 +58,8 @@ void			transformArgLong(t_data *data, int64_t varInt);
 void			transformArgString(t_data *data, char *varInt);
 void			transformArgFloat(t_data *data, double varInt);
 
-void      flagDot(t_data *data);
+int8_t   		verifFlagAlreadyUsed(t_data *data);
+void      		flagDot(t_data *data);
 
 
 #endif

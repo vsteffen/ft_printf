@@ -12,11 +12,29 @@
 
 #include "ft_printf.h"
 
+int8_t    verifFlagAlreadyUsed(t_data *data) {
+    if (data->current->dotFlag == 1) {
+        data->error = 2;
+        return (0);
+    }
+    data->current->dotFlag = 1;
+    return (1);
+}
+
 void      flagDot(t_data *data) {
-    uint8_t   precision;
+    uint8_t     precision;
+    char        numeral;
+    size_t      tmpMoveInArg;
 
     precision = 0;
-    while (ft_isdigit(data->format[data->formatPos + data->moveInArg]))
-        ++precision;
+    tmpMoveInArg = data->moveInArg;
+    while (ft_isdigit((numeral = data->format[data->formatPos + data->moveInArg]))) {
+        precision *= 10;
+        precision += (int)numeral - 48;
+        ++data->moveInArg;
+    }
+    if (tmpMoveInArg != data->moveInArg) {
+        --data->moveInArg;
+    }
     data->current->precision = precision;
 }
