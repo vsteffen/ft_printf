@@ -18,7 +18,7 @@ int			main(int ac, char **av, char **env)
 	(void)av;
 	(void)env;
 
-	printf("%lu\n", sizeof(uint64_t));
+	printf("%lu\n", sizeof(double));
 	printf("Float -> [%.f] /// double -> [%0.8g] /// int -> [%d]\n", 4.1234567890123456789012345678901234567890, (double)4.22, (int)4.722222);
 
 	printf("-------------------\n");

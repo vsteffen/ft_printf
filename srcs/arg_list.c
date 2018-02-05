@@ -40,10 +40,6 @@ t_arg	*createStructArg(t_data *data) {
 		bzero(structPtr, sizeof(t_arg)); // to remove
 		structPtr->next = NULL;
 		structPtr->padding = 0;
-		structPtr->hashFlag = 0;
-		structPtr->zeroFlag = 0;
-		structPtr->lessFlag = 0;
-		structPtr->spaceFlag = 0;
 		structPtr->beforeArg = data->tmpFormatPos;
 		structPtr->outputArg = NULL;
 		return (structPtr);

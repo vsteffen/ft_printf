@@ -13,6 +13,7 @@
 #include "ft_printf.h"
 
 int		detect_pattern(t_data *data, char charAnalyse) {
+	printf("Try to search [%c] character\n", charAnalyse);
 	if (charAnalyse == 'd') {
 		printf("'d' conversion detected\n");
 		data->current->type = 1;
@@ -34,6 +35,9 @@ int		detect_pattern(t_data *data, char charAnalyse) {
 	else if (charAnalyse == 'f') {
 		printf("'f' conversion detected\n");
 		data->current->type = 4;
+		if (!data->current->flagDot) {
+			data->current->precision = 6;
+		}
 		transformArgFloat(data, va_arg(data->ap, double));
 		return (0);
 	}
