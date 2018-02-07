@@ -18,7 +18,7 @@ int			main(int ac, char **av, char **env)
 	(void)av;
 	(void)env;
 
-	printf("%lu\n", sizeof(double));
+	printf("%lu\n", sizeof(uint32_t));
 	printf("Float -> [%.f] /// double -> [%0.8g] /// int -> [%d]\n", 4.1234567890123456789012345678901234567890, (double)4.22, (int)4.722222);
 
 	printf("-------------------\n");
@@ -29,9 +29,9 @@ int			main(int ac, char **av, char **env)
 	// else if (ac ==  3)
 	// 	ft_printf(av[1], av[2]);
 	else if (ac >  1)
-		ft_printf(av[1], 42);
+		ft_printf(av[1], -43.16);
 	printf("-------------------\n");
-
+/*
 	int number = 6;
 	char *string = "01234567";
 
@@ -53,6 +53,6 @@ int			main(int ac, char **av, char **env)
 	printf("\nMinimum width field\n");
 	printf("Here is a number|%4d|and a|%10s|word + |%04d| weird and this |%-5d| also .\n", number, string, number, number);
 	printf("|%-15.10s| --> |%%-15.10s|\n", string);
-
+*/
 	return (1);
 }

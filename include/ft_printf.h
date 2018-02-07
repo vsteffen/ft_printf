@@ -52,7 +52,9 @@ typedef struct		s_structFlDo {
 	size_t      lengthBeforeDot;
 	char        *output;
 	int8_t      dot;
-	int			tmpNb;
+	int8_t      sign;
+	uint32_t			tmpNb;
+
 }									t_structFlDo;
 
 int				ft_printf(const char * restrict format, ...);
