@@ -47,13 +47,13 @@ typedef struct		s_data {
 }									t_data;
 
 typedef struct		s_structFlDo {
-	double      beforeDot;
-	double      afterDot;
-	size_t      lengthBeforeDot;
-	char        *output;
+	int16_t			beforeDot;
+	int64_t			afterDot;
+	int8_t      lengthBeforeDot;
+	int8_t      lengthAfterDot;
 	int8_t      dot;
 	int8_t      sign;
-	uint32_t			tmpNb;
+	int16_t			tmpNb;
 
 }									t_structFlDo;
 

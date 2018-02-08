@@ -18,19 +18,20 @@ int			main(int ac, char **av, char **env)
 	(void)av;
 	(void)env;
 
-	printf("%lu\n", sizeof(uint32_t));
+	printf("%lu\n", sizeof(uint64_t));
 	printf("Float -> [%.f] /// double -> [%0.8g] /// int -> [%d]\n", 4.1234567890123456789012345678901234567890, (double)4.22, (int)4.722222);
 
 	printf("-------------------\n");
+	double varToSend = -42.8999999999999999999999999;
 	if (ac > 1)
 		printf("Trying to send this string %d -> [%s]\n\n", ac, av[1]);
 	if (ac == 1)
 		ft_printf("ANTI-CONSTITUTIONNELLEMENT");
-	// else if (ac ==  3)
-	// 	ft_printf(av[1], av[2]);
 	else if (ac >  1)
-		ft_printf(av[1], -43.16);
-	printf("-------------------\n");
+		ft_printf(av[1], varToSend);
+	printf("--------- VS ---------\n");
+	printf(av[1], varToSend);
+	printf("\n");
 /*
 	int number = 6;
 	char *string = "01234567";
