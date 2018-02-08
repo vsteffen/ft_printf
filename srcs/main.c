@@ -22,16 +22,19 @@ int			main(int ac, char **av, char **env)
 	printf("Float -> [%.f] /// double -> [%0.8g] /// int -> [%d]\n", 4.1234567890123456789012345678901234567890, (double)4.22, (int)4.722222);
 
 	printf("-------------------\n");
-	double varToSend = -42.6;
+	char *varToSend1 = "SALUT";
+	int  varToSend2 = 7;
+	// make re && ./ft_printf '[%10*-s]'
 	if (ac > 1)
 		printf("Trying to send this string %d -> [%s]\n\n", ac, av[1]);
 	if (ac == 1)
 		ft_printf("ANTI-CONSTITUTIONNELLEMENT");
 	else if (ac >  1)
-		ft_printf(av[1], varToSend);
+		ft_printf(av[1], varToSend2, varToSend1);
 	printf("--------- VS ---------\n");
-	printf(av[1], varToSend);
+	printf(av[1], varToSend2, varToSend1);
 	printf("\n");
+
 /*
 	int number = 6;
 	char *string = "01234567";
