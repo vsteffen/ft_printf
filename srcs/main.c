@@ -22,7 +22,7 @@ int			main(int ac, char **av, char **env)
 	printf("Float -> [%.f] /// double -> [%0.8g] /// int -> [%d]\n", 4.1234567890123456789012345678901234567890, (double)4.22, (int)4.722222);
 
 	printf("-------------------\n");
-	double varToSend = -42.8999999999999999999999999;
+	double varToSend = -42.6;
 	if (ac > 1)
 		printf("Trying to send this string %d -> [%s]\n\n", ac, av[1]);
 	if (ac == 1)

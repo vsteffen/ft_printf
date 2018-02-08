@@ -19,8 +19,8 @@
 
 typedef __int128	int128_t;
 
-typedef struct		s_arg { // Chained list for every arguments
-	struct s_arg	*next;
+typedef struct				s_arg { // Chained list for every arguments
+	struct s_arg			*next;
 	char					padding;
 	uint8_t					precision;
 	int8_t					flagHash; // All flags we need
@@ -28,34 +28,32 @@ typedef struct		s_arg { // Chained list for every arguments
 	int8_t					flagLess;
 	int8_t					flagSpace;
 	int8_t					flagDot;
-	size_t				beforeArg; // text pos before the argument we want to print
+	size_t					beforeArg; // text pos before the argument we want to print
 	int8_t					type;
 	char					*outputArg;
-}					t_arg;
+}							t_arg;
 
-typedef struct		s_data {
-	const char * restrict			format;
-	char											*formatMod; // use to improve read speed
-	va_list										ap;
-	size_t										formatPos;
-	size_t										tmpFormatPos; // use for beforeArg
-	size_t										moveInArg; // length of character read in
-	int8_t										error;
-	char											*output;
-	t_arg										*first;
-	t_arg										*current;
-}									t_data;
+typedef struct				s_data {
+	const char * restrict	format;
+	char					*formatMod; // use to improve read speed
+	va_list					ap;
+	size_t					formatPos;
+	size_t					tmpFormatPos; // use for beforeArg
+	size_t					moveInArg; // length of character read in
+	int8_t					error;
+	char					*output;
+	t_arg					*first;
+	t_arg					*current;
+}							t_data;
 
-typedef struct		s_structFlDo {
-	int16_t			beforeDot;
-	int64_t			afterDot;
-	int8_t      lengthBeforeDot;
-	int8_t      lengthAfterDot;
-	int8_t      dot;
-	int8_t      sign;
-	int16_t			tmpNb;
-
-}									t_structFlDo;
+typedef struct				s_structFlDo {
+	int64_t					beforeDot;
+	int64_t					afterDot;
+	int8_t					lengthBeforeDot;
+	int8_t					lengthAfterDot;
+	int8_t					dot;
+	int8_t					sign;
+}							t_structFlDo;
 
 int				ft_printf(const char * restrict format, ...);
 

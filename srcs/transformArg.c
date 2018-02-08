@@ -17,25 +17,25 @@
 
 uint8_t				lengthNumeral(int64_t nb)
 {
-		uint8_t		count;
+	uint8_t		count;
 
     count = 1;
     while (nb /= 10)
       ++count;
-		return (count);
+	return (count);
 }
 
 int64_t			ft_pow_printf(int64_t nb, uint8_t power) {
-		int64_t			result;
-		uint8_t			count;
+	int64_t			result;
+	uint8_t			count;
 
-		count = 0;
-		result = 1;
-		while (count < power) {
-			result *= nb;
-			count++;
-		}
-		return (result);
+	count = 0;
+	result = 1;
+	while (count < power) {
+		result *= nb;
+		count++;
+	}
+	return (result);
 }
 
 int64_t	ft_round_printf(double nb)
@@ -45,51 +45,53 @@ int64_t	ft_round_printf(double nb)
 
 void        fillArrayForFtoa(char *output, uint8_t precision, t_structFlDo *structFlDo) {
     uint8_t      		posAfterDot;
-		uint8_t					tmpLengthBeforeDot;
+	uint8_t				tmpLengthBeforeDot;
 
-		tmpLengthBeforeDot = structFlDo->lengthBeforeDot;
+	tmpLengthBeforeDot = structFlDo->lengthBeforeDot;
     output[tmpLengthBeforeDot] = '\0';
+	output[--tmpLengthBeforeDot] = structFlDo->beforeDot % 10 + '0';
+	while (structFlDo->beforeDot /= 10)
 		output[--tmpLengthBeforeDot] = structFlDo->beforeDot % 10 + '0';
-		while (structFlDo->beforeDot /= 10)
-			output[--tmpLengthBeforeDot] = structFlDo->beforeDot % 10 + '0';
-		if (structFlDo->sign == 1)
-			output[0] = '-';
+	if (structFlDo->sign == 1)
+		output[0] = '-';
     if (precision < 1)
         return ;
-		output[structFlDo->lengthBeforeDot] = '.';
+	output[structFlDo->lengthBeforeDot] = '.';
     posAfterDot = structFlDo->lengthBeforeDot + structFlDo->dot + precision;
-		output[posAfterDot] = '\0';
-		if (structFlDo->afterDot == 0) {
-			while (precision-- > 0)
-				output[--posAfterDot] = '0';
-			return ;
-		}
+	output[posAfterDot] = '\0';
+	if (structFlDo->afterDot == 0) {
+		while (precision-- > 0)
+			output[--posAfterDot] = '0';
+		return ;
+	}
+	output[--posAfterDot] = structFlDo->afterDot % 10 + '0';
+	while (structFlDo->afterDot /= 10)
 		output[--posAfterDot] = structFlDo->afterDot % 10 + '0';
-		while (structFlDo->afterDot /= 10)
-			output[--posAfterDot] = structFlDo->afterDot % 10 + '0';
 }
 
 char      *ft_dtoa(double nb, uint8_t precision) {
     t_structFlDo    structFlDo;
     char            *output;
-		double					tmpDouble;
+	double			tmpDouble;
 
-		structFlDo.beforeDot = (int16_t)nb;
+	structFlDo.beforeDot = (int64_t)nb;
+	if (precision == 0)
+		structFlDo.beforeDot = ft_round_printf(nb);
     structFlDo.dot = 0;
-		structFlDo.sign = 0;
-		if (precision > 18)
+	structFlDo.sign = 0;
+	if (precision > 18)
 			precision = 18;
     structFlDo.lengthBeforeDot = lengthNumeral((int64_t)structFlDo.beforeDot);
-		tmpDouble = nb - (double)structFlDo.beforeDot;
-		if (structFlDo.beforeDot < 0) {
-			structFlDo.sign = 1;
-			structFlDo.dot = 1;
-			++structFlDo.lengthBeforeDot;
-			structFlDo.beforeDot = -structFlDo.beforeDot;
-			tmpDouble = -tmpDouble;
-			structFlDo.afterDot = ft_round_printf(tmpDouble * (ft_pow_printf(10, precision)));
-			printf("AFTERDOT -> %lu + precision %d\n", structFlDo.afterDot, precision);
-		}
+	tmpDouble = nb - (double)structFlDo.beforeDot;
+	if (structFlDo.beforeDot < 0) {
+		structFlDo.sign = 1;
+		structFlDo.dot = 1;
+		++structFlDo.lengthBeforeDot;
+		structFlDo.beforeDot = -structFlDo.beforeDot;
+		tmpDouble = -tmpDouble;
+		structFlDo.afterDot = ft_round_printf(tmpDouble * (ft_pow_printf(10, precision)));
+		printf("AFTERDOT -> %lld + precision %d\n", structFlDo.afterDot, precision);
+	}
     output = (char *)malloc(sizeof(char) * (structFlDo.lengthBeforeDot + structFlDo.dot + precision) + 1);
     fillArrayForFtoa(output, precision, &structFlDo);
     return (output);
