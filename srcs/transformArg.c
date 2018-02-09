@@ -11,9 +11,7 @@
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-#include <float.h>
 #include <math.h>
-
 
 uint8_t				lengthNumeral(int64_t nb)
 {
@@ -43,7 +41,7 @@ int64_t	ft_round_printf(double nb)
 	return (nb >= 0 ? (int64_t)(nb + 0.5) : (int64_t)(nb - 0.5));
 }
 
-void        fillArrayForFtoa(char *output, uint8_t precision, t_structFlDo *structFlDo) {
+void        fillArrayForDtoa(char *output, uint8_t precision, t_structFlDo *structFlDo) {
 	uint8_t      		posAfterDot;
 	uint8_t				tmpLengthBeforeDot;
 
@@ -74,10 +72,12 @@ char      		*ft_dtoa(double nb, uint8_t precision) {
 	char            *output;
 	double					tmpDouble;
 
-	structFlDo.beforeDot = (int16_t)nb;
+	structFlDo.beforeDot = (int64_t)nb;
 	structFlDo.dot = 0;
 	structFlDo.sign = 0;
-	if (precision > 0)
+	if (precision == 0)
+		structFlDo.beforeDot = ft_round_printf(nb);
+	else
 		structFlDo.dot = 1;
 	if (precision > 18)
 		precision = 18;
@@ -93,7 +93,7 @@ char      		*ft_dtoa(double nb, uint8_t precision) {
 	else
 		structFlDo.afterDot = ft_round_printf(tmpDouble * (ft_pow_printf(10, precision)));
 	output = (char *)malloc(sizeof(char) * (structFlDo.lengthBeforeDot + structFlDo.dot + precision) + 1);
-	fillArrayForFtoa(output, precision, &structFlDo);
+	fillArrayForDtoa(output, precision, &structFlDo);
 	return (output);
 }
 
@@ -115,9 +115,6 @@ void			transformArgInt(t_data *data, int32_t varInt) {
 }
 
 void			transformArgFloat(t_data *data, double varFloat) {
-	// printf("The maximum value of float = %.10e\n", FLT_MAX);
-	// printf("The minimum value of float = %.10e\n", FLT_MIN);
-	// data->current->outputArg = ft_itoa(varFloat);
 	(void)varFloat;
 	data->current->outputArg = ft_dtoa(varFloat, data->current->precision);
 }

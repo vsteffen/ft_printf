@@ -22,10 +22,11 @@ int			main(int ac, char **av, char **env)
 	printf("Float -> [%.f] /// double -> [%0.8g] /// int -> [%d]\n", 4.1234567890123456789012345678901234567890, (double)4.22, (int)4.722222);
 
 	printf("-------------------\n");
-	double varToSend = -42.8999999999999999999999999;
+	double varToSend = 42.8999999999999999999999999;
 	// int varToSend = 42;
-	if (ac > 1)
-		printf("Trying to send this string %d -> [%s]\n\n", ac, av[1]);
+	// char *varToSend1 = "SALUT";
+	// int   varToSend2 = 7;
+	// make re && ./ft_printf '[%10*-s]'
 	if (ac == 1)
 		ft_printf("ANTI-CONSTITUTIONNELLEMENT");
 	else if (ac >  1)
@@ -34,16 +35,16 @@ int			main(int ac, char **av, char **env)
 	printf(av[1], varToSend);
 	printf("]\n");
 	/*
-	   int number = 6;
-	   char *string = "01234567";
+	int number = 6;
+	char *string = "01234567";
 
-	   printf("\nTypes\n");
-	   printf( "%%.3f %%.3g %%.3f %%.3g --> |%.3f| |%.3g| |%.3f| |%.3g|\n", 100.2, 100.2, 3.1415926, 3.1415926 );
+	printf("\nTypes\n");
+	printf( "%%.3f %%.3g %%.3f %%.3g --> |%.3f| |%.3g| |%.3f| |%.3g|\n", 100.2, 100.2, 3.1415926, 3.1415926 );
 
-	   printf("\nSome example of Flags\n");
-	   printf("|%-10d| --> |%%-10d|\n", number);
-	   printf("|%10d| --> |%%10d|\n", number);
-	   printf("|%010d| --> |%%010d|\n", number);
+	printf("\nSome example of Flags\n");
+	printf("|%-10d| --> |%%-10d|\n", number);
+	printf("|%10d| --> |%%10d|\n", number);
+	printf("|%010d| --> |%%010d|\n", number);
 	// printf("|%-010d| --> \n", number); flag '0' is ignored when flag '-' is present
 	printf("|%-#10x| --> |%%-#10x|\n", number);
 	printf("|%#10x| --> |%%#10x|\n", number);

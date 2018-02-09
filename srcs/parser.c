@@ -32,7 +32,7 @@ int		detect_pattern(t_data *data, char charAnalyse) {
 		transformArgString(data, va_arg(data->ap, char *));
 		return (0);
 	}
-	else if (charAnalyse == 'f') {
+	else if (charAnalyse == 'f' || charAnalyse == 'F') {
 		printf("'f' conversion detected\n");
 		data->current->type = 4;
 		if (!data->current->flagDot) {
