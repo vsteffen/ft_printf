@@ -49,9 +49,25 @@ int		detect_pattern(t_data *data, char charAnalyse) {
 	}
 	else if (charAnalyse == '.') {
 		printf("'.' character detected\n");
-		if (verifFlagAlreadyUsed(data) == 0)
+		if (verifFlagAlreadyUsed(data, '.') == 0)
 			return (0);
 		flagDot(data);
+		return (-1);
+	}
+	else if (ft_isdigit(charAnalyse)) {
+		printf("Width character detected\n");
+		if (charAnalyse == '0') {
+				data->current->flagZero = 1;
+				return (-1);
+		}
+		if (verifFlagAlreadyUsed(data, 'w') == 0)
+			return (0);
+		flagWidthNb(data);
+		return (-1);
+	}
+	else if (charAnalyse == ' ') {
+		printf("' ' character detected\n");
+		data->current->flagSpace = 1;
 		return (-1);
 	}
 	else {
@@ -62,20 +78,20 @@ int		detect_pattern(t_data *data, char charAnalyse) {
 
 int			parse_and_move_format(t_data *data)
 {
-		if (data->first == NULL)
-		{
-			data->first = createStructArg(data);
-			data->current = data->first;
-		}
-		else {
-			data->current->next = createStructArg(data);
-			data->current = data->current->next;
-		}
-		data->formatMod[data->formatPos] = '\0'; // use to improve speed
-		data->moveInArg = 1;
-		while(detect_pattern(data, data->format[data->formatPos + data->moveInArg]) == -1) {
-			data->moveInArg++;
-		}
-		printf("+-+-+-+ [%s] and moveArg = %lu +-+-+-+\n", data->current->outputArg, data->moveInArg);
-		return (data->moveInArg);
+	if (data->first == NULL)
+	{
+		data->first = createStructArg(data);
+		data->current = data->first;
+	}
+	else {
+		data->current->next = createStructArg(data);
+		data->current = data->current->next;
+	}
+	data->formatMod[data->formatPos] = '\0'; // use to improve speed
+	data->moveInArg = 1;
+	while(detect_pattern(data, data->format[data->formatPos + data->moveInArg]) == -1) {
+		data->moveInArg++;
+	}
+	printf("+-+-+-+ [%s] and moveArg = %lu +-+-+-+\n", data->current->outputArg, data->moveInArg);
+	return (data->moveInArg);
 }

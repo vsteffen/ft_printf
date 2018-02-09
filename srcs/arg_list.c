@@ -13,34 +13,32 @@
 #include "ft_printf.h"
 
 void			printArgAndFree(t_data *data) {
-		t_arg		*argPtrNext;
-		t_arg		*argPtrCurrent;
-		size_t		argNumber = 1;
+	t_arg		*argPtrNext;
+	t_arg		*argPtrCurrent;
+	size_t		argNumber = 1;
 
-		argPtrCurrent = data->first;
-		while (argPtrCurrent)
-		{
-			argPtrNext = argPtrCurrent->next;
-			// Free all variables inside
-			printf("Arg n°%lu -> [%s] at %lu + [%s] ||| precision = %hhu\n",  argNumber, data->formatMod + argPtrCurrent->beforeArg, argPtrCurrent->beforeArg, argPtrCurrent->outputArg, argPtrCurrent->precision);
-			// printf("%s%s", data->formatMod + argPtrCurrent->beforeArg, argPtrCurrent->outputArg);
-			free(argPtrCurrent->outputArg);
-			free(argPtrCurrent);
-			argPtrCurrent = argPtrNext;
-			argNumber++;
-		}
-		printf("Rest of the strring -> [%s]\n", data->format + data->tmpFormatPos);
+	argPtrCurrent = data->first;
+	while (argPtrCurrent)
+	{
+		argPtrNext = argPtrCurrent->next;
+		// Free all variables inside
+		printf("Arg n°%lu -> [%s] at %lu + [%s] ||| precision = %hhu and width = %lu\n",  argNumber, data->formatMod + argPtrCurrent->beforeArg, argPtrCurrent->beforeArg, argPtrCurrent->outputArg, argPtrCurrent->precision, argPtrCurrent->width);
+		// printf("%s%s", data->formatMod + argPtrCurrent->beforeArg, argPtrCurrent->outputArg);
+		free(argPtrCurrent->outputArg);
+		free(argPtrCurrent);
+		argPtrCurrent = argPtrNext;
+		argNumber++;
+	}
+	printf("Rest of the strring -> [%s]\n", data->format + data->tmpFormatPos);
 }
 
 t_arg	*createStructArg(t_data *data) {
-		t_arg		*structPtr;
+	t_arg		*structPtr;
 
-		// printf("STRUCT ARG CREATED\n");
-		structPtr = (t_arg*)malloc(sizeof(t_arg));
-		bzero(structPtr, sizeof(t_arg)); // to remove
-		structPtr->next = NULL;
-		structPtr->padding = 0;
-		structPtr->beforeArg = data->tmpFormatPos;
-		structPtr->outputArg = NULL;
-		return (structPtr);
+	structPtr = (t_arg*)malloc(sizeof(t_arg));
+	bzero(structPtr, sizeof(t_arg)); // to remove
+	structPtr->next = NULL;
+	structPtr->beforeArg = data->tmpFormatPos;
+	structPtr->outputArg = NULL;
+	return (structPtr);
 }
