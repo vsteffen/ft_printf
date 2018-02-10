@@ -24,6 +24,7 @@ typedef struct				s_arg { // Chained list for every arguments
 	size_t					width;
 	uint8_t					precision;
 	int8_t					flagWidthNb;
+	int8_t					flagWidthWc;
 	int8_t					flagHash;
 	int8_t					flagZero;
 	int8_t					flagLess;
@@ -68,7 +69,7 @@ void				transformArgShort(t_data *data, int16_t varInt);
 void				transformArgInt(t_data *data, int32_t varInt);
 void				transformArgLong(t_data *data, int64_t varInt);
 void				transformArgString(t_data *data, char *varInt);
-void				transformArgFloat(t_data *data, double varInt);
+void				transformArgDouble(t_data *data, double varInt);
 
 int8_t   			verifFlagAlreadyUsed(t_data *data, char flag);
 void      			flagDot(t_data *data);

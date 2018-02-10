@@ -13,7 +13,6 @@
 #include "ft_printf.h"
 
 int		detect_pattern(t_data *data, char charAnalyse) {
-	printf("Try to search [%c] character\n", charAnalyse);
 	if (charAnalyse == 'd') {
 		printf("'d' conversion detected\n");
 		data->current->type = 1;
@@ -38,7 +37,7 @@ int		detect_pattern(t_data *data, char charAnalyse) {
 		if (!data->current->flagDot) {
 			data->current->precision = 6;
 		}
-		transformArgFloat(data, va_arg(data->ap, double));
+		transformArgDouble(data, va_arg(data->ap, double));
 		return (0);
 	}
 	else if (charAnalyse == '%') {
@@ -70,6 +69,12 @@ int		detect_pattern(t_data *data, char charAnalyse) {
 		data->current->flagSpace = 1;
 		return (-1);
 	}
+	else if (charAnalyse == '*') {
+		printf("'*' character detected\n");
+		data->current->flagWidthWc = 1;
+		data->current->width = va_arg(data->ap, int);
+		return (-1);
+	}
 	else {
 		data->error = 1;
 		return (0);
@@ -92,6 +97,5 @@ int			parse_and_move_format(t_data *data)
 	while(detect_pattern(data, data->format[data->formatPos + data->moveInArg]) == -1) {
 		data->moveInArg++;
 	}
-	printf("+-+-+-+ [%s] and moveArg = %lu +-+-+-+\n", data->current->outputArg, data->moveInArg);
 	return (data->moveInArg);
 }

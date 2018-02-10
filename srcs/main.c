@@ -22,17 +22,18 @@ int			main(int ac, char **av, char **env)
 	printf("Float -> [%.f] /// double -> [%0.8g] /// int -> [%d]\n", 4.1234567890123456789012345678901234567890, (double)4.22, (int)4.722222);
 
 	printf("-------------------\n");
-	double varToSend = 42.8999999999999999999999999;
-	// int varToSend = 42;
+	// double varToSend = 42.8999999999999999999999999;
+	char	*varToSend2 = "12345";
+	int 	varToSend1 = 8;
 	// char *varToSend1 = "SALUT";
 	// int   varToSend2 = 7;
 	// make re && ./ft_printf '[%10*-s]'
 	if (ac == 1)
 		ft_printf("ANTI-CONSTITUTIONNELLEMENT");
-	else if (ac >  1)
-		ft_printf(av[1], varToSend);
+	// else if (ac >  1)
+		ft_printf(av[1], varToSend1, varToSend2);
 	printf("--------- VS ---------\n[");
-	printf(av[1], varToSend);
+	printf(av[1], varToSend1, varToSend2);
 	printf("]\n");
 	/*
 	int number = 6;

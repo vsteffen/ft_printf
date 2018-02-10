@@ -114,8 +114,7 @@ void			transformArgInt(t_data *data, int32_t varInt) {
 	data->current->outputArg = ft_itoa(varInt);
 }
 
-void			transformArgFloat(t_data *data, double varFloat) {
-	(void)varFloat;
+void			transformArgDouble(t_data *data, double varFloat) {
 	data->current->outputArg = ft_dtoa(varFloat, data->current->precision);
 }
 
