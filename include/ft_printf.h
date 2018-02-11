@@ -32,6 +32,7 @@ typedef struct				s_arg { // Chained list for every arguments
 	int8_t					flagDot;
 	size_t					beforeArg; // text pos before the argument we want to print
 	int8_t					type;
+	size_t					outputLength;
 	char					*outputArg;
 }							t_arg;
 

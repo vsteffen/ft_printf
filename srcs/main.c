@@ -30,9 +30,10 @@ int			main(int ac, char **av, char **env)
 	// make re && ./ft_printf '[%10*-s]'
 	if (ac == 1)
 		ft_printf("ANTI-CONSTITUTIONNELLEMENT");
-	// else if (ac >  1)
+	else if (ac >  1)
 		ft_printf(av[1], varToSend1, varToSend2);
 	printf("--------- VS ---------\n[");
+	// printf(av[1], varToSend1, varToSend2);
 	printf(av[1], varToSend1, varToSend2);
 	printf("]\n");
 	/*

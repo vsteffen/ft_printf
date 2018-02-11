@@ -12,6 +12,21 @@
 
 #include "ft_printf.h"
 
+void print_output_simple(t_arg *arg, t_data *data, size_t argNumber)
+{
+	printf("Arg n°%lu -> [%s] at %lu + [%s] ||| precision = %hhu and width = %lu\n",  argNumber, data->formatMod + arg->beforeArg, arg->beforeArg, arg->outputArg, arg->precision, arg->width);
+}
+
+void print_output_width(t_arg *arg, t_data *data, size_t argNumber)
+{
+	printf("Arg n°%lu -> [%s] at %lu + [%s] ||| precision = %hhu and width = %lu\n",  argNumber, data->formatMod + arg->beforeArg, arg->beforeArg, arg->outputArg, arg->precision, arg->width);
+}
+
+void print_output_width_reverse(t_arg *arg, t_data *data, size_t argNumber)
+{
+	printf("Arg n°%lu -> [%s] at %lu + [%s] ||| precision = %hhu and width = %lu\n",  argNumber, data->formatMod + arg->beforeArg, arg->beforeArg, arg->outputArg, arg->precision, arg->width);
+}
+
 void			printArgAndFree(t_data *data) {
 	t_arg		*argPtrNext;
 	t_arg		*argPtrCurrent;
@@ -22,7 +37,16 @@ void			printArgAndFree(t_data *data) {
 	{
 		argPtrNext = argPtrCurrent->next;
 		// Free all variables inside
-		printf("Arg n°%lu -> [%s] at %lu + [%s] ||| precision = %hhu and width = %lu\n",  argNumber, data->formatMod + argPtrCurrent->beforeArg, argPtrCurrent->beforeArg, argPtrCurrent->outputArg, argPtrCurrent->precision, argPtrCurrent->width);
+		argPtrCurrent->outputLength = ft_strlen(argPtrCurrent->outputArg); // don't forget to think about length of '\0' in %c
+		if (argPtrCurrent->flagWidthNb == 1 || argPtrCurrent->flagWidthNb == 1)
+		{
+			if (argPtrCurrent->flagLess)
+				print_output_width(argPtrCurrent, data, argNumber);
+			else
+				print_output_width_reverse(argPtrCurrent, data, argNumber);
+		}
+		else
+			print_output_simple(argPtrCurrent, data, argNumber);
 		// printf("%s%s", data->formatMod + argPtrCurrent->beforeArg, argPtrCurrent->outputArg);
 		free(argPtrCurrent->outputArg);
 		free(argPtrCurrent);

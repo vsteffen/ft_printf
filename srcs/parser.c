@@ -72,7 +72,13 @@ int		detect_pattern(t_data *data, char charAnalyse) {
 	else if (charAnalyse == '*') {
 		printf("'*' character detected\n");
 		data->current->flagWidthWc = 1;
-		data->current->width = va_arg(data->ap, int);
+		int64_t tmpInt64 = va_arg(data->ap, int64_t);
+		data->current->width = tmpInt64;
+		if (tmpInt64 < 0)
+		{
+			data->current->width = -tmpInt64;
+			data->current->flagLess = 1;
+		}
 		return (-1);
 	}
 	else {
