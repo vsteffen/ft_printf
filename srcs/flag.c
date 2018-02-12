@@ -21,14 +21,14 @@ int8_t    verifFlagAlreadyUsed(t_data *data, char flag) {
 		data->current->flagDot = 1;
 		return (1);
 	}
-	else if (flag == 'w') {
-		if (data->current->flagWidthNb == 1) {
-			data->error = 2;
-				return (0);
-		}
-		data->current->flagWidthNb = 1;
-		return (1);
-	}
+	// else if (flag == 'w') {
+	// 	if (data->current->flagWidthNb == 1) {
+	// 		data->error = 2;
+	// 			return (0);
+	// 	}
+	// 	data->current->flagWidthNb = 1;
+	// 	return (1);
+	// }
 	return (0);
 }
 

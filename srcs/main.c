@@ -23,18 +23,18 @@ int			main(int ac, char **av, char **env)
 
 	printf("-------------------\n");
 	// double varToSend = 42.8999999999999999999999999;
-	char	*varToSend2 = "12345";
-	int 	varToSend1 = 8;
+	// char	*varToSend2 = "12345";
+	int 	varToSend1 = 42;
 	// char *varToSend1 = "SALUT";
 	// int   varToSend2 = 7;
 	// make re && ./ft_printf '[%10*-s]'
 	if (ac == 1)
 		ft_printf("ANTI-CONSTITUTIONNELLEMENT");
 	else if (ac >  1)
-		ft_printf(av[1], varToSend1, varToSend2);
+		ft_printf(av[1], varToSend1);
 	printf("--------- VS ---------\n[");
 	// printf(av[1], varToSend1, varToSend2);
-	printf(av[1], varToSend1, varToSend2);
+	printf(av[1], varToSend1);
 	printf("]\n");
 	/*
 	int number = 6;

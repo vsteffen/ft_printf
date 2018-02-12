@@ -28,12 +28,15 @@ typedef struct				s_arg { // Chained list for every arguments
 	int8_t					flagHash;
 	int8_t					flagZero;
 	int8_t					flagLess;
+	int8_t					flagMore;
 	int8_t					flagSpace;
 	int8_t					flagDot;
 	size_t					beforeArg; // text pos before the argument we want to print
 	int8_t					type;
-	size_t					outputLength;
 	char					*outputArg;
+	char					*outputWidth;
+	size_t					outputLength;
+	size_t					outputWidthLength;
 }							t_arg;
 
 typedef struct				s_data {
@@ -56,6 +59,7 @@ typedef struct				s_structFlDo {
 	int8_t					lengthAfterDot;
 	int8_t					dot;
 	int8_t					sign;
+	char					signChar;
 }							t_structFlDo;
 
 int					ft_printf(const char * restrict format, ...);

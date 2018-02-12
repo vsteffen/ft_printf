@@ -51,7 +51,7 @@ void        fillArrayForDtoa(char *output, uint8_t precision, t_structFlDo *stru
 	while (structFlDo->beforeDot /= 10)
 		output[--tmpLengthBeforeDot] = structFlDo->beforeDot % 10 + '0';
 	if (structFlDo->sign == 1)
-		output[0] = '-';
+		output[0] = structFlDo->signChar;
 	if (precision < 1)
 		return ;
 	output[structFlDo->lengthBeforeDot] = '.';
@@ -67,10 +67,10 @@ void        fillArrayForDtoa(char *output, uint8_t precision, t_structFlDo *stru
 		output[--posAfterDot] = structFlDo->afterDot % 10 + '0';
 }
 
-char      		*ft_dtoa(double nb, uint8_t precision) {
+char      		*ft_dtoa_printf(t_data *data, double nb, uint8_t precision) {
 	t_structFlDo    structFlDo;
 	char            *output;
-	double					tmpDouble;
+	double			tmpDouble;
 
 	structFlDo.beforeDot = (int64_t)nb;
 	structFlDo.dot = 0;
@@ -85,13 +85,21 @@ char      		*ft_dtoa(double nb, uint8_t precision) {
 	tmpDouble = nb - (double)structFlDo.beforeDot;
 	if (structFlDo.beforeDot < 0) {
 		structFlDo.sign = 1;
-		++structFlDo.lengthBeforeDot;
+		structFlDo.signChar = '-';
 		structFlDo.beforeDot = -structFlDo.beforeDot;
 		tmpDouble = -tmpDouble;
 		structFlDo.afterDot = ft_round_printf(tmpDouble * (ft_pow_printf(10, precision)));
 	}
-	else
+	else {
+		if (data->current->flagMore)
+		{
+			structFlDo.sign = 1;
+			structFlDo.signChar = '+';
+		}
 		structFlDo.afterDot = ft_round_printf(tmpDouble * (ft_pow_printf(10, precision)));
+	}
+	if (structFlDo.sign)
+		++structFlDo.lengthBeforeDot;
 	output = (char *)malloc(sizeof(char) * (structFlDo.lengthBeforeDot + structFlDo.dot + precision) + 1);
 	fillArrayForDtoa(output, precision, &structFlDo);
 	return (output);
@@ -106,20 +114,59 @@ void			transformArgChar(t_data *data, int8_t varChar) {
 	data->current->outputArg = output;
 }
 
+static size_t	nb_numeral(int64_t n)
+{
+	size_t count;
+
+	count = 1;
+	while (n /= 10)
+		count++;
+	return (count);
+}
+
+char			*ft_int64toa_printf(t_data *data, int64_t n)
+{
+	size_t				len;
+	char				*str;
+	uint64_t			tmp_nb;
+
+	len = nb_numeral(n);
+	tmp_nb = n;
+	if (n < 0)
+	{
+		tmp_nb = -n;
+		len++;
+	}
+	if (n >= 0 && data->current->flagMore)
+		len++;
+	str = (char*)mallocp(sizeof(char) * len + 1);
+	if (!str)
+		return (NULL);
+	str[len] = 0;
+	str[--len] = tmp_nb % 10 + '0';
+	while (tmp_nb /= 10)
+		str[--len] = tmp_nb % 10 + '0';
+	if (data->current->flagMore)
+		str[0] = '+';
+	if (n < 0)
+		str[0] = '-';
+	return (str);
+}
+
 void			transformArgShort(t_data *data, int16_t varShort) {
-	data->current->outputArg = ft_itoa(varShort);
+	data->current->outputArg = ft_int64toa_printf(data, varShort);
 }
 
 void			transformArgInt(t_data *data, int32_t varInt) {
-	data->current->outputArg = ft_itoa(varInt);
+	data->current->outputArg = ft_int64toa_printf(data, varInt);
 }
 
 void			transformArgDouble(t_data *data, double varFloat) {
-	data->current->outputArg = ft_dtoa(varFloat, data->current->precision);
+	data->current->outputArg = ft_dtoa_printf(data, varFloat, data->current->precision);
 }
 
 void			transformArgLong(t_data *data, int64_t varLong) {
-	data->current->outputArg = ft_itoa(varLong);
+	data->current->outputArg = ft_int64toa_printf(data, varLong);
 }
 
 void			transformArgString(t_data *data, char *varString) {

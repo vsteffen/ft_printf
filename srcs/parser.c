@@ -13,6 +13,7 @@
 #include "ft_printf.h"
 
 int		detect_pattern(t_data *data, char charAnalyse) {
+	printf("CHAR %c\n", charAnalyse);
 	if (charAnalyse == 'd') {
 		printf("'d' conversion detected\n");
 		data->current->type = 1;
@@ -59,8 +60,9 @@ int		detect_pattern(t_data *data, char charAnalyse) {
 				data->current->flagZero = 1;
 				return (-1);
 		}
-		if (verifFlagAlreadyUsed(data, 'w') == 0)
-			return (0);
+		// if (verifFlagAlreadyUsed(data, 'w') == 0)
+			// return (0);
+		data->current->flagWidthNb = 1;
 		flagWidthNb(data);
 		return (-1);
 	}
@@ -79,6 +81,16 @@ int		detect_pattern(t_data *data, char charAnalyse) {
 			data->current->width = -tmpInt64;
 			data->current->flagLess = 1;
 		}
+		return (-1);
+	}
+	else if (charAnalyse == '-') {
+		printf("'-' character detected\n");
+		data->current->flagLess = 1;
+		return (-1);
+	}
+	else if (charAnalyse == '+') {
+		printf("'+' character detected\n");
+		data->current->flagMore = 1;
 		return (-1);
 	}
 	else {

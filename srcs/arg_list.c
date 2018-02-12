@@ -12,19 +12,39 @@
 
 #include "ft_printf.h"
 
+void get_output_malloc_width(t_arg *arg, t_data *data) {
+	size_t		pos;
+	char		fillWidth;
+
+	(void)data;
+	arg->outputWidth = (char*)malloc(sizeof(char) * arg->width + 1);
+	arg->outputWidth[arg->width] = '\0';
+	pos = -1;
+	fillWidth = ' ';
+	if (arg->flagZero)
+		fillWidth = '0';
+	while (++pos < arg->width)
+		arg->outputWidth[pos] = fillWidth;
+}
+
 void print_output_simple(t_arg *arg, t_data *data, size_t argNumber)
 {
+	printf("PRINT WITHOUT WIDTH\n");
 	printf("Arg n°%lu -> [%s] at %lu + [%s] ||| precision = %hhu and width = %lu\n",  argNumber, data->formatMod + arg->beforeArg, arg->beforeArg, arg->outputArg, arg->precision, arg->width);
 }
 
 void print_output_width(t_arg *arg, t_data *data, size_t argNumber)
 {
-	printf("Arg n°%lu -> [%s] at %lu + [%s] ||| precision = %hhu and width = %lu\n",  argNumber, data->formatMod + arg->beforeArg, arg->beforeArg, arg->outputArg, arg->precision, arg->width);
+	printf("Arg n°%lu -> before [%s] + arg [%s] + width [", argNumber, data->formatMod + arg->beforeArg, arg->outputArg);
+	printf("%s", arg->outputWidth);
+	printf("] ||| precision = %hhu and width = %lu\n", arg->precision, arg->width);
 }
 
 void print_output_width_reverse(t_arg *arg, t_data *data, size_t argNumber)
 {
-	printf("Arg n°%lu -> [%s] at %lu + [%s] ||| precision = %hhu and width = %lu\n",  argNumber, data->formatMod + arg->beforeArg, arg->beforeArg, arg->outputArg, arg->precision, arg->width);
+	printf("Arg n°%lu -> before [%s] + width [", argNumber, data->formatMod + arg->beforeArg);
+	printf("%s", arg->outputWidth);
+	printf("] + arg [%s] ||| precision = %hhu and width = %lu\n", arg->outputArg, arg->precision, arg->width);
 }
 
 void			printArgAndFree(t_data *data) {
@@ -38,8 +58,12 @@ void			printArgAndFree(t_data *data) {
 		argPtrNext = argPtrCurrent->next;
 		// Free all variables inside
 		argPtrCurrent->outputLength = ft_strlen(argPtrCurrent->outputArg); // don't forget to think about length of '\0' in %c
-		if (argPtrCurrent->flagWidthNb == 1 || argPtrCurrent->flagWidthNb == 1)
+		printf("CONDITION: (%lu < %lu) && (%hhd == 1 || %hhd == 1)\n", argPtrCurrent->outputLength, argPtrCurrent->width, argPtrCurrent->flagWidthWc, argPtrCurrent->flagWidthNb);
+		if ((argPtrCurrent->outputLength < argPtrCurrent->width) && (argPtrCurrent->flagWidthWc == 1 || argPtrCurrent->flagWidthNb == 1))
 		{
+			printf("PRINT WITH WIDTH\n");
+			argPtrCurrent->width = argPtrCurrent->width - argPtrCurrent->outputLength;
+			get_output_malloc_width(argPtrCurrent, data);
 			if (argPtrCurrent->flagLess)
 				print_output_width(argPtrCurrent, data, argNumber);
 			else
@@ -53,7 +77,7 @@ void			printArgAndFree(t_data *data) {
 		argPtrCurrent = argPtrNext;
 		argNumber++;
 	}
-	printf("Rest of the strring -> [%s]\n", data->format + data->tmpFormatPos);
+	printf("Rest of the string -> [%s]\n", data->format + data->tmpFormatPos);
 }
 
 t_arg	*createStructArg(t_data *data) {
