@@ -27,6 +27,7 @@ SRC =	ft_printf.c \
 		transformArg.c \
 		arg_list.c \
 		flag.c \
+		length_conversion.c \
 		main.c
 
 OBJ = $(patsubst %.c, $(OPATH)/%.o, $(SRC))

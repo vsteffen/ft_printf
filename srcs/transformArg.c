@@ -105,7 +105,7 @@ char      		*ft_dtoa_printf(t_data *data, double nb, uint8_t precision) {
 	return (output);
 }
 
-void			transformArgChar(t_data *data, int8_t varChar) {
+void			transform_c(t_data *data, char varChar) {
 	char  *output;
 
 	output = (char*)malloc(sizeof(char) * 2);
@@ -114,7 +114,7 @@ void			transformArgChar(t_data *data, int8_t varChar) {
 	data->current->outputArg = output;
 }
 
-static size_t	nb_numeral(int64_t n)
+static size_t	nb_numeral(intmax_t n)
 {
 	size_t count;
 
@@ -124,11 +124,11 @@ static size_t	nb_numeral(int64_t n)
 	return (count);
 }
 
-char			*ft_int64toa_printf(t_data *data, int64_t n)
+char			*ft_intMaxToA_printf(t_data *data, intmax_t n)
 {
 	size_t				len;
 	char				*str;
-	uint64_t			tmp_nb;
+	uintmax_t			tmp_nb;
 
 	len = nb_numeral(n);
 	tmp_nb = n;
@@ -153,12 +153,88 @@ char			*ft_int64toa_printf(t_data *data, int64_t n)
 	return (str);
 }
 
+void			transform_d(t_data *data, intmax_t varIntMax) {
+	data->current->outputArg = ft_intMaxToA_printf(data, varIntMax);
+}
+
+void			transform_o(t_data *data, intmax_t varIntMax) {
+	(void)data;
+	(void)varIntMax;
+}
+
+void			transform_o_unsigned(t_data *data, uintmax_t varUIntMax) {
+	(void)data;
+	(void)varUIntMax;
+}
+
+void			transform_u(t_data *data, intmax_t varIntMax) {
+	(void)data;
+	(void)varIntMax;
+}
+
+void			transform_u_unsigned(t_data *data, uintmax_t varUIntMax) {
+	(void)data;
+	(void)varUIntMax;
+}
+
+void			transform_x(t_data *data, intmax_t varIntMax) {
+	(void)data;
+	(void)varIntMax;
+}
+
+void			transform_x_unsigned(t_data *data, uintmax_t varUIntMax) {
+	(void)data;
+	(void)varUIntMax;
+}
+
+void			transform_X(t_data *data, intmax_t varIntMax) {
+	(void)data;
+	(void)varIntMax;
+}
+
+void			transform_X_unsigned(t_data *data, uintmax_t varUIntMax) {
+	(void)data;
+	(void)varUIntMax;
+}
+
+void			transform_n_char(t_data *data, signed char *varTyped) {
+	(void)data;
+	(void)varTyped;
+}
+void			transform_n_short(t_data *data, short *varTyped) {
+	(void)data;
+	(void)varTyped;
+}
+void			transform_n_l(t_data *data, long *varTyped) {
+	(void)data;
+	(void)varTyped;
+}
+void			transform_n_ll(t_data *data, long long *varTyped) {
+	(void)data;
+	(void)varTyped;
+}
+void			transform_n_intmax(t_data *data, intmax_t *varTyped) {
+	(void)data;
+	(void)varTyped;
+}
+void			transform_n_size(t_data *data, size_t *varTyped) {
+	(void)data;
+	(void)varTyped;
+}
+
+
+
+
+void			transformArgInt64(t_data *data, int64_t varInt64) {
+	data->current->outputArg = ft_intMaxToA_printf(data, varInt64);
+}
+
 void			transformArgShort(t_data *data, int16_t varShort) {
-	data->current->outputArg = ft_int64toa_printf(data, varShort);
+	data->current->outputArg = ft_intMaxToA_printf(data, varShort);
 }
 
 void			transformArgInt(t_data *data, int32_t varInt) {
-	data->current->outputArg = ft_int64toa_printf(data, varInt);
+	data->current->outputArg = ft_intMaxToA_printf(data, varInt);
 }
 
 void			transformArgDouble(t_data *data, double varFloat) {
@@ -166,7 +242,7 @@ void			transformArgDouble(t_data *data, double varFloat) {
 }
 
 void			transformArgLong(t_data *data, int64_t varLong) {
-	data->current->outputArg = ft_int64toa_printf(data, varLong);
+	data->current->outputArg = ft_intMaxToA_printf(data, varLong);
 }
 
 void			transformArgString(t_data *data, char *varString) {

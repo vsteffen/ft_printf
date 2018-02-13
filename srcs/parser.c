@@ -14,16 +14,52 @@
 
 int		detect_pattern(t_data *data, char charAnalyse) {
 	printf("CHAR %c\n", charAnalyse);
-	if (charAnalyse == 'd') {
+	if (charAnalyse == 'd' || charAnalyse == 'i') {
 		printf("'d' conversion detected\n");
-		data->current->type = 1;
-		transformArgInt(data, va_arg(data->ap, int));
+		// data->current->type = 1;
+		transform_d(data, va_arg(data->ap, int));
 		return (0);
 	}
 	else if (charAnalyse == 'c') {
 		printf("'c' conversion detected\n");
-		data->current->type = 2;
-		transformArgChar(data, va_arg(data->ap, int));
+		// data->current->type = 2;
+		transform_c(data, va_arg(data->ap, int));
+		return (0);
+	}
+	else if (charAnalyse == 'h') {
+		if (data->format[data->formatPos + data->moveInArg + 1] == 'h') {
+			printf("'hh' length modifier detected\n");
+			detect_length_mod_hh(data, data->format[data->formatPos + data->moveInArg + 2]);
+			data->moveInArg += 2;
+			return (0);
+		}
+		printf("'h' length modifier detected\n");
+		detect_length_mod_h(data, data->format[data->formatPos + data->moveInArg + 1]);
+		data->moveInArg++;
+		return (0);
+	}
+	else if (charAnalyse == 'l') {
+		if (data->format[data->formatPos + data->moveInArg + 1] == 'l') {
+			printf("'ll' length modifier detected\n");
+			detect_length_mod_ll(data, data->format[data->formatPos + data->moveInArg + 2]);
+			data->moveInArg += 2;
+			return (0);
+		}
+		printf("'l' length modifier detected\n");
+		detect_length_mod_l(data, data->format[data->formatPos + data->moveInArg + 1]);
+		data->moveInArg++;
+		return (0);
+	}
+	else if (charAnalyse == 'j') {
+		printf("'j' length modifier detected\n");
+		detect_length_mod_j(data, data->format[data->formatPos + data->moveInArg + 1]);
+		data->moveInArg++;
+		return (0);
+	}
+	else if (charAnalyse == 'z') {
+		printf("'z' length modifier detected\n");
+		detect_length_mod_z(data, data->format[data->formatPos + data->moveInArg + 1]);
+		data->moveInArg++;
 		return (0);
 	}
 	else if (charAnalyse == 's') {
@@ -43,19 +79,19 @@ int		detect_pattern(t_data *data, char charAnalyse) {
 	}
 	else if (charAnalyse == '%') {
 		printf("'%%' character detected\n");
-		data->current->type = 5;
-		transformArgChar(data, '%');
+		// data->current->type = 5;
+		transform_c(data, '%');
 		return (0);
 	}
 	else if (charAnalyse == '.') {
-		printf("'.' character detected\n");
+		printf("'.' flag detected\n");
 		if (verifFlagAlreadyUsed(data, '.') == 0)
 			return (0);
 		flagDot(data);
 		return (-1);
 	}
 	else if (ft_isdigit(charAnalyse)) {
-		printf("Width character detected\n");
+		printf("Width flag detected\n");
 		if (charAnalyse == '0') {
 				data->current->flagZero = 1;
 				return (-1);
@@ -67,12 +103,12 @@ int		detect_pattern(t_data *data, char charAnalyse) {
 		return (-1);
 	}
 	else if (charAnalyse == ' ') {
-		printf("' ' character detected\n");
+		printf("' ' flag detected\n");
 		data->current->flagSpace = 1;
 		return (-1);
 	}
 	else if (charAnalyse == '*') {
-		printf("'*' character detected\n");
+		printf("'*' flag detected\n");
 		data->current->flagWidthWc = 1;
 		int64_t tmpInt64 = va_arg(data->ap, int64_t);
 		data->current->width = tmpInt64;
@@ -84,12 +120,12 @@ int		detect_pattern(t_data *data, char charAnalyse) {
 		return (-1);
 	}
 	else if (charAnalyse == '-') {
-		printf("'-' character detected\n");
+		printf("'-' flag detected\n");
 		data->current->flagLess = 1;
 		return (-1);
 	}
 	else if (charAnalyse == '+') {
-		printf("'+' character detected\n");
+		printf("'+' flag detected\n");
 		data->current->flagMore = 1;
 		return (-1);
 	}

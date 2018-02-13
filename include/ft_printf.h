@@ -69,7 +69,31 @@ int					parse_and_move_format(t_data *data);
 t_arg				*createStructArg(t_data *data);
 void				printArgAndFree(t_data *data);
 
-void				transformArgChar(t_data *data, int8_t varInt);
+void				detect_length_mod_hh(t_data *data, char conversion);
+void				detect_length_mod_h(t_data *data, char conversion);
+void				detect_length_mod_l(t_data *data, char conversion);
+void				detect_length_mod_ll(t_data *data, char conversion);
+void				detect_length_mod_j(t_data *data, char conversion);
+void				detect_length_mod_z(t_data *data, char conversion);
+
+void				transform_c(t_data *data, char varInt);
+void				transform_d(t_data *data, intmax_t varIntMax);
+void				transform_o(t_data *data, intmax_t varIntMax);
+void				transform_o_unsigned(t_data *data, uintmax_t varUIntMax);
+void				transform_u(t_data *data, intmax_t varIntMax);
+void				transform_u_unsigned(t_data *data, uintmax_t varUIntMax);
+void				transform_x(t_data *data, intmax_t varIntMax);
+void				transform_x_unsigned(t_data *data, uintmax_t varUIntMax);
+void				transform_X(t_data *data, intmax_t varIntMax);
+void				transform_X_unsigned(t_data *data, uintmax_t varUIntMax);
+void				transform_n_char(t_data *data, signed char *varTyped);
+void				transform_n_short(t_data *data, short *varTyped);
+void				transform_n_l(t_data *data, long *varTyped);
+void				transform_n_ll(t_data *data, long long *varTyped);
+void				transform_n_intmax(t_data *data, intmax_t *varTyped);
+void				transform_n_size(t_data *data, size_t *varTyped);
+
+
 void				transformArgShort(t_data *data, int16_t varInt);
 void				transformArgInt(t_data *data, int32_t varInt);
 void				transformArgLong(t_data *data, int64_t varInt);
