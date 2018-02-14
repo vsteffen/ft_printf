@@ -18,6 +18,8 @@ char			*ft_itoa_printf(t_data *data, intmax_t n, size_t prec)
 
 	(void)prec;
 	len = nb_numeral(n);
+	if (len < prec)
+		len = prec;
 	tmp_nb = n;
 	if (n < 0)
 	{
@@ -33,6 +35,12 @@ char			*ft_itoa_printf(t_data *data, intmax_t n, size_t prec)
 	str[--len] = tmp_nb % 10 + '0';
 	while (tmp_nb /= 10)
 		str[--len] = tmp_nb % 10 + '0';
+	if (len - data->current->flagMore > 0)
+	{
+		while (--len > 0)
+			str[len] = '0';
+		str[0] = '0';
+	}
 	if (data->current->flagMore)
 		str[0] = '+';
 	if (n < 0)
