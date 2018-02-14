@@ -20,6 +20,41 @@ int		detect_pattern(t_data *data, char charAnalyse) {
 		transform_d(data, va_arg(data->ap, int));
 		return (0);
 	}
+	else if (charAnalyse == 'o') {
+		printf("'o' conversion detected\n");
+		transform_o(data, (uintmax_t)va_arg(data->ap, int));
+		return (0);
+	}
+	else if (charAnalyse == 'u') {
+		printf("'u' conversion detected\n");
+		transform_u(data, (uintmax_t)va_arg(data->ap, int));
+		return (0);
+	}
+	else if (charAnalyse == 'x') {
+		printf("'x' conversion detected\n");
+		transform_x(data, (uintmax_t)va_arg(data->ap, int));
+		return (0);
+	}
+	else if (charAnalyse == 'X') {
+		printf("'x' conversion detected\n");
+		transform_X(data, (uintmax_t)va_arg(data->ap, int));
+		return (0);
+	}
+	else if (charAnalyse == 'D') {
+		printf("'D' conversion detected\n");
+		transform_d(data, (long int)va_arg(data->ap, long int));
+		return (0);
+	}
+	else if (charAnalyse == 'O') {
+		printf("'O' conversion detected\n");
+		transform_o(data, (long int)va_arg(data->ap, long int));
+		return (0);
+	}
+	else if (charAnalyse == 'U') {
+		printf("'U' conversion detected\n");
+		transform_u(data, (long int)va_arg(data->ap, long int));
+		return (0);
+	}
 	else if (charAnalyse == 'c') {
 		printf("'c' conversion detected\n");
 		// data->current->type = 2;
@@ -65,7 +100,7 @@ int		detect_pattern(t_data *data, char charAnalyse) {
 	else if (charAnalyse == 's') {
 		printf("'s' conversion detected\n");
 		data->current->type = 3;
-		transformArgString(data, va_arg(data->ap, char *));
+		transform_s(data, va_arg(data->ap, char *));
 		return (0);
 	}
 	else if (charAnalyse == 'f' || charAnalyse == 'F') {
@@ -74,7 +109,7 @@ int		detect_pattern(t_data *data, char charAnalyse) {
 		if (!data->current->flagDot) {
 			data->current->precision = 6;
 		}
-		transformArgDouble(data, va_arg(data->ap, double));
+		transform_f(data, va_arg(data->ap, double));
 		return (0);
 	}
 	else if (charAnalyse == '%') {
@@ -151,5 +186,6 @@ int			parse_and_move_format(t_data *data)
 	while(detect_pattern(data, data->format[data->formatPos + data->moveInArg]) == -1) {
 		data->moveInArg++;
 	}
+	printf("PRINT WITH WIDTH\n");
 	return (data->moveInArg);
 }

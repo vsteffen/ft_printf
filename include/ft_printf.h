@@ -22,7 +22,7 @@ typedef __int128			int128_t;
 typedef struct				s_arg { // Chained list for every arguments
 	struct s_arg			*next;
 	size_t					width;
-	uint8_t					precision;
+	size_t					precision;
 	int8_t					flagWidthNb;
 	int8_t					flagWidthWc;
 	int8_t					flagHash;
@@ -78,27 +78,20 @@ void				detect_length_mod_z(t_data *data, char conversion);
 
 void				transform_c(t_data *data, char varInt);
 void				transform_d(t_data *data, intmax_t varIntMax);
-void				transform_o(t_data *data, intmax_t varIntMax);
-void				transform_o_unsigned(t_data *data, uintmax_t varUIntMax);
-void				transform_u(t_data *data, intmax_t varIntMax);
-void				transform_u_unsigned(t_data *data, uintmax_t varUIntMax);
-void				transform_x(t_data *data, intmax_t varIntMax);
-void				transform_x_unsigned(t_data *data, uintmax_t varUIntMax);
-void				transform_X(t_data *data, intmax_t varIntMax);
-void				transform_X_unsigned(t_data *data, uintmax_t varUIntMax);
+void				transform_s(t_data *data, char *varString);
+void				transform_o(t_data *data, uintmax_t varUIntMax);
+void				transform_u(t_data *data, uintmax_t varUIntMax);
+void				transform_x(t_data *data, uintmax_t varUIntMax);
+void				transform_X(t_data *data, uintmax_t varUIntMax);
 void				transform_n_char(t_data *data, signed char *varTyped);
 void				transform_n_short(t_data *data, short *varTyped);
 void				transform_n_l(t_data *data, long *varTyped);
 void				transform_n_ll(t_data *data, long long *varTyped);
 void				transform_n_intmax(t_data *data, intmax_t *varTyped);
 void				transform_n_size(t_data *data, size_t *varTyped);
+void				transform_f(t_data *data, double varFloat);
 
 
-void				transformArgShort(t_data *data, int16_t varInt);
-void				transformArgInt(t_data *data, int32_t varInt);
-void				transformArgLong(t_data *data, int64_t varInt);
-void				transformArgString(t_data *data, char *varInt);
-void				transformArgDouble(t_data *data, double varInt);
 
 int8_t   			verifFlagAlreadyUsed(t_data *data, char flag);
 void      			flagDot(t_data *data);

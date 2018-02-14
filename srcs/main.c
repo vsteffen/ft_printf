@@ -24,7 +24,7 @@ int			main(int ac, char **av, char **env)
 	printf("-------------------\n");
 	// double varToSend = 42.8999999999999999999999999;
 	// char	*varToSend2 = "12345";
-	int 	varToSend1 = 42;
+	int 	varToSend1 = 420;
 	// char *varToSend1 = "SALUT";
 	// int   varToSend2 = 7;
 	// make re && ./ft_printf '[%10*-s]'

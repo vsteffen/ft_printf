@@ -33,7 +33,7 @@ int8_t    verifFlagAlreadyUsed(t_data *data, char flag) {
 }
 
 void      flagDot(t_data *data) {
-	uint8_t     precision;
+	size_t     	precision;
 	char        numeral;
 	size_t      tmpMoveInArg;
 
@@ -49,7 +49,7 @@ void      flagDot(t_data *data) {
 		data->moveInArg--;
 	}
 	data->current->precision = precision;
-	// printf("PREC FUNCTION: precision = %d and tmp = %lu and moveInArg = %lu and last char = %c\n", precision, tmpMoveInArg, data->moveInArg, numeral);
+	// printf("PREC FUNCTION: precision = %zu and tmp = %lu and moveInArg = %lu and last char = %c\n", precision, tmpMoveInArg, data->moveInArg, numeral);
 }
 
 void      flagWidthNb(t_data *data) {
