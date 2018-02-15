@@ -41,6 +41,10 @@ char			*ft_itoa_base_printf(uintmax_t nb, uint8_t base, char *alph, size_t prec)
 
 void			transform_o(t_data *data, uintmax_t varUIntMax) {
 	data->current->outputArg = ft_itoa_base_printf(varUIntMax, 8, "0123456789abcdef", data->current->precision);
+	if (data->current->flagHash)
+	{
+		data->current->outputArg = ft_strjoinaf2("0", data->current->outputArg);
+	}
 }
 
 void			transform_u(t_data *data, uintmax_t varUIntMax) {
@@ -49,8 +53,16 @@ void			transform_u(t_data *data, uintmax_t varUIntMax) {
 
 void			transform_x(t_data *data, uintmax_t varUIntMax) {
 	data->current->outputArg = ft_itoa_base_printf(varUIntMax, 16, "0123456789abcdef", data->current->precision);
+	if (data->current->flagHash)
+	{
+		data->current->outputArg = ft_strjoinaf2("0x", data->current->outputArg);
+	}
 }
 
 void			transform_X(t_data *data, uintmax_t varUIntMax) {
 	data->current->outputArg = ft_itoa_base_printf(varUIntMax, 16, "0123456789ABCDEF", data->current->precision);
+	if (data->current->flagHash)
+	{
+		data->current->outputArg = ft_strjoinaf2("0X", data->current->outputArg);
+	}
 }

@@ -55,6 +55,11 @@ int		detect_pattern(t_data *data, char charAnalyse) {
 		transform_u(data, (long int)va_arg(data->ap, long int));
 		return (0);
 	}
+	else if (charAnalyse == 'p') {
+		printf("'p' conversion detected\n");
+		transform_p(data, va_arg(data->ap, void *));
+		return (0);
+	}
 	else if (charAnalyse == 'c') {
 		printf("'c' conversion detected\n");
 		// data->current->type = 2;
@@ -162,6 +167,11 @@ int		detect_pattern(t_data *data, char charAnalyse) {
 	else if (charAnalyse == '+') {
 		printf("'+' flag detected\n");
 		data->current->flagMore = 1;
+		return (-1);
+	}
+	else if (charAnalyse == '#') {
+		printf("'#' flag detected\n");
+		data->current->flagHash = 1;
 		return (-1);
 	}
 	else {

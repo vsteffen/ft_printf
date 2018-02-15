@@ -32,6 +32,7 @@ SRC =	ft_printf.c \
 		transform_gen.c \
 		transform_d.c \
 		transform_f.c \
+		transform_p.c \
 		main.c
 
 OBJ = $(patsubst %.c, $(OPATH)/%.o, $(SRC))

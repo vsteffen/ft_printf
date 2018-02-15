@@ -90,7 +90,10 @@ void				transform_n_ll(t_data *data, long long *varTyped);
 void				transform_n_intmax(t_data *data, intmax_t *varTyped);
 void				transform_n_size(t_data *data, size_t *varTyped);
 void				transform_f(t_data *data, double varFloat);
+void				transform_p(t_data *data, void *ptr);
 
+
+char				*ft_itoa_base_printf(uintmax_t nb, uint8_t base, char *alph, size_t prec);
 
 
 int8_t   			verifFlagAlreadyUsed(t_data *data, char flag);
