@@ -29,6 +29,7 @@ SRC =	ft_printf.c \
 		length_conversion.c \
 		transform_base.c\
 		transform_gen.c \
+		transform_wide.c \
 		transform_d.c \
 		transform_f.c \
 		transform_p.c \

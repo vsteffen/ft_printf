@@ -62,6 +62,10 @@ void	detect_length_mod_l(t_data *data, char conversion)
 		transform_X(data, (unsigned long)va_arg(data->ap, unsigned long));
 	else if (conversion == 'n')
 		transform_n(data, (intmax_t *)va_arg(data->ap, long *));
+	else if (conversion == 'c')
+		transform_wide_c(data, va_arg(data->ap, wint_t));
+	else if (conversion == 's')
+		transform_wide_s(data, va_arg(data->ap, wchar_t *));
 	else
 		data->error = 1;
 }

@@ -67,8 +67,22 @@ int		detect_pattern(t_data *data, char charAnalyse) {
 	}
 	else if (charAnalyse == 'c') {
 		printf("'c' conversion detected\n");
-		// data->current->type = 2;
 		transform_c(data, va_arg(data->ap, int));
+		return (0);
+	}
+	else if (charAnalyse == 's') {
+		printf("'s' conversion detected\n");
+		transform_s(data, va_arg(data->ap, char *));
+		return (0);
+	}
+	else if (charAnalyse == 'C') {
+		printf("'C' conversion detected\n");
+		transform_wide_c(data, va_arg(data->ap, wint_t));
+		return (0);
+	}
+	else if (charAnalyse == 'S') {
+		printf("'S' conversion detected\n");
+		transform_wide_s(data, va_arg(data->ap, wchar_t *));
 		return (0);
 	}
 	else if (charAnalyse == 'h') {
@@ -105,12 +119,6 @@ int		detect_pattern(t_data *data, char charAnalyse) {
 		printf("'z' length modifier detected\n");
 		detect_length_mod_z(data, data->format[data->formatPos + data->moveInArg + 1]);
 		data->moveInArg++;
-		return (0);
-	}
-	else if (charAnalyse == 's') {
-		printf("'s' conversion detected\n");
-		// data->current->type = 3;
-		transform_s(data, va_arg(data->ap, char *));
 		return (0);
 	}
 	else if (charAnalyse == 'f' || charAnalyse == 'F') {

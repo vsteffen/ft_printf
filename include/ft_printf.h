@@ -16,6 +16,7 @@
 # include "libft.h"
 # include <stdarg.h>
 # include <stdint.h>
+# include <wchar.h>
 
 typedef __int128			int128_t;
 
@@ -78,8 +79,10 @@ void				detect_length_mod_j(t_data *data, char conversion);
 void				detect_length_mod_z(t_data *data, char conversion);
 
 void				transform_c(t_data *data, char varInt);
-void				transform_d(t_data *data, intmax_t varIntMax);
 void				transform_s(t_data *data, char *varString);
+void				transform_wide_c(t_data *data, wint_t wide);
+void				transform_wide_s(t_data *data, wchar_t *wide);
+void				transform_d(t_data *data, intmax_t varIntMax);
 void				transform_o(t_data *data, uintmax_t varUIntMax);
 void				transform_u(t_data *data, uintmax_t varUIntMax);
 void				transform_x(t_data *data, uintmax_t varUIntMax);
@@ -87,7 +90,6 @@ void				transform_X(t_data *data, uintmax_t varUIntMax);
 void				transform_n(t_data *data, intmax_t *varIntMax);
 void				transform_f(t_data *data, double varFloat);
 void				transform_p(t_data *data, void *ptr);
-
 
 char				*ft_itoa_base_printf(uintmax_t nb, uint8_t base, char *alph, size_t prec);
 

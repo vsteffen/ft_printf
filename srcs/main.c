@@ -18,16 +18,16 @@ int			main(int ac, char **av, char **env)
 	(void)av;
 	(void)env;
 
-	// printf("%lu\n", sizeof(uint64_t));
+	// printf("%lu\n", sizeof(wchar_t));
 	// printf("Float -> [%.f] /// double -> [%0.8g] /// int -> [%d]\n", 4.1234567890123456789012345678901234567890, (double)4.22, (int)4.722222);
 
 	printf("-------------------\n");
 	int retour;
 	// double varToSend = 42.8999999999999999999999999;
 	// char	*varToSend2 = "12345";
-	int 	varToSend1 = 420;
+	// int 	varToSend1 = 420;
 	// char varToSend1 = '\0';
-	// char *varToSend1 = "SALUT";
+	char *varToSend1 = "SALUT";
 	// int   varToSend2 = 7;
 	// make re && ./ft_printf '[%10*-s]'
 	if (ac >  1) {
