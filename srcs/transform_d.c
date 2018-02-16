@@ -1,6 +1,6 @@
 #include "ft_printf.h"
 
-static size_t	nb_numeral(intmax_t n)
+static size_t	nb_numeral_d(intmax_t n)
 {
 	size_t count;
 
@@ -17,7 +17,7 @@ char			*ft_itoa_printf(t_data *data, intmax_t n, size_t prec)
 	uintmax_t			tmp_nb;
 
 	(void)prec;
-	len = nb_numeral(n);
+	len = nb_numeral_d(n);
 	if (len < prec)
 		len = prec;
 	tmp_nb = n;
@@ -49,5 +49,10 @@ char			*ft_itoa_printf(t_data *data, intmax_t n, size_t prec)
 }
 
 void			transform_d(t_data *data, intmax_t varIntMax) {
-	data->current->outputArg = ft_itoa_printf(data, varIntMax, data->current->precision);
+	if (varIntMax == 0)
+		data->current->outputArg = malloc_prec_zero_doux(data->current->precision);
+	else
+		data->current->outputArg = ft_itoa_printf(data, varIntMax, data->current->precision);
+	if (data->current->flagSpace == 1)
+		data->current->outputArg = ft_strjoinaf2(" ", data->current->outputArg);
 }

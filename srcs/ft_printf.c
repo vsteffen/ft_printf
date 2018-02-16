@@ -20,6 +20,7 @@ void		init_data_and_var(t_data *data, const char * restrict format) {
 	data->tmpFormatPos = 0;
 	data->error = 0;
 	data->output = NULL;
+	data->lenSoFar = 0;
 	data->first = NULL;
 	data->current = NULL;
 }
@@ -31,6 +32,7 @@ int		exitPrintf(t_data *data) {
 
 int			ft_printf(const char * restrict format, ...) {
 	t_data		data;
+	size_t		length;
 
 	init_data_and_var(&data, format);
 	va_start(data.ap, format);
@@ -44,10 +46,12 @@ int			ft_printf(const char * restrict format, ...) {
 				return (exitPrintf(&data));
 			continue ;
 		}
+		data.lenSoFar++;
 	}
 	printf("\nRESULT:\n");
 	printArgAndFree(&data);
-	// printf("]\n");
+	length = data.lenSoFar;
+	// Free data
 	va_end(data.ap);
-	return (0);
+	return (length);
 }

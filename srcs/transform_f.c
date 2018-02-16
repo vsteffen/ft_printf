@@ -1,6 +1,6 @@
 #include "ft_printf.h"
 
-uint8_t				lengthNumeral(int64_t nb)
+static uint8_t				lengthNumeral(int64_t nb)
 {
 	uint8_t		count;
 
@@ -94,4 +94,6 @@ char      		*ft_dtoa_printf(t_data *data, double nb, uint8_t precision) {
 
 void			transform_f(t_data *data, double varFloat) {
 	data->current->outputArg = ft_dtoa_printf(data, varFloat, data->current->precision);
+	if (data->current->flagSpace == 1)
+		data->current->outputArg = ft_strjoinaf2(" ", data->current->outputArg);
 }

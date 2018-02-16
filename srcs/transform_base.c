@@ -1,6 +1,6 @@
 #include "ft_printf.h"
 
-static uint8_t			countNumeral(uintmax_t nb, uint8_t base)
+static uint8_t			countNumeral_base(uintmax_t nb, uint8_t base)
 {
 	uint8_t 	count;
 
@@ -18,7 +18,7 @@ char			*ft_itoa_base_printf(uintmax_t nb, uint8_t base, char *alph, size_t prec)
 
 	if (nb == 0)
 		return (ft_strdup("0"));
-	length = (size_t)countNumeral(nb, base);
+	length = (size_t)countNumeral_base(nb, base);
 	if (length < prec)
 		length = prec;
 	output = (char *)mallocp(sizeof(char) * length + 1);
@@ -40,27 +40,39 @@ char			*ft_itoa_base_printf(uintmax_t nb, uint8_t base, char *alph, size_t prec)
 }
 
 void			transform_o(t_data *data, uintmax_t varUIntMax) {
-	data->current->outputArg = ft_itoa_base_printf(varUIntMax, 8, "0123456789abcdef", data->current->precision);
-	if (data->current->flagHash)
+	if (varUIntMax == 0)
+		data->current->outputArg = malloc_prec_zero_doux(data->current->precision);
+	else
+		data->current->outputArg = ft_itoa_base_printf(varUIntMax, 8, "0123456789abcdef", data->current->precision);
+	if (data->current->flagHash && varUIntMax > 0)
 	{
 		data->current->outputArg = ft_strjoinaf2("0", data->current->outputArg);
 	}
 }
 
 void			transform_u(t_data *data, uintmax_t varUIntMax) {
-	data->current->outputArg = ft_itoa_base_printf(varUIntMax, 10, "0123456789abcdef", data->current->precision);
+	if (varUIntMax == 0)
+		data->current->outputArg = malloc_prec_zero_doux(data->current->precision);
+	else
+		data->current->outputArg = ft_itoa_base_printf(varUIntMax, 10, "0123456789abcdef", data->current->precision);
 }
 
 void			transform_x(t_data *data, uintmax_t varUIntMax) {
-	data->current->outputArg = ft_itoa_base_printf(varUIntMax, 16, "0123456789abcdef", data->current->precision);
-	if (data->current->flagHash)
+	if (varUIntMax == 0)
+		data->current->outputArg = malloc_prec_zero_doux(data->current->precision);
+	else
+		data->current->outputArg = ft_itoa_base_printf(varUIntMax, 16, "0123456789abcdef", data->current->precision);
+	if (data->current->flagHash && varUIntMax > 0)
 	{
 		data->current->outputArg = ft_strjoinaf2("0x", data->current->outputArg);
 	}
 }
 
 void			transform_X(t_data *data, uintmax_t varUIntMax) {
-	data->current->outputArg = ft_itoa_base_printf(varUIntMax, 16, "0123456789ABCDEF", data->current->precision);
+	if (varUIntMax == 0)
+		data->current->outputArg = malloc_prec_zero_doux(data->current->precision);
+	else
+		data->current->outputArg = ft_itoa_base_printf(varUIntMax, 16, "0123456789ABCDEF", data->current->precision);
 	if (data->current->flagHash)
 	{
 		data->current->outputArg = ft_strjoinaf2("0X", data->current->outputArg);

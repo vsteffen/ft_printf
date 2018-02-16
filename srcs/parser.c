@@ -60,6 +60,11 @@ int		detect_pattern(t_data *data, char charAnalyse) {
 		transform_p(data, va_arg(data->ap, void *));
 		return (0);
 	}
+	else if (charAnalyse == 'n') {
+		printf("'n' conversion detected\n");
+		transform_n(data, (intmax_t *)va_arg(data->ap, int *));
+		return (0);
+	}
 	else if (charAnalyse == 'c') {
 		printf("'c' conversion detected\n");
 		// data->current->type = 2;
@@ -104,13 +109,13 @@ int		detect_pattern(t_data *data, char charAnalyse) {
 	}
 	else if (charAnalyse == 's') {
 		printf("'s' conversion detected\n");
-		data->current->type = 3;
+		// data->current->type = 3;
 		transform_s(data, va_arg(data->ap, char *));
 		return (0);
 	}
 	else if (charAnalyse == 'f' || charAnalyse == 'F') {
 		printf("'f' conversion detected\n");
-		data->current->type = 4;
+		// data->current->type = 4;
 		if (!data->current->flagDot) {
 			data->current->precision = 6;
 		}
@@ -180,6 +185,20 @@ int		detect_pattern(t_data *data, char charAnalyse) {
 	}
 }
 
+void get_output_malloc_width(t_arg *arg) {
+	size_t		pos;
+	char		fillWidth;
+
+	arg->outputWidth = (char*)malloc(sizeof(char) * arg->width + 1);
+	arg->outputWidth[arg->width] = '\0';
+	pos = 0;
+	fillWidth = ' ';
+	if (arg->flagZero)
+		fillWidth = '0';
+	while (pos++ < arg->width)
+		arg->outputWidth[pos - 1] = fillWidth;
+}
+
 int			parse_and_move_format(t_data *data)
 {
 	if (data->first == NULL)
@@ -187,15 +206,23 @@ int			parse_and_move_format(t_data *data)
 		data->first = createStructArg(data);
 		data->current = data->first;
 	}
-	else {
+	else
+	{
 		data->current->next = createStructArg(data);
 		data->current = data->current->next;
 	}
 	data->formatMod[data->formatPos] = '\0'; // use to improve speed
 	data->moveInArg = 1;
-	while(detect_pattern(data, data->format[data->formatPos + data->moveInArg]) == -1) {
+	while(detect_pattern(data, data->format[data->formatPos + data->moveInArg]) == -1)
 		data->moveInArg++;
+	data->current->outputLength += ft_strlen(data->current->outputArg); // don't forget to think about length of '\0' in %c
+	if (data->current->outputLength < data->current->width)
+	{
+		data->current->width = data->current->width - data->current->outputLength;
+		get_output_malloc_width(data->current);
 	}
-	printf("PRINT WITH WIDTH\n");
+	else
+		data->current->width = 0;
+	data->lenSoFar += data->current->outputLength + data->current->width;
 	return (data->moveInArg);
 }

@@ -24,7 +24,6 @@ LIBS = $(ROOT)/lib/libft.a
 
 SRC =	ft_printf.c \
 		parser.c \
-		transformArg.c \
 		arg_list.c \
 		flag.c \
 		length_conversion.c \

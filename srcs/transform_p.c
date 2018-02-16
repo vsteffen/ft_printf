@@ -15,7 +15,6 @@ char			*ft_ptoa_base_printf(uintptr_t nb, uint8_t base, char *alph, size_t prec)
 	char		*output;
 	size_t		length;
 
-
 	if (nb == 0)
 		return (ft_strdup("0"));
 	length = (size_t)countNumeral(nb, base);
@@ -26,7 +25,6 @@ char			*ft_ptoa_base_printf(uintptr_t nb, uint8_t base, char *alph, size_t prec)
 	while (nb != 0)
 	{
 		length--;
-		// printf("Add [%c] at %zu\n", alph[nb % base], length);
 		output[length] = alph[nb % base];
 		nb /= base;
 	}

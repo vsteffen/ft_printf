@@ -25,7 +25,7 @@ void	detect_length_mod_hh(t_data *data, char conversion)
 	else if (conversion == 'X')
 		transform_X(data, (unsigned char)va_arg(data->ap, int));
 	else if (conversion == 'n')
-		transform_n_char(data, (signed char *)va_arg(data->ap, signed char *));
+		transform_n(data, (intmax_t *)va_arg(data->ap, signed char *));
 	else
 		data->error = 1;
 }
@@ -43,7 +43,7 @@ void	detect_length_mod_h(t_data *data, char conversion)
 	else if (conversion == 'X')
 		transform_X(data, (unsigned short)va_arg(data->ap, int));
 	else if (conversion == 'n')
-		transform_n_short(data, (short *)va_arg(data->ap, short *));
+		transform_n(data, (intmax_t *)va_arg(data->ap, short *));
 	else
 		data->error = 1;
 }
@@ -61,7 +61,7 @@ void	detect_length_mod_l(t_data *data, char conversion)
 	else if (conversion == 'X')
 		transform_X(data, (unsigned long)va_arg(data->ap, unsigned long));
 	else if (conversion == 'n')
-		transform_n_l(data, (long *)va_arg(data->ap, long *));
+		transform_n(data, (intmax_t *)va_arg(data->ap, long *));
 	else
 		data->error = 1;
 }
@@ -79,7 +79,7 @@ void	detect_length_mod_ll(t_data *data, char conversion)
 	else if (conversion == 'X')
 		transform_X(data, (unsigned long long)va_arg(data->ap, unsigned long long));
 	else if (conversion == 'n')
-		transform_n_ll(data, (long long *)va_arg(data->ap, long long *));
+		transform_n(data, (intmax_t *)va_arg(data->ap, long long *));
 	else
 		data->error = 1;
 }
@@ -97,7 +97,7 @@ void	detect_length_mod_j(t_data *data, char conversion)
 	else if (conversion == 'X')
 		transform_X(data, (uintmax_t)va_arg(data->ap, uintmax_t));
 	else if (conversion == 'n')
-		transform_n_intmax(data, (intmax_t *)va_arg(data->ap, intmax_t *));
+		transform_n(data, (intmax_t *)va_arg(data->ap, intmax_t *));
 	else
 		data->error = 1;
 }
@@ -115,7 +115,7 @@ void	detect_length_mod_z(t_data *data, char conversion)
 	else if (conversion == 'X')
 		transform_X(data, (size_t)va_arg(data->ap, size_t));
 	else if (conversion == 'n')
-		transform_n_intmax(data, (intmax_t *)va_arg(data->ap, intmax_t *));
+		transform_n(data, (intmax_t *)va_arg(data->ap, intmax_t *));
 	else
 		data->error = 1;
 }
