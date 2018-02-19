@@ -26,7 +26,6 @@ char			*ft_itoa_base_printf(uintmax_t nb, uint8_t base, char *alph, size_t prec)
 	while (nb != 0)
 	{
 		length--;
-		// printf("Add [%c] at %zu\n", alph[nb % base], length);
 		output[length] = alph[nb % base];
 		nb /= base;
 	}

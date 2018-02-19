@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+#include <locale.h>
 
 int			main(int ac, char **av, char **env)
 {
@@ -21,15 +22,22 @@ int			main(int ac, char **av, char **env)
 	// printf("%lu\n", sizeof(wchar_t));
 	// printf("Float -> [%.f] /// double -> [%0.8g] /// int -> [%d]\n", 4.1234567890123456789012345678901234567890, (double)4.22, (int)4.722222);
 
+	setlocale(LC_CTYPE,"UTF-8");
 	printf("-------------------\n");
 	int retour;
 	// double varToSend = 42.8999999999999999999999999;
 	// char	*varToSend2 = "12345";
 	// int 	varToSend1 = 420;
 	// char varToSend1 = '\0';
-	char *varToSend1 = "SALUT";
+	// char *varToSend1 = "SALUT";
+	// wchar_t				*varToSend1 = L"我是一只猫";
+	wchar_t				*varToSend1 = L"𝄞𝄞𝄞";
+	// wchar_t				*varToSend1 = L"~~~";
+	// wchar_t				*varToSend1 = L"ééé";
+	// wchar_t				*varToSend1 = L"";
+	// 我是一只猫
+
 	// int   varToSend2 = 7;
-	// make re && ./ft_printf '[%10*-s]'
 	if (ac >  1) {
 		retour = ft_printf(av[1], varToSend1);
 		printf("Length ft_printf read : %d\n", retour);
