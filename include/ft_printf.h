@@ -35,6 +35,9 @@ typedef struct				s_arg { // Chained list for every arguments
 	size_t					beforeArg; // text pos before the argument we want to print
 	int8_t					type;
 	char					*outputArg;
+	char					*outputArgWide;
+	size_t					outputWideLength;
+	size_t					trueLengthWide;
 	char					*outputWidth;
 	size_t					outputLength;
 	size_t					outputWidthLength;
@@ -80,7 +83,7 @@ void				detect_length_mod_z(t_data *data, char conversion);
 
 void				transform_c(t_data *data, char varInt);
 void				transform_s(t_data *data, char *varString);
-void				transform_wide_c(t_data *data, wint_t wide);
+void				transform_wide_c(t_data *data, wchar_t wide);
 void				transform_wide_s(t_data *data, wchar_t *wide);
 void				transform_d(t_data *data, intmax_t varIntMax);
 void				transform_o(t_data *data, uintmax_t varUIntMax);

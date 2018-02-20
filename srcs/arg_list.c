@@ -18,32 +18,44 @@ void print_output_simple(t_arg *arg, t_data *data, size_t argNumber)
 	// printf("Arg n°%lu -> [%s] at %lu + [%s] ||| precision = %zu and width = %lu\n",  argNumber, data->formatMod + arg->beforeArg, arg->beforeArg, arg->outputArg, arg->precision, arg->width);
 
 	(void)argNumber;
-	ft_putstr(data->formatMod + arg->beforeArg);
-	ft_putstr(arg->outputArg);
+	// printf("+-+-+-+ WITHOUT WIDTH +-+-+-+\n");
+	write(1, data->formatMod + arg->beforeArg, ft_strlen(data->formatMod + arg->beforeArg));
+	if (arg->outputWideLength > 0)
+		write(1, arg->outputArg, arg->outputWideLength);
+	else
+		write(1, arg->outputArg, ft_strlen(arg->outputArg));
 }
 
 void print_output_width(t_arg *arg, t_data *data, size_t argNumber)
-{
-	// printf("Arg n°%lu -> before [%s] + arg [%s] + width [", argNumber, data->formatMod + arg->beforeArg, arg->outputArg);
-	// printf("%s", arg->outputWidth);
-	// printf("] ||| precision = %zu and width = %lu\n", arg->precision, arg->width);
-
-	(void)argNumber;
-	ft_putstr(data->formatMod + arg->beforeArg);
-	ft_putstr(arg->outputArg);
-	ft_putstr(arg->outputWidth);
-}
-
-void print_output_width_reverse(t_arg *arg, t_data *data, size_t argNumber)
 {
 	// printf("Arg n°%lu -> before [%s] + width [", argNumber, data->formatMod + arg->beforeArg);
 	// printf("%s", arg->outputWidth);
 	// printf("] + arg [%s] ||| precision = %zu and width = %lu\n", arg->outputArg, arg->precision, arg->width);
 
 	(void)argNumber;
-	ft_putstr(data->formatMod + arg->beforeArg);
-	ft_putstr(arg->outputWidth);
-	ft_putstr(arg->outputArg);
+	// printf("+-+-+-+ IN WIDTH +-+-+-+\n");
+	write(1, data->formatMod + arg->beforeArg, ft_strlen(data->formatMod + arg->beforeArg));
+	write(1, arg->outputWidth, ft_strlen(arg->outputWidth));
+	if (arg->outputWideLength > 0)
+		write(1, arg->outputArg, arg->outputWideLength);
+	else
+		write(1, arg->outputArg, ft_strlen(arg->outputArg));
+}
+
+void print_output_width_reverse(t_arg *arg, t_data *data, size_t argNumber)
+{
+	// printf("Arg n°%lu -> before [%s] + arg [%s] + width [", argNumber, data->formatMod + arg->beforeArg, arg->outputArg);
+	// printf("%s", arg->outputWidth);
+	// printf("] ||| precision = %zu and width = %lu\n", arg->precision, arg->width);
+
+	(void)argNumber;
+	// printf("+-+-+-+ IN WIDTH REVERSE+-+-+-+\n");
+	write(1, data->formatMod + arg->beforeArg, ft_strlen(data->formatMod + arg->beforeArg));
+	if (arg->outputWideLength > 0)
+		write(1, arg->outputArg, arg->outputWideLength);
+	else
+		write(1, arg->outputArg, ft_strlen(arg->outputArg));
+	write(1, arg->outputWidth, ft_strlen(arg->outputWidth));
 }
 
 void			printArgAndFree(t_data *data) {
@@ -59,7 +71,7 @@ void			printArgAndFree(t_data *data) {
 		// Free all variables inside
 		if (argPtrCurrent->outputWidth != NULL)
 		{
-			if (argPtrCurrent->flagLess)
+			if (argPtrCurrent->flagLess == 0)
 				print_output_width(argPtrCurrent, data, argNumber);
 			else
 				print_output_width_reverse(argPtrCurrent, data, argNumber);
@@ -86,6 +98,7 @@ void			printArgAndFree(t_data *data) {
 	}
 	ft_putstr(data->format + data->tmpFormatPos);
 	ft_putstr("]\n");
+	
 	// printf("Rest of the string -> [%s]\n", data->format + data->tmpFormatPos);
 }
 
