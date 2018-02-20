@@ -51,7 +51,6 @@ typedef struct				s_data {
 	size_t					tmpFormatPos; // use for beforeArg
 	size_t					moveInArg; // length of character read in
 	int8_t					error;
-	char					*output;
 	size_t					lenSoFar;
 	t_arg					*first;
 	t_arg					*current;

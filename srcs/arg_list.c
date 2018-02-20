@@ -37,7 +37,10 @@ void print_output_width(t_arg *arg, t_data *data, size_t argNumber)
 	write(1, data->formatMod + arg->beforeArg, ft_strlen(data->formatMod + arg->beforeArg));
 	write(1, arg->outputWidth, ft_strlen(arg->outputWidth));
 	if (arg->outputWideLength > 0)
+	{
 		write(1, arg->outputArg, arg->outputWideLength);
+		free(arg->outputArg);
+	}
 	else
 		write(1, arg->outputArg, ft_strlen(arg->outputArg));
 }
@@ -52,7 +55,10 @@ void print_output_width_reverse(t_arg *arg, t_data *data, size_t argNumber)
 	// printf("+-+-+-+ IN WIDTH REVERSE+-+-+-+\n");
 	write(1, data->formatMod + arg->beforeArg, ft_strlen(data->formatMod + arg->beforeArg));
 	if (arg->outputWideLength > 0)
+	{
 		write(1, arg->outputArg, arg->outputWideLength);
+		free(arg->outputArg);
+	}
 	else
 		write(1, arg->outputArg, ft_strlen(arg->outputArg));
 	write(1, arg->outputWidth, ft_strlen(arg->outputWidth));
@@ -64,7 +70,6 @@ void			printArgAndFree(t_data *data) {
 	size_t		argNumber = 1;
 
 	argPtrCurrent = data->first;
-	ft_putstr("[");
 	while (argPtrCurrent)
 	{
 		argPtrNext = argPtrCurrent->next;
@@ -97,8 +102,6 @@ void			printArgAndFree(t_data *data) {
 		argNumber++;
 	}
 	ft_putstr(data->format + data->tmpFormatPos);
-	ft_putstr("]\n");
-
 	// printf("Rest of the string -> [%s]\n", data->format + data->tmpFormatPos);
 }
 

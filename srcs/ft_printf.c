@@ -19,14 +19,14 @@ void		init_data_and_var(t_data *data, const char * restrict format) {
 	data->formatPos = -1;
 	data->tmpFormatPos = 0;
 	data->error = 0;
-	data->output = NULL;
 	data->lenSoFar = 0;
 	data->first = NULL;
 	data->current = NULL;
 }
 
 int		exitPrintf(t_data *data) {
-	printf("Error encountered -> %hhd\n", data->error);
+	(void)data;
+	// printf("Error encountered -> %hhd\n", data->error);
 	return (0);
 }
 
@@ -48,10 +48,9 @@ int			ft_printf(const char * restrict format, ...) {
 		}
 		data.lenSoFar++;
 	}
-	printf("\nRESULT:\n");
 	printArgAndFree(&data);
 	length = data.lenSoFar;
-	// Free data
+	free(data.formatMod);
 	va_end(data.ap);
 	return (length);
 }

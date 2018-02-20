@@ -23,7 +23,7 @@ int			main(int ac, char **av, char **env)
 	// printf("Float -> [%.f] /// double -> [%0.8g] /// int -> [%d]\n", 4.1234567890123456789012345678901234567890, (double)4.22, (int)4.722222);
 
 	setlocale(LC_CTYPE,"UTF-8");
-	printf("-------------------\n");
+	printf("--------------------------\n");
 	int retour;
 	// double varToSend = 42.8999999999999999999999999;
 	// char	*varToSend2 = "12345";
@@ -40,11 +40,13 @@ int			main(int ac, char **av, char **env)
 
 	// int   varToSend2 = 7;
 	if (ac >  1) {
+		ft_printf("[");
 		retour = ft_printf(av[1], varToSend1, varToSend2, varToSend3);
+		ft_printf("]\n");
 		printf("Length ft_printf read : %d\n", retour);
 	}
 	// printf("Value of varToSend1 = %d\n", varToSend1);
-	printf("--------- VS ---------\n[");
+	printf("----------- VS -----------\n[");
 	// printf(av[1], varToSend1, varToSend2);
 	retour = printf(av[1], varToSend1, varToSend2, varToSend3);
 	printf("]\n");
