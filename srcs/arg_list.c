@@ -98,7 +98,7 @@ void			printArgAndFree(t_data *data) {
 	}
 	ft_putstr(data->format + data->tmpFormatPos);
 	ft_putstr("]\n");
-	
+
 	// printf("Rest of the string -> [%s]\n", data->format + data->tmpFormatPos);
 }
 
@@ -106,7 +106,7 @@ t_arg	*createStructArg(t_data *data) {
 	t_arg		*structPtr;
 
 	structPtr = (t_arg*)malloc(sizeof(t_arg));
-	bzero(structPtr, sizeof(t_arg)); // to remove
+	ft_bzero(structPtr, sizeof(t_arg)); // to remove
 	structPtr->next = NULL;
 	structPtr->beforeArg = data->tmpFormatPos;
 	structPtr->outputArg = NULL;
