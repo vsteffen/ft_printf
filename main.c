@@ -19,19 +19,17 @@ int			main(int ac, char **av, char **env)
 	(void)av;
 	(void)env;
 
-	// printf("%lu\n", sizeof(wchar_t));
-	// printf("Float -> [%.f] /// double -> [%0.8g] /// int -> [%d]\n", 4.1234567890123456789012345678901234567890, (double)4.22, (int)4.722222);
-
 	setlocale(LC_CTYPE,"UTF-8");
+	printf("TESTING -> [%s] ARG = 42\n", "%0+5d");
 	printf("--------------------------\n");
 	int retour;
 	// double varToSend = 42.8999999999999999999999999;
 	// char	*varToSend2 = "12345";
 	// int 	varToSend1 = 420;
-	wint_t				varToSend3 = L'猫';
+	// wint_t				varToSend3 = L'猫';
 	// char varToSend3 = '\0';
-	char *varToSend2 = "SALUT";
-	wchar_t				*varToSend1 = L"我是一只猫";
+	// char *varToSend2 = "SALUT";
+	// wchar_t				*varToSend1 = L"我是一只猫";
 	// wchar_t				*varToSend1 = L"𝄞𝄞𝄞";
 	// wchar_t				*varToSend1 = L"~~~";
 	// wchar_t				*varToSend1 = L"ééé";
@@ -39,16 +37,13 @@ int			main(int ac, char **av, char **env)
 	// 我是一只猫
 
 	// int   varToSend2 = 7;
-	if (ac >  1) {
-		ft_printf("[");
-		retour = ft_printf(av[1], varToSend1, varToSend2, varToSend3);
-		ft_printf("]\n");
-		printf("Length ft_printf read : %d\n", retour);
-	}
+	ft_printf("[");
+	retour = ft_printf("%+d", 0);
+	ft_printf("]\n");
+	printf("Length ft_printf read : %d\n", retour);
 	// printf("Value of varToSend1 = %d\n", varToSend1);
 	printf("----------- VS -----------\n[");
-	// printf(av[1], varToSend1, varToSend2);
-	retour = printf(av[1], varToSend1, varToSend2, varToSend3);
+	retour = printf("%+d", 0);
 	printf("]\n");
 	printf("Length printf read : %d\n", retour);
 	// printf("Value of varToSend1 = %d\n", varToSend1);
