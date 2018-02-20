@@ -19,6 +19,7 @@
 # include <stdio.h>
 # define BUFF_SIZE 1
 # include "color_style.h"
+# include "ft_printf.h"
 
 void				ft_bzero(void *s, size_t n);
 void				*ft_memset(void *s, int c, size_t n);
