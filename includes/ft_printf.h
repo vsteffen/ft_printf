@@ -95,7 +95,7 @@ void				transform_p(t_data *data, void *ptr);
 
 char				*ft_itoa_base_printf(uintmax_t nb, uint8_t base, char *alph, size_t prec);
 
-char				*malloc_prec_zero_doux(size_t prec);
+char				*malloc_prec_zero_doux(size_t prec, t_data *data);
 
 int8_t   			verifFlagAlreadyUsed(t_data *data, char flag);
 void      			flagDot(t_data *data);

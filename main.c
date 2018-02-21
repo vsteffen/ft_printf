@@ -20,7 +20,7 @@ int			main(int ac, char **av, char **env)
 	(void)env;
 
 	setlocale(LC_CTYPE,"UTF-8");
-	printf("TESTING -> [%s] ARG = 42\n", "%0+5d");
+	printf("TESTING -> [%s] ARG = this	\n", "%.2s");
 	printf("--------------------------\n");
 	int retour;
 	// double varToSend = 42.8999999999999999999999999;
@@ -35,15 +35,14 @@ int			main(int ac, char **av, char **env)
 	// wchar_t				*varToSend1 = L"ééé";
 	// wchar_t				*varToSend1 = L"";
 	// 我是一只猫
-
 	// int   varToSend2 = 7;
 	ft_printf("[");
-	retour = ft_printf("%+d", 0);
+	retour = ft_printf("%C%C", '4', '2');
 	ft_printf("]\n");
 	printf("Length ft_printf read : %d\n", retour);
 	// printf("Value of varToSend1 = %d\n", varToSend1);
 	printf("----------- VS -----------\n[");
-	retour = printf("%+d", 0);
+	retour = printf("%C%C", '4', '2');
 	printf("]\n");
 	printf("Length printf read : %d\n", retour);
 	// printf("Value of varToSend1 = %d\n", varToSend1);

@@ -196,7 +196,7 @@ int		detect_pattern(t_data *data, char charAnalyse) {
 	}
 }
 
-void get_output_malloc_width(t_arg *arg, char firstCharOutput) {
+void get_output_malloc_width(t_arg *arg, char firstCharOutput, char lastConv) {
 	size_t		pos;
 	char		fillWidth;
 
@@ -212,6 +212,11 @@ void get_output_malloc_width(t_arg *arg, char firstCharOutput) {
 	{
 		arg->outputWidth[0] = firstCharOutput;
 		arg->outputArg[0] = '0';
+	}
+	if (arg->flagZero == 1 && arg->flagHash == 1 && arg->outputWidth[1] != '\0' && (lastConv == 'x' || lastConv == 'X'))
+	{
+		arg->outputWidth[1] = 'x';
+		arg->outputArg[1] = '0';
 	}
 }
 
@@ -239,7 +244,7 @@ int			parse_and_move_format(t_data *data)
 	{
 		// printf("Malloc width field ... %lu < %lu\n", data->current->outputLength, data->current->width);
 		data->current->width = data->current->width - data->current->outputLength;
-		get_output_malloc_width(data->current, data->current->outputArg[0]);
+		get_output_malloc_width(data->current, data->current->outputArg[0], data->format[data->formatPos + data->moveInArg]);
 		// printf("Width obtained -> [%s]\n", data->current->outputWidth);
 	}
 	else

@@ -23,7 +23,7 @@ void print_output_simple(t_arg *arg, t_data *data, size_t argNumber)
 	if (arg->outputWideLength > 0)
 		write(1, arg->outputArg, arg->outputWideLength);
 	else
-		write(1, arg->outputArg, ft_strlen(arg->outputArg));
+		write(1, arg->outputArg, arg->outputLength);
 }
 
 void print_output_width(t_arg *arg, t_data *data, size_t argNumber)
@@ -42,7 +42,7 @@ void print_output_width(t_arg *arg, t_data *data, size_t argNumber)
 		free(arg->outputArg);
 	}
 	else
-		write(1, arg->outputArg, ft_strlen(arg->outputArg));
+		write(1, arg->outputArg, arg->outputLength);
 }
 
 void print_output_width_reverse(t_arg *arg, t_data *data, size_t argNumber)
@@ -60,7 +60,7 @@ void print_output_width_reverse(t_arg *arg, t_data *data, size_t argNumber)
 		free(arg->outputArg);
 	}
 	else
-		write(1, arg->outputArg, ft_strlen(arg->outputArg));
+		write(1, arg->outputArg, arg->outputLength);
 	write(1, arg->outputWidth, ft_strlen(arg->outputWidth));
 }
 

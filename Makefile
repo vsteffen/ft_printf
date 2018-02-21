@@ -12,7 +12,7 @@
 
 NAME = libftprintf.a
 
-# gcc main.c libftprintf.a -I include -o ft_printf
+# gcc main.c libftprintf.a -I includes -o ft_printf
 
 CC =	/usr/bin/clang
 RM =	/bin/rm
@@ -28,7 +28,7 @@ CFLAGS = -Wall -Wextra -Werror -g
 ROOT =		$(shell /bin/pwd)
 OPATH =		$(ROOT)/objs
 CPATH =		$(ROOT)/srcs
-HPATH =		$(ROOT)/include
+HPATH =		$(ROOT)/includes
 PRINTF =	/ft_printf
 
 SRC =	ft_atoi.c \

@@ -1,28 +1,22 @@
 #include "ft_printf.h"
 
-char	*malloc_prec_zero_doux(size_t precision) {
+char	*malloc_prec_zero_doux(size_t precision, t_data *data) {
 	char		*output;
 	size_t		pos;
 
-	// if (precision == 0 && (data->current->flagWidthNb || data->current->flagWidthWc))
+	if (data->current->flagMore && data->current->flagDot == 0)
+		return (ft_strdup("+0"));
 	if (precision == 0)
 		return (ft_strdup("0"));
 	output = (char*)malloc(sizeof(char) * precision + 0 + 1);
 	output[precision] = '\0';
-	pos = 0; //+ 1;
-	// printf("MDR\n");
-	// if (1 == 1)
-	// {
-	// 	output[0] = '+';
-	// 	pos++;
-	// }
+	pos = 0;
 	while (pos++ < precision)
 		output[pos - 1] = '0';
 	return (output);
 }
 
 void			transform_n(t_data *data, intmax_t *varIntMax) {
-	(void)data;
-	*varIntMax = 89;
-	// data->current->outputArg = ft_strdup("");
+	*varIntMax = data->lenSoFar;
+	data->current->outputArg = ft_strdup("");
 }

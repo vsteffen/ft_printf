@@ -1,10 +1,26 @@
 #include "ft_printf.h"
 
+char	*ft_strdup_mod_prec(const char *s, size_t prec)
+{
+	size_t		pos;
+	char		*dest;
+
+	pos = 0;
+	dest = (char*)mallocp(sizeof(char) * prec + 1);
+	while (s[pos] && prec > pos)
+	{
+		dest[pos] = s[pos];
+		pos++;
+	}
+	dest[pos] = '\0';
+	return (dest);
+}
+
 void			transform_c(t_data *data, char varChar) {
 	char  *output;
 
 	output = (char*)malloc(sizeof(char) * 2);
-	output[0] = (char)varChar;
+	output[0] = varChar;
 	output[1] = '\0';
 	data->current->outputArg = output;
 	if (varChar == '\0')
@@ -13,9 +29,20 @@ void			transform_c(t_data *data, char varChar) {
 
 void			transform_s(t_data *data, char *varString) {
 	if (varString == NULL)
-		data->current->outputArg = ft_strdup("(null)");
+	{
+		if (data->current->flagDot == 1)
+			data->current->outputArg = ft_strdup_mod_prec("(null)", data->current->precision);
+		else
+			data->current->outputArg = ft_strdup("(null)");
+	}
 	else
-		data->current->outputArg = ft_strdup(varString);
+	{
+		if (data->current->flagDot == 1)
+			data->current->outputArg = ft_strdup_mod_prec(varString, data->current->precision);
+		else
+			data->current->outputArg = ft_strdup(varString);
+
+	}
 }
 
 size_t			ft_wstrlen(wchar_t *str)
