@@ -32,6 +32,8 @@ void	detect_length_mod_hh(t_data *data, char conversion)
 		transform_u(data, (unsigned long int)va_arg(data->ap, unsigned long int));
 	else if (conversion == 'n')
 		transform_n(data, (intmax_t *)va_arg(data->ap, signed char *));
+	else if (conversion == 'p')
+		transform_p(data, va_arg(data->ap, void *));
 	else
 		data->error = 1;
 }
@@ -56,6 +58,8 @@ void	detect_length_mod_h(t_data *data, char conversion)
 		transform_u(data, (unsigned long int)va_arg(data->ap, unsigned long int));
 	else if (conversion == 'n')
 		transform_n(data, (intmax_t *)va_arg(data->ap, short *));
+	else if (conversion == 'p')
+		transform_p(data, va_arg(data->ap, void *));
 	else
 		data->error = 1;
 	// transform_u(data, (long int)va_arg(data->ap, long int));
@@ -85,6 +89,8 @@ void	detect_length_mod_l(t_data *data, char conversion)
 		transform_wide_c(data, va_arg(data->ap, wint_t));
 	else if (conversion == 's')
 		transform_wide_s(data, va_arg(data->ap, wchar_t *));
+	else if (conversion == 'p')
+		transform_p(data, va_arg(data->ap, void *));
 	else
 		data->error = 1;
 }
@@ -109,6 +115,8 @@ void	detect_length_mod_ll(t_data *data, char conversion)
 		transform_u(data, (unsigned long int)va_arg(data->ap, unsigned long long int));
 	else if (conversion == 'n')
 		transform_n(data, (intmax_t *)va_arg(data->ap, long long *));
+	else if (conversion == 'p')
+		transform_p(data, va_arg(data->ap, void *));
 	else
 		data->error = 1;
 }
@@ -133,6 +141,8 @@ void	detect_length_mod_j(t_data *data, char conversion)
 		transform_u(data, (unsigned long int)va_arg(data->ap, uintmax_t));
 	else if (conversion == 'n')
 		transform_n(data, (intmax_t *)va_arg(data->ap, intmax_t *));
+	else if (conversion == 'p')
+		transform_p(data, va_arg(data->ap, void *));
 	else
 		data->error = 1;
 }
@@ -157,6 +167,8 @@ void	detect_length_mod_z(t_data *data, char conversion)
 		transform_u(data, (unsigned long int)va_arg(data->ap, size_t));
 	else if (conversion == 'n')
 		transform_n(data, (intmax_t *)va_arg(data->ap, intmax_t *));
+	else if (conversion == 'p')
+		transform_p(data, va_arg(data->ap, void *));
 	else
 		data->error = 1;
 }

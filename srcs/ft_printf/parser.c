@@ -191,7 +191,12 @@ int		detect_pattern(t_data *data, char charAnalyse) {
 		return (-1);
 	}
 	else {
-		data->error = 1;
+		data->error = 100;
+		if (charAnalyse != '\0')
+		{
+			data->current->outputArg = ft_strdup("q");
+			data->current->outputArg[0] = data->formatMod[data->formatPos + data->moveInArg];
+		}
 		return (0);
 	}
 }
@@ -218,6 +223,11 @@ void get_output_malloc_width(t_arg *arg, char firstCharOutput, char lastConv) {
 		arg->outputWidth[1] = 'x';
 		arg->outputArg[1] = '0';
 	}
+	if (arg->flagZero == 1 && arg->outputWidth[1] != '\0' && lastConv == 'p')
+	{
+		arg->outputWidth[1] = 'x';
+		arg->outputArg[1] = '0';
+	}
 }
 
 int			parse_and_move_format(t_data *data)
@@ -236,10 +246,12 @@ int			parse_and_move_format(t_data *data)
 	data->moveInArg = 1;
 	while(detect_pattern(data, data->format[data->formatPos + data->moveInArg]) == -1)
 		data->moveInArg++;
-	if (data->current->trueLengthWide > 0)
-		data->current->outputLength += data->current->trueLengthWide;
+	if (data->current->outputWideLength > 0)
+		data->current->outputLength += data->current->outputWideLength;
 	else
 		data->current->outputLength += ft_strlen(data->current->outputArg);
+	if (data->current->outputArg == NULL && data->error > 0 && data->error != 100)
+		data->current->outputArg = ft_strdup("");
 	if (data->current->outputLength < data->current->width)
 	{
 		// printf("Malloc width field ... %lu < %lu\n", data->current->outputLength, data->current->width);

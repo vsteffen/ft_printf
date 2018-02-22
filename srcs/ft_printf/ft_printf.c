@@ -40,10 +40,23 @@ int			ft_printf(const char * restrict format, ...) {
 		// printf("WHILE ON FORMAT -> %c at %lu\n", format[data.formatPos], data.formatPos);
 		if (format[data.formatPos] == '%')
 		{
+			if (format[data.formatPos + 1] == '\0')
+			{
+				data.tmpFormatPos = data.formatPos + 1;
+				continue ;
+			}
 			data.formatPos += parse_and_move_format(&data);
-			data.tmpFormatPos = data.formatPos + 1;
 			if (data.error > 0)
-				return (exitPrintf(&data));
+			{
+				// printf("KOUKOU\n");
+				if (data.error != 100)
+					data.formatPos--;
+				data.error = 0;
+				// return (exitPrintf(&data));
+			}
+			data.tmpFormatPos = data.formatPos + 1;
+			// printf("\nChar received ... [%c]\n", format[data.formatPos]);
+
 			continue ;
 		}
 		data.lenSoFar++;

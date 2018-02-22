@@ -37,12 +37,12 @@ int			main(int ac, char **av, char **env)
 	// 我是一只猫
 	// int   varToSend2 = 7;
 	ft_printf("[");
-	retour = ft_printf("%C%C", '4', '2');
+	retour = ft_printf("%");
 	ft_printf("]\n");
 	printf("Length ft_printf read : %d\n", retour);
 	// printf("Value of varToSend1 = %d\n", varToSend1);
 	printf("----------- VS -----------\n[");
-	retour = printf("%C%C", '4', '2');
+	retour = printf("%");
 	printf("]\n");
 	printf("Length printf read : %d\n", retour);
 	// printf("Value of varToSend1 = %d\n", varToSend1);

@@ -14,35 +14,30 @@
 
 void print_output_simple(t_arg *arg, t_data *data, size_t argNumber)
 {
-	// printf("PRINT WITHOUT WIDTH\n");
-	// printf("Arg n°%lu -> [%s] at %lu + [%s] ||| precision = %zu and width = %lu\n",  argNumber, data->formatMod + arg->beforeArg, arg->beforeArg, arg->outputArg, arg->precision, arg->width);
-
 	(void)argNumber;
-	// printf("+-+-+-+ WITHOUT WIDTH +-+-+-+\n");
 	write(1, data->formatMod + arg->beforeArg, ft_strlen(data->formatMod + arg->beforeArg));
 	if (arg->outputWideLength > 0)
+	{
 		write(1, arg->outputArg, arg->outputWideLength);
+		free(arg->outputArgWide);
+	}
 	else
 		write(1, arg->outputArg, arg->outputLength);
 }
 
 void print_output_width(t_arg *arg, t_data *data, size_t argNumber)
 {
-	// printf("Arg n°%lu -> before [%s] + width [", argNumber, data->formatMod + arg->beforeArg);
-	// printf("%s", arg->outputWidth);
-	// printf("] + arg [%s] ||| precision = %zu and width = %lu\n", arg->outputArg, arg->precision, arg->width);
-
 	(void)argNumber;
-	// printf("+-+-+-+ IN WIDTH +-+-+-+\n");
 	write(1, data->formatMod + arg->beforeArg, ft_strlen(data->formatMod + arg->beforeArg));
 	write(1, arg->outputWidth, ft_strlen(arg->outputWidth));
 	if (arg->outputWideLength > 0)
 	{
 		write(1, arg->outputArg, arg->outputWideLength);
-		free(arg->outputArg);
+		free(arg->outputArgWide);
 	}
 	else
 		write(1, arg->outputArg, arg->outputLength);
+	free(arg->outputWidth);
 }
 
 void print_output_width_reverse(t_arg *arg, t_data *data, size_t argNumber)
@@ -57,11 +52,12 @@ void print_output_width_reverse(t_arg *arg, t_data *data, size_t argNumber)
 	if (arg->outputWideLength > 0)
 	{
 		write(1, arg->outputArg, arg->outputWideLength);
-		free(arg->outputArg);
+		free(arg->outputArgWide);
 	}
 	else
 		write(1, arg->outputArg, arg->outputLength);
 	write(1, arg->outputWidth, ft_strlen(arg->outputWidth));
+	free(arg->outputWidth);
 }
 
 void			printArgAndFree(t_data *data) {
@@ -98,7 +94,8 @@ void			printArgAndFree(t_data *data) {
 		// else
 		// 	print_output_simple(argPtrCurrent, data, argNumber);
 		// printf("%s%s", data->formatMod + argPtrCurrent->beforeArg, argPtrCurrent->outputArg);
-		free(argPtrCurrent->outputArg);
+		if (argPtrCurrent->outputArg != NULL)
+			free(argPtrCurrent->outputArg);
 		free(argPtrCurrent);
 		argPtrCurrent = argPtrNext;
 		argNumber++;

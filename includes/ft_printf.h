@@ -37,7 +37,6 @@ typedef struct				s_arg { // Chained list for every arguments
 	char					*outputArg;
 	char					*outputArgWide;
 	size_t					outputWideLength;
-	size_t					trueLengthWide;
 	char					*outputWidth;
 	size_t					outputLength;
 	size_t					outputWidthLength;
