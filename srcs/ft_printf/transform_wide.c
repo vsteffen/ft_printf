@@ -131,6 +131,10 @@ void			transform_wide_s(t_data *data, wchar_t *wide) {
 		data->current->outputArg = ft_strdup("(null)");
 		return ;
 	}
+	// if (data->current->flagDot == 1 && data->current->outputWideLength > data->current->precision)
+	// {
+	// 	data->current->outputArg = malloc_prec_zero_doux(data->current->precision, data, 'd');
+	// }
 	length = ft_wstrlen(wide);
 	output = (char *)malloc(sizeof(char) * length * 4 + 1);
 	pos = 0;
