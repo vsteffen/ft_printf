@@ -28,6 +28,7 @@ typedef struct				s_arg { // Chained list for every arguments
 	int8_t					flagWidthWc;
 	int8_t					flagHash;
 	int8_t					flagZero;
+	int8_t					flagZeroWeird;
 	int8_t					flagLess;
 	int8_t					flagMore;
 	int8_t					flagSpace;
@@ -94,7 +95,7 @@ void				transform_p(t_data *data, void *ptr);
 
 char				*ft_itoa_base_printf(uintmax_t nb, uint8_t base, char *alph, size_t prec);
 
-char				*malloc_prec_zero_doux(size_t prec, t_data *data);
+char				*malloc_prec_zero_doux(size_t prec, t_data *data, char conversion);
 
 int8_t   			verifFlagAlreadyUsed(t_data *data, char flag);
 void      			flagDot(t_data *data);

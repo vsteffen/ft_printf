@@ -20,7 +20,10 @@ int8_t    verifFlagAlreadyUsed(t_data *data, char flag) {
 		}
 		data->current->flagDot = 1;
 		if (data->current->flagZero > 0)
+		{
 			data->current->flagZero = 0;
+			data->current->flagZeroWeird = 1;
+		}
 		return (1);
 	}
 	// else if (flag == 'w') {

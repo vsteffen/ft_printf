@@ -209,11 +209,18 @@ void get_output_malloc_width(t_arg *arg, char firstCharOutput, char lastConv) {
 	arg->outputWidth[arg->width] = '\0';
 	pos = 0;
 	fillWidth = ' ';
-	if (arg->flagZero > 0)
+	if (arg->flagZero > 0 || (arg->flagZeroWeird == 1 && (lastConv == 'c' || lastConv == 's' || lastConv == '%' || lastConv == 'Z')))
 		fillWidth = '0';
+	// printf("FILL WIDTH [%c] flag -> [%hhd]\n", fillWidth, arg->flagZero);
 	while (pos++ < arg->width)
 		arg->outputWidth[pos - 1] = fillWidth;
-	if (arg->flagZero > 1 && (firstCharOutput == '+' || firstCharOutput == '-'))
+	// printf("LOL -> [%c] -- [%hhd] -- [%s] -- [%s]\n", firstCharOutput, arg->flagZero, arg->outputWidth, arg->outputArg);
+	if (arg->flagSpace == 1 && arg->flagZero == 1)
+	{
+		arg->outputWidth[0] = ' ';
+		arg->outputArg[0] = '0';
+	}
+	if (arg->flagZero > 0 && (firstCharOutput == '+' || firstCharOutput == '-'))
 	{
 		arg->outputWidth[0] = firstCharOutput;
 		arg->outputArg[0] = '0';

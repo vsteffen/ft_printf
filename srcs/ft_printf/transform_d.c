@@ -62,7 +62,7 @@ void			transform_d(t_data *data, intmax_t varIntMax) {
 		if (data->current->precision == 0 && data->current->flagDot == 1)
 			data->current->outputArg = ft_strdup("");
 		else
-			data->current->outputArg = malloc_prec_zero_doux(data->current->precision, data);
+			data->current->outputArg = malloc_prec_zero_doux(data->current->precision, data, 'd');
 	}
 	else
 		data->current->outputArg = ft_itoa_printf(data, varIntMax, data->current->precision);

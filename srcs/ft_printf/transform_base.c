@@ -46,7 +46,7 @@ void			transform_o(t_data *data, uintmax_t varUIntMax) {
 		else if (data->current->precision == 0 && data->current->flagDot == 1)
 			data->current->outputArg = ft_strdup("");
 		else
-			data->current->outputArg = malloc_prec_zero_doux(data->current->precision, data);
+			data->current->outputArg = malloc_prec_zero_doux(data->current->precision, data, 'o');
 		return ;
 	}
 	else
@@ -63,7 +63,7 @@ void			transform_u(t_data *data, uintmax_t varUIntMax) {
 		if (data->current->precision == 0 && data->current->flagDot == 1)
 			data->current->outputArg = ft_strdup("");
 		else
-			data->current->outputArg = malloc_prec_zero_doux(data->current->precision, data);
+			data->current->outputArg = malloc_prec_zero_doux(data->current->precision, data, 'u');
 	}
 	else
 		data->current->outputArg = ft_itoa_base_printf(varUIntMax, 10, "0123456789abcdef", data->current->precision);
@@ -75,7 +75,7 @@ void			transform_x(t_data *data, uintmax_t varUIntMax) {
 		if (data->current->precision == 0 && data->current->flagDot == 1)
 			data->current->outputArg = ft_strdup("");
 		else
-			data->current->outputArg = malloc_prec_zero_doux(data->current->precision, data);
+			data->current->outputArg = malloc_prec_zero_doux(data->current->precision, data, 'x');
 	}
 	else
 		data->current->outputArg = ft_itoa_base_printf(varUIntMax, 16, "0123456789abcdef", data->current->precision);
@@ -91,11 +91,11 @@ void			transform_X(t_data *data, uintmax_t varUIntMax) {
 		if (data->current->precision == 0 && data->current->flagDot == 1)
 			data->current->outputArg = ft_strdup("");
 		else
-			data->current->outputArg = malloc_prec_zero_doux(data->current->precision, data);
+			data->current->outputArg = malloc_prec_zero_doux(data->current->precision, data, 'X');
 	}
 	else
 		data->current->outputArg = ft_itoa_base_printf(varUIntMax, 16, "0123456789ABCDEF", data->current->precision);
-	if (data->current->flagHash)
+	if (data->current->flagHash && varUIntMax > 0)
 	{
 		data->current->outputArg = ft_strjoinaf2("0X", data->current->outputArg);
 	}

@@ -111,11 +111,20 @@ void			transform_wide_c(t_data *data, wchar_t wide) {
 	data->current->outputArg = output;
 }
 
+void reset_output_for_precision(char *output, t_data *data, size_t tmpWideLength)
+{
+	while (tmpWideLength < data->current->outputWideLength)
+	{
+		output[data->current->outputWideLength] = '\0';
+		data->current->outputWideLength--;
+	}
+}
+
 void			transform_wide_s(t_data *data, wchar_t *wide) {
 	size_t		length;
 	size_t		pos;
 	char		*output;
-
+	size_t		tmpWideLength;
 
 	if (wide == NULL)
 	{
@@ -125,13 +134,20 @@ void			transform_wide_s(t_data *data, wchar_t *wide) {
 	length = ft_wstrlen(wide);
 	output = (char *)malloc(sizeof(char) * length * 4 + 1);
 	pos = 0;
+	tmpWideLength = 0;
 	data->current->outputWideLength = 0;
 	while (wide[pos])
 	{
+		tmpWideLength = data->current->outputWideLength;
 		if ((data->current->outputWideLength += get_wchar(wide[pos], output, data->current->outputWideLength)) == 0)
 		{
 			data->error = 1;
 			return ;
+		}
+		if (data->current->flagDot == 1 && data->current->outputWideLength > data->current->precision)
+		{
+			reset_output_for_precision(output, data, tmpWideLength);
+			break ;
 		}
 		pos++;
 	}
