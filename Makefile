@@ -131,9 +131,9 @@ SRC =	ft_atoi.c \
 
 .PHONY: all clean fclean re
 
-all: $(OPATH) $(NAME)
+all: $(NAME)
 
-$(NAME): $(OBJ)
+$(NAME): $(OPATH) $(OBJ)
 	@echo "Creating OBJ files"
 	@echo "Building $@"
 	@$(AR) rc $@ $(OBJ)

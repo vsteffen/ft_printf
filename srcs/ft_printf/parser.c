@@ -164,13 +164,13 @@ int		detect_pattern(t_data *data, char charAnalyse) {
 	else if (charAnalyse == '*') {
 		// printf("'*' flag detected\n");
 		data->current->flagWidthWc = 1;
-		int64_t tmpInt64 = va_arg(data->ap, int64_t);
-		data->current->width = tmpInt64;
-		if (tmpInt64 < 0)
+		int tmpInt = va_arg(data->ap, int);
+		if (tmpInt < 0)
 		{
-			data->current->width = -tmpInt64;
+			tmpInt = -tmpInt;
 			data->current->flagLess = 1;
 		}
+		data->current->width = (size_t)tmpInt;
 		return (-1);
 	}
 	else if (charAnalyse == '-') {
@@ -253,6 +253,8 @@ int			parse_and_move_format(t_data *data)
 	data->moveInArg = 1;
 	while(detect_pattern(data, data->format[data->formatPos + data->moveInArg]) == -1)
 		data->moveInArg++;
+	if (data->format[data->formatPos + data->moveInArg] == '\0')
+		return (data->moveInArg - 1);
 	if (data->current->outputWideLength > 0)
 		data->current->outputLength += data->current->outputWideLength;
 	else
@@ -263,7 +265,10 @@ int			parse_and_move_format(t_data *data)
 	{
 		// printf("Malloc width field ... %lu < %lu\n", data->current->outputLength, data->current->width);
 		data->current->width = data->current->width - data->current->outputLength;
-		get_output_malloc_width(data->current, data->current->outputArg[0], data->format[data->formatPos + data->moveInArg]);
+		if (data->current->outputArg != NULL)
+			get_output_malloc_width(data->current, data->current->outputArg[0], data->format[data->formatPos + data->moveInArg]);
+		// else
+			// get_output_malloc_width(data->current, '\0', data->format[data->formatPos + data->moveInArg]);
 		// printf("Width obtained -> [%s]\n", data->current->outputWidth);
 	}
 	else

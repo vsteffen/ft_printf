@@ -73,6 +73,8 @@ char      		*ft_dtoa_printf(t_data *data, double nb, uint8_t precision) {
 	if (structFlDo.beforeDot < 0) {
 		structFlDo.sign = 1;
 		structFlDo.signChar = '-';
+		if (data->current->flagZero == 1)
+			data->current->flagZero = 2;
 		structFlDo.beforeDot = -structFlDo.beforeDot;
 		tmpDouble = -tmpDouble;
 		structFlDo.afterDot = ft_round_printf(tmpDouble * (ft_pow_printf(10, precision)));
@@ -82,6 +84,8 @@ char      		*ft_dtoa_printf(t_data *data, double nb, uint8_t precision) {
 		{
 			structFlDo.sign = 1;
 			structFlDo.signChar = '+';
+			if (data->current->flagZero == 1)
+				data->current->flagZero = 2;
 		}
 		structFlDo.afterDot = ft_round_printf(tmpDouble * (ft_pow_printf(10, precision)));
 	}
@@ -94,6 +98,6 @@ char      		*ft_dtoa_printf(t_data *data, double nb, uint8_t precision) {
 
 void			transform_f(t_data *data, double varFloat) {
 	data->current->outputArg = ft_dtoa_printf(data, varFloat, data->current->precision);
-	if (data->current->flagSpace == 1 && (data->current->outputArg[0] != '+' || data->current->outputArg[0] != '-'))
+	if (data->current->flagSpace == 1 && data->current->outputArg[0] != '+' && data->current->outputArg[0] != '-')
 		data->current->outputArg = ft_strjoinaf2(" ", data->current->outputArg);
 }

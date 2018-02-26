@@ -39,12 +39,25 @@ int8_t    verifFlagAlreadyUsed(t_data *data, char flag) {
 
 void      flagDot(t_data *data) {
 	size_t     	precision;
+	int			argWildcard;
 	char        numeral;
 	size_t      tmpMoveInArg;
 
 	precision = 0;
 	tmpMoveInArg = data->moveInArg;
 	++data->moveInArg; // to put cursor on the first numeral
+	if (data->format[data->formatPos + data->moveInArg] == '*')
+	{
+		argWildcard = va_arg(data->ap, int);
+		if (argWildcard < 0)
+		{
+			data->current->flagZero = 1;
+			data->current->flagAsterisk = 1;
+		}
+		else
+			data->current->precision = (size_t)argWildcard;
+		return ;
+	}
 	while (ft_isdigit((numeral = data->format[data->formatPos + data->moveInArg]))) {
 		precision *= 10;
 		precision += (int)numeral - 48;

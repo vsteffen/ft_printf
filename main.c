@@ -36,13 +36,14 @@ int			main(int ac, char **av, char **env)
 	// wchar_t				*varToSend1 = L"";
 	// 我是一只猫
 	// int   varToSend2 = 7;
-	ft_printf("[");
-	retour = ft_printf("% ");
-	ft_printf("]\n");
+
+	write(1, "[", 1);
+	retour = ft_printf("{%.*s}", -5, "42");
+	write(1, "]\n", 2);
 	printf("Length ft_printf read : %d\n", retour);
 	// printf("Value of varToSend1 = %d\n", varToSend1);
 	printf("----------- VS -----------\n[");
-	retour = printf("% ");
+	retour = printf("{%.*s}", -5, "42");
 	printf("]\n");
 	printf("Length printf read : %d\n", retour);
 	// printf("Value of varToSend1 = %d\n", varToSend1);

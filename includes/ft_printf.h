@@ -26,6 +26,7 @@ typedef struct				s_arg { // Chained list for every arguments
 	size_t					precision;
 	int8_t					flagWidthNb;
 	int8_t					flagWidthWc;
+	int8_t					flagAsterisk;
 	int8_t					flagHash;
 	int8_t					flagZero;
 	int8_t					flagZeroWeird;

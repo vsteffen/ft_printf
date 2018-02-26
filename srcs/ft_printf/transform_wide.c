@@ -1,13 +1,13 @@
 #include "ft_printf.h"
 
-char	*ft_strdup_mod_prec(const char *s, size_t prec)
+char	*ft_strdup_mod_prec(const char *s, size_t prec, int8_t flagAsterisk)
 {
 	size_t		pos;
 	char		*dest;
 
 	pos = 0;
 	dest = (char*)mallocp(sizeof(char) * prec + 1);
-	while (s[pos] && prec > pos)
+	while (s[pos] && (flagAsterisk == 1 || prec > pos))
 	{
 		dest[pos] = s[pos];
 		pos++;
@@ -31,14 +31,14 @@ void			transform_s(t_data *data, char *varString) {
 	if (varString == NULL)
 	{
 		if (data->current->flagDot == 1)
-			data->current->outputArg = ft_strdup_mod_prec("(null)", data->current->precision);
+			data->current->outputArg = ft_strdup_mod_prec("(null)", data->current->precision, data->current->flagAsterisk);
 		else
 			data->current->outputArg = ft_strdup("(null)");
 	}
 	else
 	{
 		if (data->current->flagDot == 1)
-			data->current->outputArg = ft_strdup_mod_prec(varString, data->current->precision);
+			data->current->outputArg = ft_strdup_mod_prec(varString, data->current->precision, data->current->flagAsterisk);
 		else
 			data->current->outputArg = ft_strdup(varString);
 
@@ -148,7 +148,7 @@ void			transform_wide_s(t_data *data, wchar_t *wide) {
 			data->error = 1;
 			return ;
 		}
-		if (data->current->flagDot == 1 && data->current->outputWideLength > data->current->precision)
+		if (data->current->flagAsterisk == 0 && data->current->flagDot == 1 && data->current->outputWideLength > data->current->precision)
 		{
 			reset_output_for_precision(output, data, tmpWideLength);
 			break ;
