@@ -38,7 +38,9 @@ int			main(int ac, char **av, char **env)
 	// int   varToSend2 = 7;
 
 	write(1, "[", 1);
-	retour = ft_printf("{%.*s}", -5, "42");
+	// printf("LENNNNNN = %lu \n", ft_strlen("\033[0m"));
+	// printf(BG_RED);
+	retour = ft_printf("SALUT %{BG_RED,FG_CYAN,FD,CS_RESET,BG_RED,UNDERLINE,NO_UNDERLINED} TOI %{FD,FG_YELLOW} POUET %{FD} POULET", 2, 1, 2);
 	write(1, "]\n", 2);
 	printf("Length ft_printf read : %d\n", retour);
 	// printf("Value of varToSend1 = %d\n", varToSend1);

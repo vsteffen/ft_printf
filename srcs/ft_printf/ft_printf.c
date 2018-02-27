@@ -20,6 +20,8 @@ void		init_data_and_var(t_data *data, const char * restrict format) {
 	data->tmpFormatPos = 0;
 	data->error = 0;
 	data->lenSoFar = 0;
+	data->colorSet = 0;
+	data->fd = 1;
 	data->first = NULL;
 	data->current = NULL;
 }

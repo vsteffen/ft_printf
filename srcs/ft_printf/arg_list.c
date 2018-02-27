@@ -15,28 +15,28 @@
 void print_output_simple(t_arg *arg, t_data *data, size_t argNumber)
 {
 	(void)argNumber;
-	write(1, data->formatMod + arg->beforeArg, ft_strlen(data->formatMod + arg->beforeArg));
+	write(arg->tmpFd, data->formatMod + arg->beforeArg, ft_strlen(data->formatMod + arg->beforeArg));
 	if (arg->outputWideLength > 0)
 	{
-		write(1, arg->outputArg, arg->outputWideLength);
+		write(arg->fd, arg->outputArg, arg->outputWideLength);
 		free(arg->outputArgWide);
 	}
 	else
-		write(1, arg->outputArg, arg->outputLength);
+		write(arg->fd, arg->outputArg, arg->outputLength);
 }
 
 void print_output_width(t_arg *arg, t_data *data, size_t argNumber)
 {
 	(void)argNumber;
-	write(1, data->formatMod + arg->beforeArg, ft_strlen(data->formatMod + arg->beforeArg));
-	write(1, arg->outputWidth, ft_strlen(arg->outputWidth));
+	write(arg->tmpFd, data->formatMod + arg->beforeArg, ft_strlen(data->formatMod + arg->beforeArg));
+	write(arg->fd, arg->outputWidth, ft_strlen(arg->outputWidth));
 	if (arg->outputWideLength > 0)
 	{
-		write(1, arg->outputArg, arg->outputWideLength);
+		write(arg->fd, arg->outputArg, arg->outputWideLength);
 		free(arg->outputArgWide);
 	}
 	else
-		write(1, arg->outputArg, arg->outputLength);
+		write(arg->fd, arg->outputArg, arg->outputLength);
 	free(arg->outputWidth);
 }
 
@@ -48,15 +48,15 @@ void print_output_width_reverse(t_arg *arg, t_data *data, size_t argNumber)
 
 	(void)argNumber;
 	// printf("+-+-+-+ IN WIDTH REVERSE+-+-+-+\n");
-	write(1, data->formatMod + arg->beforeArg, ft_strlen(data->formatMod + arg->beforeArg));
+	write(arg->tmpFd, data->formatMod + arg->beforeArg, ft_strlen(data->formatMod + arg->beforeArg));
 	if (arg->outputWideLength > 0)
 	{
-		write(1, arg->outputArg, arg->outputWideLength);
+		write(arg->fd, arg->outputArg, arg->outputWideLength);
 		free(arg->outputArgWide);
 	}
 	else
-		write(1, arg->outputArg, arg->outputLength);
-	write(1, arg->outputWidth, ft_strlen(arg->outputWidth));
+		write(arg->fd, arg->outputArg, arg->outputLength);
+	write(arg->fd, arg->outputWidth, ft_strlen(arg->outputWidth));
 	free(arg->outputWidth);
 }
 
@@ -68,6 +68,7 @@ void			printArgAndFree(t_data *data) {
 	argPtrCurrent = data->first;
 	while (argPtrCurrent)
 	{
+		// printf("fd = %lu\n", argPtrCurrent->fd);
 		argPtrNext = argPtrCurrent->next;
 		// printf("FlagZero -> %hhd\n", argPtrCurrent->flagZero);
 		// Free all variables inside
@@ -100,7 +101,9 @@ void			printArgAndFree(t_data *data) {
 		argPtrCurrent = argPtrNext;
 		argNumber++;
 	}
-	ft_putstr(data->format + data->tmpFormatPos);
+	write(data->fd, data->format + data->tmpFormatPos, ft_strlen(data->format + data->tmpFormatPos));
+	if (data->colorSet == 1)
+		write(1, "\033[0m", 4);
 	// printf("Rest of the string -> [%s]\n", data->format + data->tmpFormatPos);
 }
 
@@ -112,5 +115,7 @@ t_arg	*createStructArg(t_data *data) {
 	structPtr->next = NULL;
 	structPtr->beforeArg = data->tmpFormatPos;
 	structPtr->outputArg = NULL;
+	structPtr->fd = data->fd;
+	structPtr->tmpFd = data->fd;
 	return (structPtr);
 }

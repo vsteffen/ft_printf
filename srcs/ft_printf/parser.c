@@ -190,6 +190,19 @@ int		detect_pattern(t_data *data, char charAnalyse) {
 		data->current->flagHash = 1;
 		return (-1);
 	}
+	else if (charAnalyse == '{' && data->moveInArg == 1) {
+		flagColorFd(data, data->format + data->formatPos + data->moveInArg + 1);
+		while (data->format[data->formatPos + data->moveInArg] == ',')
+			flagColorFd(data, data->format + data->formatPos + data->moveInArg + 1);
+		if (data->format[data->formatPos + data->moveInArg] != '}' && data->error == 0)
+		{
+			data->error = 1;
+			data->lenSoFar -= ft_strlen(data->current->outputArg);
+			data->current->outputArg[0] = '\0';
+			data->moveInArg = 1;
+		}
+		return (0);
+	}
 	else {
 		data->error = 100;
 		if (charAnalyse != '\0')

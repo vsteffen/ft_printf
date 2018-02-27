@@ -36,6 +36,8 @@ typedef struct				s_arg { // Chained list for every arguments
 	int8_t					flagDot;
 	size_t					beforeArg; // text pos before the argument we want to print
 	int8_t					type;
+	uintmax_t				fd;
+	uintmax_t				tmpFd;
 	char					*outputArg;
 	char					*outputArgWide;
 	size_t					outputWideLength;
@@ -53,6 +55,8 @@ typedef struct				s_data {
 	size_t					moveInArg; // length of character read in
 	int8_t					error;
 	size_t					lenSoFar;
+	int8_t					colorSet;
+	uintmax_t				fd;
 	t_arg					*first;
 	t_arg					*current;
 }							t_data;
@@ -100,6 +104,7 @@ char				*malloc_prec_zero_doux(size_t prec, t_data *data, char conversion);
 
 int8_t   			verifFlagAlreadyUsed(t_data *data, char flag);
 void      			flagDot(t_data *data);
+void      			flagColorFd(t_data *data, const char *arguments);
 void      			flagWidthNb(t_data *data);
 
 #endif
