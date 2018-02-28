@@ -60,6 +60,11 @@ int		detect_pattern(t_data *data, char charAnalyse) {
 		transform_p(data, va_arg(data->ap, void *));
 		return (0);
 	}
+	else if (charAnalyse == 'r') {
+		// printf("'p' conversion detected\n");
+		transform_r(data, (int64_t)va_arg(data->ap, int64_t));
+		return (0);
+	}
 	else if (charAnalyse == 'n') {
 		// printf("'n' conversion detected\n");
 		transform_n(data, (intmax_t *)va_arg(data->ap, int *));

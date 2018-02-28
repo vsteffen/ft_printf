@@ -97,6 +97,7 @@ void				transform_X(t_data *data, uintmax_t varUIntMax);
 void				transform_n(t_data *data, intmax_t *varIntMax);
 void				transform_f(t_data *data, double varFloat);
 void				transform_p(t_data *data, void *ptr);
+void				transform_r(t_data *data, int64_t byte);
 
 char				*ft_itoa_base_printf(uintmax_t nb, uint8_t base, char *alph, size_t prec);
 

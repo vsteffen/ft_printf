@@ -40,12 +40,12 @@ int			main(int ac, char **av, char **env)
 	write(1, "[", 1);
 	// printf("LENNNNNN = %lu \n", ft_strlen("\033[0m"));
 	// printf(BG_RED);
-	retour = ft_printf("SALUT %{BG_RED,FG_CYAN,FD,CS_RESET,BG_RED,UNDERLINE,NO_UNDERLINED} TOI %{FD,FG_YELLOW} POUET %{FD} POULET", 2, 1, 2);
+	retour = ft_printf("%r", 18446744073709551615);
 	write(1, "]\n", 2);
 	printf("Length ft_printf read : %d\n", retour);
 	// printf("Value of varToSend1 = %d\n", varToSend1);
 	printf("----------- VS -----------\n[");
-	retour = printf("{%.*s}", -5, "42");
+	retour = printf("%llu", -1);
 	printf("]\n");
 	printf("Length printf read : %d\n", retour);
 	// printf("Value of varToSend1 = %d\n", varToSend1);
