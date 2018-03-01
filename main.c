@@ -12,6 +12,7 @@
 
 #include "libft.h"
 #include <locale.h>
+#include <fcntl.h>
 
 int			main(int ac, char **av, char **env)
 {
@@ -40,7 +41,10 @@ int			main(int ac, char **av, char **env)
 	write(1, "[", 1);
 	// printf("LENNNNNN = %lu \n", ft_strlen("\033[0m"));
 	// printf(BG_RED);
-	retour = ft_printf("%r", 18446744073709551615);
+	int fp;
+	fp = open ("test.txt", O_RDWR|O_CREAT, 0666);
+	retour = ft_printf("POULET %{FD}TEST AWESOME%{FD}POUET%{FD} ALLOW\n", fp, 1, fp);
+	close (fp);
 	write(1, "]\n", 2);
 	printf("Length ft_printf read : %d\n", retour);
 	// printf("Value of varToSend1 = %d\n", varToSend1);
@@ -70,5 +74,5 @@ int			main(int ac, char **av, char **env)
 	// printf("\nMinimum width field\n");
 	// printf("Here is a number|%4d|and a|%10s|word + |%04d| weird and this |%-5d| also .\n", number, string, number, number);
 	// printf("|%-15.10s| --> |%%-15.10s|\n", string);
-	return (1);
+	return (0);
 }
