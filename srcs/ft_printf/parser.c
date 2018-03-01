@@ -93,36 +93,36 @@ int		detect_pattern(t_data *data, char charAnalyse) {
 	else if (charAnalyse == 'h') {
 		if (data->format[data->formatPos + data->moveInArg + 1] == 'h') {
 			// printf("'hh' length modifier detected\n");
-			detect_length_mod_hh(data, data->format[data->formatPos + data->moveInArg + 2]);
+			detect_length_mod_hh1(data, data->format[data->formatPos + data->moveInArg + 2]);
 			data->moveInArg += 2;
 			return (0);
 		}
 		// printf("'h' length modifier detected\n");
-		detect_length_mod_h(data, data->format[data->formatPos + data->moveInArg + 1]);
+		detect_length_mod_h1(data, data->format[data->formatPos + data->moveInArg + 1]);
 		data->moveInArg++;
 		return (0);
 	}
 	else if (charAnalyse == 'l') {
 		if (data->format[data->formatPos + data->moveInArg + 1] == 'l') {
 			// printf("'ll' length modifier detected\n");
-			detect_length_mod_ll(data, data->format[data->formatPos + data->moveInArg + 2]);
+			detect_length_mod_ll1(data, data->format[data->formatPos + data->moveInArg + 2]);
 			data->moveInArg += 2;
 			return (0);
 		}
 		// printf("'l' length modifier detected\n");
-		detect_length_mod_l(data, data->format[data->formatPos + data->moveInArg + 1]);
+		detect_length_mod_l1(data, data->format[data->formatPos + data->moveInArg + 1]);
 		data->moveInArg++;
 		return (0);
 	}
 	else if (charAnalyse == 'j') {
 		// printf("'j' length modifier detected\n");
-		detect_length_mod_j(data, data->format[data->formatPos + data->moveInArg + 1]);
+		detect_length_mod_j1(data, data->format[data->formatPos + data->moveInArg + 1]);
 		data->moveInArg++;
 		return (0);
 	}
 	else if (charAnalyse == 'z') {
 		// printf("'z' length modifier detected\n");
-		detect_length_mod_z(data, data->format[data->formatPos + data->moveInArg + 1]);
+		detect_length_mod_z1(data, data->format[data->formatPos + data->moveInArg + 1]);
 		data->moveInArg++;
 		return (0);
 	}
@@ -259,12 +259,12 @@ int			parse_and_move_format(t_data *data)
 {
 	if (data->first == NULL)
 	{
-		data->first = createStructArg(data);
+		data->first = create_struct_arg(data);
 		data->current = data->first;
 	}
 	else
 	{
-		data->current->next = createStructArg(data);
+		data->current->next = create_struct_arg(data);
 		data->current = data->current->next;
 	}
 	data->formatMod[data->formatPos] = '\0'; // use to improve speed

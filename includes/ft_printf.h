@@ -75,15 +75,15 @@ int					ft_printf(const char * restrict format, ...);
 
 int					parse_and_move_format(t_data *data);
 
-t_arg				*createStructArg(t_data *data);
-void				printArgAndFree(t_data *data);
+t_arg				*create_struct_arg(t_data *data);
+void				print_arg_and_free(t_data *data);
 
-void				detect_length_mod_hh(t_data *data, char conversion);
-void				detect_length_mod_h(t_data *data, char conversion);
-void				detect_length_mod_l(t_data *data, char conversion);
-void				detect_length_mod_ll(t_data *data, char conversion);
-void				detect_length_mod_j(t_data *data, char conversion);
-void				detect_length_mod_z(t_data *data, char conversion);
+void				detect_length_mod_hh1(t_data *data, char conversion);
+void				detect_length_mod_h1(t_data *data, char conversion);
+void				detect_length_mod_l1(t_data *data, char conversion);
+void				detect_length_mod_ll1(t_data *data, char conversion);
+void				detect_length_mod_j1(t_data *data, char conversion);
+void				detect_length_mod_z1(t_data *data, char conversion);
 
 void				transform_c(t_data *data, char varInt);
 void				transform_s(t_data *data, char *varString);

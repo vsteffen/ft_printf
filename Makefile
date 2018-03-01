@@ -117,10 +117,13 @@ SRC =	ft_atoi.c \
 		ft_range.c \
 		ft_foreach.c \
 		mallocp.c \
+		$(PRINTF)/print.c \
 		$(PRINTF)/arg_list.c \
 		$(PRINTF)/flag.c \
 		$(PRINTF)/ft_printf.c \
-		$(PRINTF)/length_conversion.c \
+		$(PRINTF)/length_conversion1.c \
+		$(PRINTF)/length_conversion2.c \
+		$(PRINTF)/length_conversion3.c \
 		$(PRINTF)/parser.c \
 		$(PRINTF)/transform_base.c \
 		$(PRINTF)/transform_d.c \

@@ -41,10 +41,10 @@ int			main(int ac, char **av, char **env)
 	write(1, "[", 1);
 	// printf("LENNNNNN = %lu \n", ft_strlen("\033[0m"));
 	// printf(BG_RED);
-	int fp;
-	fp = open ("test.txt", O_RDWR|O_CREAT, 0666);
-	retour = ft_printf("POULET %{FD}TEST AWESOME%{FD}POUET%{FD} ALLOW\n", fp, 1, fp);
-	close (fp);
+	// int fp;
+	// fp = open ("test.txt", O_RDWR|O_CREAT, 0666);
+	retour = ft_printf("POULET %{FD}TEST AWESOME%{FD}POUET%{FD} ALLOW", 2, 1, 2);
+	// close (fp);
 	write(1, "]\n", 2);
 	printf("Length ft_printf read : %d\n", retour);
 	// printf("Value of varToSend1 = %d\n", varToSend1);

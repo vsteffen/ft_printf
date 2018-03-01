@@ -5,22 +5,25 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: vsteffen <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/10/27 18:52:23 by vsteffen          #+#    #+#             */
-/*   Updated: 2016/11/17 17:37:23 by vsteffen         ###   ########.fr       */
+/*   Created: 2018/03/01 19:53:07 by vsteffen          #+#    #+#             */
+/*   Updated: 2018/03/01 19:58:54 by vsteffen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void	flagColorMoveInArg(t_data *data, const char *color, size_t move) {
+void	flagColorMoveInArg(t_data *data, const char *color, size_t move)
+{
 	if (data->current->outputArg == NULL)
 		data->current->outputArg = ft_strdup(color);
 	else
-		data->current->outputArg = ft_strjoinaf1(data->current->outputArg, color);
+		data->current->outputArg = ft_strjoinaf1(\
+			data->current->outputArg, color);
 	data->moveInArg += move;
 }
 
-void      flagColorFG(t_data *data, const char *arguments) {
+void	flagColorFG(t_data *data, const char *arguments)
+{
 	if (ft_strncmp("RED", arguments, 3) == 0)
 		flagColorMoveInArg(data, FG_RED, 3);
 	else if (ft_strncmp("BLUE", arguments, 4) == 0)
@@ -59,7 +62,8 @@ void      flagColorFG(t_data *data, const char *arguments) {
 		data->error = 1;
 }
 
-void      flagColorBG(t_data *data, const char *arguments) {
+void	flagColorBG(t_data *data, const char *arguments)
+{
 	if (ft_strncmp("RED", arguments, 3) == 0)
 		flagColorMoveInArg(data, BG_RED, 3);
 	else if (ft_strncmp("BLUE", arguments, 4) == 0)
@@ -98,8 +102,8 @@ void      flagColorBG(t_data *data, const char *arguments) {
 		data->error = 1;
 }
 
-void      flagColorNO(t_data *data, const char *arguments) {
-	// printf("\nString received = [%s]\n", arguments);
+void	flagColorNO(t_data *data, const char *arguments)
+{
 	if (ft_strncmp("BLINK", arguments, 5) == 0)
 		flagColorMoveInArg(data, NO_BLINK, 5);
 	else if (ft_strncmp("REVERSE", arguments, 7) == 0)
@@ -112,7 +116,8 @@ void      flagColorNO(t_data *data, const char *arguments) {
 		data->error = 1;
 }
 
-int8_t	flagColorOther(t_data *data, const char *arguments) {
+int8_t	flagColorOther(t_data *data, const char *arguments)
+{
 	if (ft_strncmp("BOLD", arguments, 4) == 0)
 		flagColorMoveInArg(data, BOLD, 4);
 	else if (ft_strncmp("FAINT", arguments, 5) == 0)
@@ -128,16 +133,12 @@ int8_t	flagColorOther(t_data *data, const char *arguments) {
 	else if (ft_strncmp("UNDERLINE", arguments, 9) == 0)
 		flagColorMoveInArg(data, UNDERLINE, 9);
 	else
-	{
-		// printf("WTFFFFFF\n");
 		return (1);
-	}
 	return (0);
 }
 
-void      flagColorFd(t_data *data, const char *arguments) {
-	// printf("\nCOLORFD = [%s]\n", arguments);
-	// printf("\nPASS HERE\n");
+void	flagColorFd(t_data *data, const char *arguments)
+{
 	data->moveInArg++;
 	if (ft_strncmp("FD", arguments, 2) == 0)
 	{
@@ -165,7 +166,6 @@ void      flagColorFd(t_data *data, const char *arguments) {
 	{
 		data->error = 1;
 		// data->lenSoFar -= ft_strlen(data->current->outputArg);
-
 	}
 	if (data->error != 0)
 	{
@@ -174,15 +174,17 @@ void      flagColorFd(t_data *data, const char *arguments) {
 		data->moveInArg = 1;
 		return ;
 	}
-	// printf("OUTPUT ARG = [%s]\n", data->current->outputArg);
 	data->colorSet = 1;
 }
 
-int8_t    verifFlagAlreadyUsed(t_data *data, char flag) {
-	if (flag == '.') {
-		if (data->current->flagDot == 1) {
+int8_t	verifFlagAlreadyUsed(t_data *data, char flag)
+{
+	if (flag == '.')
+	{
+		if (data->current->flagDot == 1)
+		{
 			data->error = 2;
-				return (0);
+			return (0);
 		}
 		data->current->flagDot = 1;
 		if (data->current->flagZero > 0)
@@ -192,26 +194,19 @@ int8_t    verifFlagAlreadyUsed(t_data *data, char flag) {
 		}
 		return (1);
 	}
-	// else if (flag == 'w') {
-	// 	if (data->current->flagWidthNb == 1) {
-	// 		data->error = 2;
-	// 			return (0);
-	// 	}
-	// 	data->current->flagWidthNb = 1;
-	// 	return (1);
-	// }
 	return (0);
 }
 
-void      flagDot(t_data *data) {
-	size_t     	precision;
-	int			argWildcard;
-	char        numeral;
-	size_t      tmpMoveInArg;
+void	flagDot(t_data *data)
+{
+	size_t	precision;
+	int		argWildcard;
+	char	numeral;
+	size_t	tmpMoveInArg;
 
 	precision = 0;
 	tmpMoveInArg = data->moveInArg;
-	++data->moveInArg; // to put cursor on the first numeral
+	++data->moveInArg;
 	if (data->format[data->formatPos + data->moveInArg] == '*')
 	{
 		argWildcard = va_arg(data->ap, int);
@@ -224,32 +219,34 @@ void      flagDot(t_data *data) {
 			data->current->precision = (size_t)argWildcard;
 		return ;
 	}
-	while (ft_isdigit((numeral = data->format[data->formatPos + data->moveInArg]))) {
+	while (ft_isdigit((numeral = data->format\
+		[data->formatPos + data->moveInArg])))
+	{
 		precision *= 10;
 		precision += (int)numeral - 48;
 		data->moveInArg++;
 	}
-	if (tmpMoveInArg != data->moveInArg) {
+	if (tmpMoveInArg != data->moveInArg)
 		data->moveInArg--;
-	}
 	data->current->precision = precision;
-	// printf("PREC FUNCTION: precision = %zu and tmp = %lu and moveInArg = %lu and last char = %c\n", precision, tmpMoveInArg, data->moveInArg, numeral);
 }
 
-void      flagWidthNb(t_data *data) {
-	size_t		width;
-	char        numeral;
-	size_t      tmpMoveInArg;
+void	flagWidthNb(t_data *data)
+{
+	size_t	width;
+	char	numeral;
+	size_t	tmpMoveInArg;
 
 	width = 0;
 	tmpMoveInArg = data->moveInArg;
-	while (ft_isdigit((numeral = data->format[data->formatPos + data->moveInArg]))) {
+	while (ft_isdigit((numeral = data->format\
+		[data->formatPos + data->moveInArg])))
+	{
 		width *= 10;
 		width += (int)numeral - 48;
 		data->moveInArg++;
 	}
-	if (tmpMoveInArg != data->moveInArg) {
+	if (tmpMoveInArg != data->moveInArg)
 		data->moveInArg--;
-	}
 	data->current->width = width;
 }

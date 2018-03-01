@@ -71,7 +71,7 @@ int			ft_printf(const char * restrict format, ...) {
 		data.formatPos++;
 		data.lenSoFar++;
 	}
-	printArgAndFree(&data);
+	print_arg_and_free(&data);
 	length = data.lenSoFar;
 	free(data.formatMod);
 	va_end(data.ap);
