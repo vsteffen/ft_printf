@@ -1,7 +1,7 @@
 # **************************************************************************** #
 #                                                                              #
 #                                                         :::      ::::::::    #
-#    newMakefile                                        :+:      :+:    :+:    #
+#    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
 #    By: vsteffen <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
@@ -120,6 +120,8 @@ SRC =	ft_atoi.c \
 		$(PRINTF)/print.c \
 		$(PRINTF)/arg_list.c \
 		$(PRINTF)/flag.c \
+		$(PRINTF)/flag_color1.c \
+		$(PRINTF)/flag_color2.c \
 		$(PRINTF)/ft_printf.c \
 		$(PRINTF)/length_conversion1.c \
 		$(PRINTF)/length_conversion2.c \
@@ -127,7 +129,8 @@ SRC =	ft_atoi.c \
 		$(PRINTF)/parser.c \
 		$(PRINTF)/transform_base.c \
 		$(PRINTF)/transform_d.c \
-		$(PRINTF)/transform_f.c \
+		$(PRINTF)/transform_f1.c \
+		$(PRINTF)/transform_f2.c \
 		$(PRINTF)/transform_gen.c \
 		$(PRINTF)/transform_p.c \
 		$(PRINTF)/transform_r.c \

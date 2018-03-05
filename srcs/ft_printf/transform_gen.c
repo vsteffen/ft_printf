@@ -1,10 +1,24 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   transform_gen.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: vsteffen <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/03/05 22:05:28 by vsteffen          #+#    #+#             */
+/*   Updated: 2018/03/05 22:06:09 by vsteffen         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_printf.h"
 
-char	*malloc_prec_zero_doux(size_t precision, t_data *data, char conversion) {
+char	*malloc_prec_zero_doux(size_t precision, t_arg *arg, char conversion)
+{
 	char		*output;
 	size_t		pos;
 
-	if (data->current->flagMore && data->current->flagDot == 0 && (conversion == 'd' || conversion == 'f'))
+	if (arg->flag_more && arg->flag_dot == 0 && \
+		(conversion == 'd' || conversion == 'f'))
 		return (ft_strdup("+0"));
 	if (precision == 0)
 		return (ft_strdup("0"));
@@ -16,7 +30,8 @@ char	*malloc_prec_zero_doux(size_t precision, t_data *data, char conversion) {
 	return (output);
 }
 
-void			transform_n(t_data *data, intmax_t *varIntMax) {
-	*varIntMax = data->lenSoFar;
-	data->current->outputArg = ft_strdup("");
+void	transform_n(t_data *data, intmax_t *var_int_max)
+{
+	*var_int_max = data->len_so_far;
+	data->current->output_arg = ft_strdup("");
 }

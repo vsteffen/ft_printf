@@ -36,7 +36,7 @@ void	detect_length_mod_l2(t_data *data, char conversion)
 void	detect_length_mod_l1(t_data *data, char conversion)
 {
 	if (conversion == 'd' || conversion == 'i')
-		transform_d(data, (long)va_arg(data->ap, long));
+		transform_d(data->current, (long)va_arg(data->ap, long));
 	else if (conversion == 'o')
 		transform_o(data, (unsigned long)va_arg(data->ap, unsigned long));
 	else if (conversion == 'u')
@@ -46,7 +46,7 @@ void	detect_length_mod_l1(t_data *data, char conversion)
 	else if (conversion == 'X')
 		transform_X(data, (unsigned long)va_arg(data->ap, unsigned long));
 	else if (conversion == 'D')
-		transform_d(data, (long int)va_arg(data->ap, long int));
+		transform_d(data->current, (long int)va_arg(data->ap, long int));
 	else if (conversion == 'O')
 		transform_o(data, (unsigned long int)va_arg(data->ap, \
 			unsigned long int));
@@ -77,7 +77,7 @@ void	detect_length_mod_ll2(t_data *data, char conversion)
 void	detect_length_mod_ll1(t_data *data, char conversion)
 {
 	if (conversion == 'd' || conversion == 'i')
-		transform_d(data, (long long)va_arg(data->ap, long long));
+		transform_d(data->current, (long long)va_arg(data->ap, long long));
 	else if (conversion == 'o')
 		transform_o(data, (unsigned long long)va_arg(data->ap, \
 			unsigned long long));
@@ -91,7 +91,7 @@ void	detect_length_mod_ll1(t_data *data, char conversion)
 		transform_X(data, (unsigned long long)va_arg(data->ap, \
 			unsigned long long));
 	else if (conversion == 'D')
-		transform_d(data, (long int)va_arg(data->ap, long long int));
+		transform_d(data->current, (long int)va_arg(data->ap, long long int));
 	else
 		detect_length_mod_ll2(data, conversion);
 }

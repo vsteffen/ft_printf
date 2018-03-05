@@ -39,82 +39,82 @@ char			*ft_itoa_base_printf(uintmax_t nb, uint8_t base, char *alph, size_t prec)
 }
 
 void			transform_o(t_data *data, uintmax_t varUIntMax) {
-	if (data->current->flagHash == 1)
+	if (data->current->flag_hash == 1)
 	{
-		// if (data->current->precision == 0 && data->current->flagDot == 1)
+		// if (data->current->precision == 0 && data->current->flag_dot == 1)
 		if (varUIntMax == 0)
 		{
 			// printf("\nICI 1\n");
-			if (data->current->flagDot == 1 && data->current->precision > 0)
-				data->current->outputArg = malloc_prec_zero_doux(data->current->precision, data, 'o');
+			if (data->current->flag_dot == 1 && data->current->precision > 0)
+				data->current->output_arg = malloc_prec_zero_doux(data->current->precision, data->current, 'o');
 			else
-				data->current->outputArg = ft_strdup("0");
+				data->current->output_arg = ft_strdup("0");
 		}
-		else if (data->current->flagDot == 1)
+		else if (data->current->flag_dot == 1)
 		{
-			data->current->outputArg = ft_itoa_base_printf(varUIntMax, 8, "0123456789abcdef", data->current->precision);
+			data->current->output_arg = ft_itoa_base_printf(varUIntMax, 8, "0123456789abcdef", data->current->precision);
 			if (data->current->precision == 0)
-				data->current->outputArg = ft_strjoinaf2("0", data->current->outputArg);
+				data->current->output_arg = ft_strjoinaf2("0", data->current->output_arg);
 		}
 		else
 		{
-			data->current->outputArg = ft_itoa_base_printf(varUIntMax, 8, "0123456789abcdef", data->current->precision);
-				data->current->outputArg = ft_strjoinaf2("0", data->current->outputArg);
+			data->current->output_arg = ft_itoa_base_printf(varUIntMax, 8, "0123456789abcdef", data->current->precision);
+				data->current->output_arg = ft_strjoinaf2("0", data->current->output_arg);
 		}
 		return ;
 	}
 	else if (varUIntMax == 0)
 	{
-		if (data->current->precision == 0 && data->current->flagDot == 1)
-			data->current->outputArg = ft_strdup("");
+		if (data->current->precision == 0 && data->current->flag_dot == 1)
+			data->current->output_arg = ft_strdup("");
 		else
-			data->current->outputArg = malloc_prec_zero_doux(data->current->precision, data, 'o');
+			data->current->output_arg = malloc_prec_zero_doux(data->current->precision, data->current, 'o');
 		return ;
 	}
 	else
-		data->current->outputArg = ft_itoa_base_printf(varUIntMax, 8, "0123456789abcdef", data->current->precision);
+		data->current->output_arg = ft_itoa_base_printf(varUIntMax, 8, "0123456789abcdef", data->current->precision);
 }
 
 void			transform_u(t_data *data, uintmax_t varUIntMax) {
 	if (varUIntMax == 0)
 	{
-		if (data->current->precision == 0 && data->current->flagDot == 1)
-			data->current->outputArg = ft_strdup("");
+		if (data->current->precision == 0 && data->current->flag_dot == 1)
+			data->current->output_arg = ft_strdup("");
 		else
-			data->current->outputArg = malloc_prec_zero_doux(data->current->precision, data, 'u');
+			data->current->output_arg = malloc_prec_zero_doux(data->current->precision, data->current, 'u');
 	}
 	else
-		data->current->outputArg = ft_itoa_base_printf(varUIntMax, 10, "0123456789abcdef", data->current->precision);
+		data->current->output_arg = ft_itoa_base_printf(varUIntMax, 10, "0123456789abcdef", data->current->precision);
 }
 
 void			transform_x(t_data *data, uintmax_t varUIntMax) {
 	if (varUIntMax == 0)
 	{
-		if (data->current->precision == 0 && data->current->flagDot == 1)
-			data->current->outputArg = ft_strdup("");
+		if (data->current->precision == 0 && data->current->flag_dot == 1)
+			data->current->output_arg = ft_strdup("");
 		else
-			data->current->outputArg = malloc_prec_zero_doux(data->current->precision, data, 'x');
+			data->current->output_arg = malloc_prec_zero_doux(data->current->precision, data->current, 'x');
 	}
 	else
-		data->current->outputArg = ft_itoa_base_printf(varUIntMax, 16, "0123456789abcdef", data->current->precision);
-	if (data->current->flagHash && varUIntMax > 0)
+		data->current->output_arg = ft_itoa_base_printf(varUIntMax, 16, "0123456789abcdef", data->current->precision);
+	if (data->current->flag_hash && varUIntMax > 0)
 	{
-		data->current->outputArg = ft_strjoinaf2("0x", data->current->outputArg);
+		data->current->output_arg = ft_strjoinaf2("0x", data->current->output_arg);
 	}
 }
 
 void			transform_X(t_data *data, uintmax_t varUIntMax) {
 	if (varUIntMax == 0)
 	{
-		if (data->current->precision == 0 && data->current->flagDot == 1)
-			data->current->outputArg = ft_strdup("");
+		if (data->current->precision == 0 && data->current->flag_dot == 1)
+			data->current->output_arg = ft_strdup("");
 		else
-			data->current->outputArg = malloc_prec_zero_doux(data->current->precision, data, 'X');
+			data->current->output_arg = malloc_prec_zero_doux(data->current->precision, data->current, 'X');
 	}
 	else
-		data->current->outputArg = ft_itoa_base_printf(varUIntMax, 16, "0123456789ABCDEF", data->current->precision);
-	if (data->current->flagHash && varUIntMax > 0)
+		data->current->output_arg = ft_itoa_base_printf(varUIntMax, 16, "0123456789ABCDEF", data->current->precision);
+	if (data->current->flag_hash && varUIntMax > 0)
 	{
-		data->current->outputArg = ft_strjoinaf2("0X", data->current->outputArg);
+		data->current->output_arg = ft_strjoinaf2("0X", data->current->output_arg);
 	}
 }

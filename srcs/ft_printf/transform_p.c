@@ -39,12 +39,12 @@ void			transform_p(t_data *data, void *ptr) {
 	uintptr_t uip = (uintptr_t)ptr;
 	if (uip == 0)
 	{
-		if (data->current->precision == 0 && data->current->flagDot == 1)
-			data->current->outputArg = ft_strdup("");
+		if (data->current->precision == 0 && data->current->flag_dot == 1)
+			data->current->output_arg = ft_strdup("");
 		else
-			data->current->outputArg = malloc_prec_zero_doux(data->current->precision, data, 'd');
+			data->current->output_arg = malloc_prec_zero_doux(data->current->precision, data->current, 'd');
 	}
 	else
-		data->current->outputArg = ft_ptoa_base_printf(uip, 16, "0123456789abcdef", data->current->precision);
-	data->current->outputArg = ft_strjoinaf2("0x", data->current->outputArg);
+		data->current->output_arg = ft_ptoa_base_printf(uip, 16, "0123456789abcdef", data->current->precision);
+	data->current->output_arg = ft_strjoinaf2("0x", data->current->output_arg);
 }

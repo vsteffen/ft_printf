@@ -7,7 +7,7 @@ void			transform_r(t_data *data, int64_t byte) {
 	size_t		count;
 
 	prec = data->current->precision;
-	if (data->current->flagDot != 1)
+	if (data->current->flag_dot != 1)
 		prec = 64;
 	if (prec == 0)
 		return ;
@@ -26,5 +26,5 @@ void			transform_r(t_data *data, int64_t byte) {
 		tmpInt64 *= 2;
 		count--;
 	}
-	data->current->outputArg = output;
+	data->current->output_arg = output;
 }

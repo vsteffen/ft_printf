@@ -1,13 +1,13 @@
 #include "ft_printf.h"
 
-char	*ft_strdup_mod_prec(const char *s, size_t prec, int8_t flagAsterisk)
+char	*ft_strdup_mod_prec(const char *s, size_t prec, int8_t flag_asterisk)
 {
 	size_t		pos;
 	char		*dest;
 
 	pos = 0;
 	dest = (char*)mallocp(sizeof(char) * prec + 1);
-	while (s[pos] && (flagAsterisk == 1 || prec > pos))
+	while (s[pos] && (flag_asterisk == 1 || prec > pos))
 	{
 		dest[pos] = s[pos];
 		pos++;
@@ -22,25 +22,25 @@ void			transform_c(t_data *data, char varChar) {
 	output = (char*)malloc(sizeof(char) * 2);
 	output[0] = varChar;
 	output[1] = '\0';
-	data->current->outputArg = output;
+	data->current->output_arg = output;
 	if (varChar == '\0')
-		data->current->outputLength++;
+		data->current->output_length++;
 }
 
 void			transform_s(t_data *data, char *varString) {
 	if (varString == NULL)
 	{
-		if (data->current->flagDot == 1)
-			data->current->outputArg = ft_strdup_mod_prec("(null)", data->current->precision, data->current->flagAsterisk);
+		if (data->current->flag_dot == 1)
+			data->current->output_arg = ft_strdup_mod_prec("(null)", data->current->precision, data->current->flag_asterisk);
 		else
-			data->current->outputArg = ft_strdup("(null)");
+			data->current->output_arg = ft_strdup("(null)");
 	}
 	else
 	{
-		if (data->current->flagDot == 1)
-			data->current->outputArg = ft_strdup_mod_prec(varString, data->current->precision, data->current->flagAsterisk);
+		if (data->current->flag_dot == 1)
+			data->current->output_arg = ft_strdup_mod_prec(varString, data->current->precision, data->current->flag_asterisk);
 		else
-			data->current->outputArg = ft_strdup(varString);
+			data->current->output_arg = ft_strdup(varString);
 
 	}
 }
@@ -101,22 +101,22 @@ void			transform_wide_c(t_data *data, wchar_t wide) {
 	char		*output;
 
 	output = (char *)malloc(sizeof(char) * 4 + 1);
-	if ((data->current->outputWideLength += get_wchar(wide, output, 0)) == 0)
+	if ((data->current->output_wide_length += get_wchar(wide, output, 0)) == 0)
 	{
 		// free(output);
 		data->error = 1;
 		return ;
 	}
-	output[data->current->outputWideLength] = '\0';
-	data->current->outputArg = output;
+	output[data->current->output_wide_length] = '\0';
+	data->current->output_arg = output;
 }
 
 void reset_output_for_precision(char *output, t_data *data, size_t tmpWideLength)
 {
-	while (tmpWideLength < data->current->outputWideLength)
+	while (tmpWideLength < data->current->output_wide_length)
 	{
-		output[data->current->outputWideLength] = '\0';
-		data->current->outputWideLength--;
+		output[data->current->output_wide_length] = '\0';
+		data->current->output_wide_length--;
 	}
 }
 
@@ -128,36 +128,36 @@ void			transform_wide_s(t_data *data, wchar_t *wide) {
 
 	if (wide == NULL)
 	{
-		data->current->outputArg = ft_strdup("(null)");
+		data->current->output_arg = ft_strdup("(null)");
 		return ;
 	}
-	// if (data->current->flagDot == 1 && data->current->outputWideLength > data->current->precision)
+	// if (data->current->flag_dot == 1 && data->current->output_wide_length > data->current->precision)
 	// {
-	// 	data->current->outputArg = malloc_prec_zero_doux(data->current->precision, data, 'd');
+	// 	data->current->output_arg = malloc_prec_zero_doux(data->current->precision, data->current, 'd');
 	// }
 	length = ft_wstrlen(wide);
 	output = (char *)malloc(sizeof(char) * length * 4 + 1);
 	pos = 0;
 	tmpWideLength = 0;
-	data->current->outputWideLength = 0;
+	data->current->output_wide_length = 0;
 	while (wide[pos])
 	{
-		tmpWideLength = data->current->outputWideLength;
-		if ((data->current->outputWideLength += get_wchar(wide[pos], output, data->current->outputWideLength)) == 0)
+		tmpWideLength = data->current->output_wide_length;
+		if ((data->current->output_wide_length += get_wchar(wide[pos], output, data->current->output_wide_length)) == 0)
 		{
 			data->error = 1;
 			return ;
 		}
-		if (data->current->flagAsterisk == 0 && data->current->flagDot == 1 && data->current->outputWideLength > data->current->precision)
+		if (data->current->flag_asterisk == 0 && data->current->flag_dot == 1 && data->current->output_wide_length > data->current->precision)
 		{
 			reset_output_for_precision(output, data, tmpWideLength);
 			break ;
 		}
 		pos++;
 	}
-	output[data->current->outputWideLength] = '\0';
+	output[data->current->output_wide_length] = '\0';
 	// printf("Value of first char [%x] [%x] [%x] [%x]\n", output[0], output[1], output[2], output[3]);
 	// printf("First char = [%s]\n", output);
-	data->current->outputArg = output;
-	data->current->outputWideLength = data->current->outputWideLength;
+	data->current->output_arg = output;
+	data->current->output_wide_length = data->current->output_wide_length;
 }
