@@ -88,14 +88,14 @@ void						transform_s(t_data *data, char *varString);
 void						transform_wide_c(t_data *data, wchar_t wide);
 void						transform_wide_s(t_data *data, wchar_t *wide);
 void						transform_d(t_arg *arg, intmax_t var_int_max);
-void						transform_o(t_data *data, uintmax_t varUIntMax);
-void						transform_u(t_data *data, uintmax_t varUIntMax);
-void						transform_x(t_data *data, uintmax_t varUIntMax);
-void						transform_X(t_data *data, uintmax_t varUIntMax);
+void						transform_o(t_arg *arg, uintmax_t var_uintmax);
+void						transform_u(t_arg *arg, uintmax_t var_uintmax);
+void						transform_x(t_arg *arg, uintmax_t var_uintmax);
+void						transform_bx(t_arg *arg, uintmax_t var_uintmax);
 void						transform_n(t_data *data, intmax_t *var_int_max);
 void						transform_f(t_arg *arg, double var_float);
-void						transform_p(t_data *data, void *ptr);
-void						transform_r(t_data *data, int64_t byte);
+void						transform_p(t_arg *arg, void *ptr);
+void						transform_r(t_arg *arg, int64_t byte);
 
 char						*ft_itoa_base_printf(uintmax_t nb, uint8_t base, \
 								char *alph, size_t prec);

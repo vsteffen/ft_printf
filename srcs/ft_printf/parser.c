@@ -18,19 +18,19 @@ int		detect_pattern(t_data *data, char charAnalyse) {
 		return (0);
 	}
 	else if (charAnalyse == 'o') {
-		transform_o(data, (unsigned int)va_arg(data->ap, int));
+		transform_o(data->current, (unsigned int)va_arg(data->ap, int));
 		return (0);
 	}
 	else if (charAnalyse == 'u') {
-		transform_u(data, (unsigned int)va_arg(data->ap, int));
+		transform_u(data->current, (unsigned int)va_arg(data->ap, int));
 		return (0);
 	}
 	else if (charAnalyse == 'x') {
-		transform_x(data, (unsigned int)va_arg(data->ap, int));
+		transform_x(data->current, (unsigned int)va_arg(data->ap, int));
 		return (0);
 	}
 	else if (charAnalyse == 'X') {
-		transform_X(data, (unsigned int)va_arg(data->ap, int));
+		transform_bx(data->current, (unsigned int)va_arg(data->ap, int));
 		return (0);
 	}
 	else if (charAnalyse == 'D') {
@@ -38,19 +38,19 @@ int		detect_pattern(t_data *data, char charAnalyse) {
 		return (0);
 	}
 	else if (charAnalyse == 'O') {
-		transform_o(data, (long int)va_arg(data->ap, long int));
+		transform_o(data->current, (long int)va_arg(data->ap, long int));
 		return (0);
 	}
 	else if (charAnalyse == 'U') {
-		transform_u(data, (long int)va_arg(data->ap, long int));
+		transform_u(data->current, (long int)va_arg(data->ap, long int));
 		return (0);
 	}
 	else if (charAnalyse == 'p') {
-		transform_p(data, va_arg(data->ap, void *));
+		transform_p(data->current, va_arg(data->ap, void *));
 		return (0);
 	}
 	else if (charAnalyse == 'r') {
-		transform_r(data, (int64_t)va_arg(data->ap, int64_t));
+		transform_r(data->current, (int64_t)va_arg(data->ap, int64_t));
 		return (0);
 	}
 	else if (charAnalyse == 'n') {

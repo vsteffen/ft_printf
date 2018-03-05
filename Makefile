@@ -133,7 +133,6 @@ SRC =	ft_atoi.c \
 		$(PRINTF)/transform_f2.c \
 		$(PRINTF)/transform_gen.c \
 		$(PRINTF)/transform_p.c \
-		$(PRINTF)/transform_r.c \
 		$(PRINTF)/transform_wide.c
 
 .PHONY: all clean fclean re
