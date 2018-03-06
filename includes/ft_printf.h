@@ -67,12 +67,21 @@ typedef struct				s_struct_fl_do {
 	char					sign_char;
 }							t_struct_fl_do;
 
-int							ft_printf(const char *restrict format, ...);
+typedef struct				s_wide_s {
+	size_t					pos;
+	char					*output;
+	size_t					tmp_wlength;
+}							t_wide_s;
 
-int							parse_and_move_format(t_data *data);
+int							ft_printf(const char *restrict format, ...);
 
 t_arg						*create_struct_arg(t_data *data);
 void						print_arg_and_free(t_data *data);
+
+int							parse_and_move_format(t_data *data);
+int8_t						parser_conv1(t_data *data, char char_analyse);
+int8_t						parser_mod1(t_data *data, char char_analyse);
+int8_t						parser_flag1(t_data *data, char char_analyse);
 
 void						detect_length_mod_hh1(t_data *data, \
 								char conversion);
@@ -83,15 +92,17 @@ void						detect_length_mod_ll1(t_data *data, \
 void						detect_length_mod_j1(t_data *data, char conversion);
 void						detect_length_mod_z1(t_data *data, char conversion);
 
-void						transform_c(t_data *data, char varInt);
-void						transform_s(t_data *data, char *varString);
-void						transform_wide_c(t_data *data, wchar_t wide);
-void						transform_wide_s(t_data *data, wchar_t *wide);
+void						transform_c(t_arg *arg, char var_int);
+void						transform_s(t_arg *arg, char *var_string);
+void						transform_wide_c(t_data *data, t_arg *arg, \
+	wchar_t wide);
+void						transform_wide_s(t_data *data, t_arg *arg, \
+	wchar_t *wide);
 void						transform_d(t_arg *arg, intmax_t var_int_max);
 void						transform_o(t_arg *arg, uintmax_t var_uintmax);
 void						transform_u(t_arg *arg, uintmax_t var_uintmax);
 void						transform_x(t_arg *arg, uintmax_t var_uintmax);
-void						transform_bx(t_arg *arg, uintmax_t var_uintmax);
+void						transform_big_x(t_arg *arg, uintmax_t var_uintmax);
 void						transform_n(t_data *data, intmax_t *var_int_max);
 void						transform_f(t_arg *arg, double var_float);
 void						transform_p(t_arg *arg, void *ptr);
@@ -99,12 +110,13 @@ void						transform_r(t_arg *arg, int64_t byte);
 
 char						*ft_itoa_base_printf(uintmax_t nb, uint8_t base, \
 								char *alph, size_t prec);
-
 char						*malloc_prec_zero_doux(size_t prec, t_arg *arg, \
 								char conversion);
-
+uint8_t						count_numeral_base(uintmax_t nb, uint8_t base);
 int64_t						ft_pow_printf(int64_t nb, uint8_t power);
 int64_t						ft_round_printf(double nb);
+int8_t						get_wchar1(wchar_t wide, char *output, \
+	size_t output_pos);
 
 int8_t						verif_flag_already_used(t_data *data, char flag);
 void						flag_dot(t_data *data);
@@ -116,7 +128,6 @@ int8_t						flag_color_other(t_data *data, \
 								const char *arguments);
 void						flag_color_move_in_arg(t_data *data, \
 								const char *color, size_t move);
-
 void						flag_width_nb(t_data *data);
 
 #endif

@@ -22,9 +22,10 @@ void	detect_length_mod_hh2(t_data *data, char conversion)
 	else if (conversion == 'p')
 		transform_p(data->current, va_arg(data->ap, void *));
 	else if (conversion == 'C')
-		transform_wide_c(data, (wchar_t)va_arg(data->ap, wint_t));
+		transform_wide_c(data, data->current, \
+			(wchar_t)va_arg(data->ap, wint_t));
 	else if (conversion == 'S')
-		transform_wide_s(data, va_arg(data->ap, wchar_t *));
+		transform_wide_s(data, data->current, va_arg(data->ap, wchar_t *));
 	else
 		data->error = 1;
 }
@@ -40,7 +41,7 @@ void	detect_length_mod_hh1(t_data *data, char conversion)
 	else if (conversion == 'x')
 		transform_x(data->current, (unsigned char)va_arg(data->ap, int));
 	else if (conversion == 'X')
-		transform_bx(data->current, (unsigned char)va_arg(data->ap, int));
+		transform_big_x(data->current, (unsigned char)va_arg(data->ap, int));
 	else if (conversion == 'D')
 		transform_d(data->current, (long int)va_arg(data->ap, long int));
 	else if (conversion == 'O')
@@ -60,9 +61,10 @@ void	detect_length_mod_h2(t_data *data, char conversion)
 	else if (conversion == 'p')
 		transform_p(data->current, va_arg(data->ap, void *));
 	else if (conversion == 'C')
-		transform_wide_c(data, (wchar_t)va_arg(data->ap, wint_t));
+		transform_wide_c(data, data->current, \
+			(wchar_t)va_arg(data->ap, wint_t));
 	else if (conversion == 'S')
-		transform_wide_s(data, va_arg(data->ap, wchar_t *));
+		transform_wide_s(data, data->current, va_arg(data->ap, wchar_t *));
 	else
 		data->error = 1;
 }
@@ -78,7 +80,7 @@ void	detect_length_mod_h1(t_data *data, char conversion)
 	else if (conversion == 'x')
 		transform_x(data->current, (unsigned short)va_arg(data->ap, int));
 	else if (conversion == 'X')
-		transform_bx(data->current, (unsigned short)va_arg(data->ap, int));
+		transform_big_x(data->current, (unsigned short)va_arg(data->ap, int));
 	else if (conversion == 'D')
 		transform_d(data->current, (long int)va_arg(data->ap, long int));
 	else if (conversion == 'O')

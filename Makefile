@@ -127,13 +127,19 @@ SRC =	ft_atoi.c \
 		$(PRINTF)/length_conversion2.c \
 		$(PRINTF)/length_conversion3.c \
 		$(PRINTF)/parser.c \
-		$(PRINTF)/transform_base.c \
+		$(PRINTF)/parser_conv.c \
+		$(PRINTF)/parser_mod.c \
+		$(PRINTF)/parser_flag.c \
+		$(PRINTF)/transform_base1.c \
+		$(PRINTF)/transform_base2.c \
 		$(PRINTF)/transform_d.c \
 		$(PRINTF)/transform_f1.c \
 		$(PRINTF)/transform_f2.c \
 		$(PRINTF)/transform_gen.c \
 		$(PRINTF)/transform_p.c \
-		$(PRINTF)/transform_wide.c
+		$(PRINTF)/transform_cs.c \
+		$(PRINTF)/transform_wide1.c \
+		$(PRINTF)/transform_wide2.c
 
 .PHONY: all clean fclean re
 

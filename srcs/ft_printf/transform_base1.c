@@ -1,54 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   transform_base.c                                   :+:      :+:    :+:   */
+/*   transform_base1.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vsteffen <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/03/05 23:19:05 by vsteffen          #+#    #+#             */
-/*   Updated: 2018/03/05 23:21:28 by vsteffen         ###   ########.fr       */
+/*   Created: 2018/03/06 16:55:05 by vsteffen          #+#    #+#             */
+/*   Updated: 2018/03/06 16:55:22 by vsteffen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-
-static uint8_t		count_numeral_base(uintmax_t nb, uint8_t base)
-{
-	uint8_t		count;
-
-	count = 1;
-	while (nb /= base)
-		++count;
-	return (count);
-}
-
-char				*ft_itoa_base_printf(uintmax_t nb, uint8_t base, \
-	char *alph, size_t prec)
-{
-	char		*output;
-	size_t		length;
-
-	if (nb == 0)
-		return (ft_strdup("0"));
-	length = (size_t)count_numeral_base(nb, base);
-	if (length < prec)
-		length = prec;
-	output = (char *)mallocp(sizeof(char) * length + 1);
-	output[length] = '\0';
-	while (nb != 0)
-	{
-		length--;
-		output[length] = alph[nb % base];
-		nb /= base;
-	}
-	if (length > 0)
-	{
-		while (--length > 0)
-			output[length] = '0';
-		output[0] = '0';
-	}
-	return (output);
-}
 
 void				transform_o_flag_hash(t_arg *arg, uintmax_t var_uintmax)
 {
@@ -127,7 +89,7 @@ void				transform_x(t_arg *arg, uintmax_t var_uintmax)
 	}
 }
 
-void				transform_bx(t_arg *arg, uintmax_t var_uintmax)
+void				transform_big_x(t_arg *arg, uintmax_t var_uintmax)
 {
 	if (var_uintmax == 0)
 	{
