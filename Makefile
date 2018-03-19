@@ -12,8 +12,6 @@
 
 NAME = libftprintf.a
 
-# gcc main.c libftprintf.a -I includes -o ft_printf
-
 CC =	/usr/bin/clang
 RM =	/bin/rm
 MAKE =	/usr/bin/make
@@ -42,6 +40,11 @@ SRC =	ft_atoi.c \
 		ft_isupper.c \
 		ft_isprint.c \
 		ft_itoa.c \
+		ft_d_extract_round_int_part.c \
+		ft_dtoa.c \
+		ft_dtoa_clean.c \
+		ft_itoa_base.c \
+		ft_itoa_base_alph.c \
 		ft_lstadd.c \
 		ft_lstdel.c \
 		ft_lstdelone.c \
@@ -117,6 +120,8 @@ SRC =	ft_atoi.c \
 		ft_range.c \
 		ft_foreach.c \
 		mallocp.c \
+		ft_pow_int64.c \
+		ft_length_numeral_int64.c \
 		$(PRINTF)/print.c \
 		$(PRINTF)/arg_list.c \
 		$(PRINTF)/flag.c \

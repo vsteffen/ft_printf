@@ -1,26 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   transform_f2.c                                     :+:      :+:    :+:   */
+/*   ft_length_numeral_int64.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vsteffen <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/03/05 22:26:45 by vsteffen          #+#    #+#             */
-/*   Updated: 2018/03/05 22:26:48 by vsteffen         ###   ########.fr       */
+/*   Created: 2018/03/15 19:23:24 by vsteffen          #+#    #+#             */
+/*   Updated: 2018/03/15 19:25:10 by vsteffen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "libft.h"
 
-int64_t			ft_d_extract_round_int_part_printf(double nb)
+uint8_t	ft_length_numeral_int64(int64_t nb)
 {
-	return (nb >= 0 ? (int64_t)(nb + 0.5) : (int64_t)(nb - 0.5));
-}
+	uint8_t		count;
 
-void			transform_f(t_arg *arg, double var_float)
-{
-	arg->output_arg = ft_dtoa_printf(arg, var_float, arg->precision);
-	if (arg->flag_space == 1 && arg->output_arg[0] != '+' \
-		&& arg->output_arg[0] != '-')
-		arg->output_arg = ft_strjoinaf2(" ", arg->output_arg);
+	count = 1;
+	while (nb /= 10)
+		++count;
+	return (count);
 }

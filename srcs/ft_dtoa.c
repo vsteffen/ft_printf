@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   transform_f1.c                                     :+:      :+:    :+:   */
+/*   ft_dtoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vsteffen <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/03/05 22:26:40 by vsteffen          #+#    #+#             */
-/*   Updated: 2018/03/05 22:26:41 by vsteffen         ###   ########.fr       */
+/*   Created: 2018/03/13 11:19:22 by vsteffen          #+#    #+#             */
+/*   Updated: 2018/03/13 11:19:25 by vsteffen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "libft.h"
 
 static uint8_t	ft_dtoa_zero_after_dot(double nb, uint8_t prec)
 {
@@ -54,7 +54,7 @@ static int8_t	ft_dtoa_add_zero(t_struct_fldo *fldo, char *output, \
 	return (0);
 }
 
-void			fill_array_for_dtoa(char *output, uint8_t precision, \
+static void		fill_array_for_dtoa(char *output, uint8_t precision, \
 	t_struct_fldo *fldo)
 {
 	uint8_t		pos_after_dot;
@@ -82,35 +82,24 @@ void			fill_array_for_dtoa(char *output, uint8_t precision, \
 	}
 }
 
-void			ft_dtoa_printflag(t_struct_fldo *fldo, t_arg *arg, \
-	double tmp_double, uint8_t precision)
+static void		ft_dtoa_sign(t_struct_fldo *fldo, double tmp_double, \
+	uint8_t precision)
 {
 	if (fldo->before_dot < 0)
 	{
 		fldo->sign = 1;
 		fldo->sign_char = '-';
-		if (arg->flag_zero == 1)
-			arg->flag_zero = 2;
 		fldo->before_dot = -fldo->before_dot;
 		tmp_double = -tmp_double;
-		fldo->after_dot = ft_d_extract_round_int_part_printf(\
+		fldo->after_dot = ft_d_extract_round_int_part(\
 			tmp_double * (ft_pow_int64(10, precision)));
 	}
 	else
-	{
-		if (arg->flag_more)
-		{
-			fldo->sign = 1;
-			fldo->sign_char = '+';
-			if (arg->flag_zero == 1)
-				arg->flag_zero = 2;
-		}
-		fldo->after_dot = ft_d_extract_round_int_part_printf(\
+		fldo->after_dot = ft_d_extract_round_int_part(\
 			tmp_double * (ft_pow_int64(10, precision)));
-	}
 }
 
-char			*ft_dtoa_printf(t_arg *arg, double nb, uint8_t precision)
+char			*ft_dtoa(double nb, uint8_t precision)
 {
 	t_struct_fldo	fldo;
 	char			*output;
@@ -121,14 +110,14 @@ char			*ft_dtoa_printf(t_arg *arg, double nb, uint8_t precision)
 	fldo.sign = 0;
 	fldo.zero_after_dot = 0;
 	if (precision == 0)
-		fldo.before_dot = ft_d_extract_round_int_part_printf(nb);
+		fldo.before_dot = ft_d_extract_round_int_part(nb);
 	else
 		fldo.dot = 1;
 	if (precision > 18)
 		precision = 18;
 	fldo.length_before_dot = ft_length_numeral_int64((int64_t)fldo.before_dot);
 	tmp_double = nb - (double)fldo.before_dot;
-	ft_dtoa_printflag(&fldo, arg, tmp_double, precision);
+	ft_dtoa_sign(&fldo, tmp_double, precision);
 	if (fldo.dot)
 		fldo.zero_after_dot = ft_dtoa_zero_after_dot(tmp_double, precision);
 	if (fldo.sign)

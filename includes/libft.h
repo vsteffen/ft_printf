@@ -133,4 +133,12 @@ t_list				*ft_lstpcontent(t_list **alst, t_list *new);
 
 void				*mallocp(size_t size);
 
+char				*ft_itoa_base(uintmax_t nb, uint8_t base, size_t prec);
+char				*ft_itoa_base_alph(uintmax_t nb, uint8_t base, char *alph, \
+		size_t prec);
+char				*ft_dtoa(double nb, uint8_t precision);
+char				*ft_dtoa_clean(double nb, uint8_t precision);
+int64_t				ft_d_extract_round_int_part(double nb);
+int64_t				ft_pow_int64(int64_t nb, uint8_t power);
+uint8_t				ft_length_numeral_int64(int64_t nb);
 #endif

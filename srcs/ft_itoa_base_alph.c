@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_itoa_base.c                                     :+:      :+:    :+:   */
+/*   ft_itoa_base_alph.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vsteffen <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,10 +12,10 @@
 
 #include <libft.h>
 
-char			*ft_itoa_base(uintmax_t nb, uint8_t base, size_t prec)
+char			*ft_itoa_base_alph(uintmax_t nb, uint8_t base, char *alph, \
+	size_t prec)
 {
 	char		*output;
-	char		*alph;
 	size_t		length;
 
 	if (nb == 0)
@@ -25,7 +25,6 @@ char			*ft_itoa_base(uintmax_t nb, uint8_t base, size_t prec)
 		length = prec;
 	output = (char *)mallocp(sizeof(char) * length + 1);
 	output[length] = '\0';
-	alph = "0123456789abcdef";
 	while (nb != 0)
 	{
 		length--;

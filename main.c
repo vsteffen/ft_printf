@@ -21,16 +21,24 @@ int			main(int ac, char **av, char **env)
 	(void)ac;
 	(void)av;
 	(void)env;
-	setlocale(LC_CTYPE, "UTF-8");
-	printf("TESTING -> [%s] ARG = 0\n", "%#.3o");
-	printf("--------------------------\n");
-	write(1, "[", 1);
-	retour = ft_printf("POULET %{FD,BG_CYAN,FG_RED,UNDERLINE}TEST AWESOME%{FD} POUET%{FD} ALLOW -> %.4r", 2, 1, 2, 3);
-	write(1, "]\n", 2);
-	printf("Length ft_printf read : %d\n", retour);
-	printf("----------- VS -----------\n[");
-	retour = printf("%llu", -1);
-	printf("]\n");
-	printf("Length printf read : %d\n", retour);
+	printf("Try 1: (9999.121212121, 3) = [%s]\n", ft_dtoa(9999.121212121, 3));
+	printf("Try 2: (6.00012121212, 3) = [%s]\n", ft_dtoa(6.00012121212, 3));
+	printf("Try 3: (6.00012121212, 1) = [%s]\n", ft_dtoa(6.00012121212, 1));
+	printf("Try 4: (6.0, 3) = [%s]\n", ft_dtoa(6.0, 3));
+	printf("Try 5: (20.1, 1) = [%s]\n", ft_dtoa(20.1, 1));
+	printf("Try 6: (20.1, 0) = [%s]\n", ft_dtoa(20.1, 0));
+	printf("Try 7: (20, 1) = [%s]\n", ft_dtoa(20, 1));
+	printf("Try 8: (21.03, 1) = [%s]\n", ft_dtoa(21.03, 1));
+	printf("Try 9: (21.03, 6) = [%s]\n", ft_dtoa(21.03, 6));
+
+	printf("Try 11: (9999.121212121, 3) = [%.3f]\n", 9999.121212121);
+	printf("Try 12: (6.00012121212, 3) = [%.3f]\n", 6.00012121212);
+	printf("Try 13: (6.00012121212, 1) = [%.1f]\n", 6.00012121212);
+	printf("Try 14: (6.0, 3) = [%.3f]\n", 6.0);
+	printf("Try 15: (20.1, 1) = [%.1f]\n", 20.1);
+	printf("Try 16: (20.1, 0) = [%.0f]\n", 20.1);
+	printf("Try 17: (20, 1) = [%.1f]\n", 20);
+	printf("Try 18: (21.03, 1) = [%.1f]\n", 21.03);
+	printf("Try 19: (21.03, 6) = [%.6f]\n", 21.03);
 	return (0);
 }

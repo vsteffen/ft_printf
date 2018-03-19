@@ -1,26 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   transform_f2.c                                     :+:      :+:    :+:   */
+/*   ft_pow_int64.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vsteffen <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/03/05 22:26:45 by vsteffen          #+#    #+#             */
-/*   Updated: 2018/03/05 22:26:48 by vsteffen         ###   ########.fr       */
+/*   Created: 2018/03/15 19:25:34 by vsteffen          #+#    #+#             */
+/*   Updated: 2018/03/15 22:28:25 by vsteffen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "libft.h"
 
-int64_t			ft_d_extract_round_int_part_printf(double nb)
+int64_t	ft_pow_int64(int64_t nb, uint8_t power)
 {
-	return (nb >= 0 ? (int64_t)(nb + 0.5) : (int64_t)(nb - 0.5));
-}
+	int64_t		result;
+	uint8_t		count;
 
-void			transform_f(t_arg *arg, double var_float)
-{
-	arg->output_arg = ft_dtoa_printf(arg, var_float, arg->precision);
-	if (arg->flag_space == 1 && arg->output_arg[0] != '+' \
-		&& arg->output_arg[0] != '-')
-		arg->output_arg = ft_strjoinaf2(" ", arg->output_arg);
+	count = 0;
+	result = 1;
+	while (count < power)
+	{
+		result *= nb;
+		count++;
+	}
+	return (result);
 }

@@ -58,14 +58,15 @@ typedef struct				s_data {
 	t_arg					*current;
 }							t_data;
 
-typedef struct				s_struct_fl_do {
+typedef struct				s_struct_fldo {
 	int64_t					before_dot;
 	int64_t					after_dot;
 	int8_t					length_before_dot;
 	int8_t					dot;
+	uint8_t					zero_after_dot;
 	int8_t					sign;
 	char					sign_char;
-}							t_struct_fl_do;
+}							t_struct_fldo;
 
 typedef struct				s_wide_s {
 	size_t					pos;
@@ -108,13 +109,15 @@ void						transform_f(t_arg *arg, double var_float);
 void						transform_p(t_arg *arg, void *ptr);
 void						transform_r(t_arg *arg, int64_t byte);
 
+char						*ft_dtoa_printf(t_arg *arg, double nb, \
+	uint8_t precision);
 char						*ft_itoa_base_printf(uintmax_t nb, uint8_t base, \
 								char *alph, size_t prec);
 char						*malloc_prec_zero_doux(size_t prec, t_arg *arg, \
 								char conversion);
 uint8_t						count_numeral_base(uintmax_t nb, uint8_t base);
 int64_t						ft_pow_printf(int64_t nb, uint8_t power);
-int64_t						ft_round_printf(double nb);
+int64_t						ft_d_extract_round_int_part_printf(double nb);
 int8_t						get_wchar1(wchar_t wide, char *output, \
 	size_t output_pos);
 
