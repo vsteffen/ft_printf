@@ -36,7 +36,7 @@ void	transform_n(t_data *data, intmax_t *var_int_max)
 	data->current->output_arg = ft_strdup("");
 }
 
-void	transform_r_init_prec(size_t *prec, t_arg *arg)
+void	transform_b_init_prec(size_t *prec, t_arg *arg)
 {
 	*prec = arg->precision;
 	if (arg->flag_dot != 1)
@@ -45,14 +45,14 @@ void	transform_r_init_prec(size_t *prec, t_arg *arg)
 		*prec = 64;
 }
 
-void	transform_r(t_arg *arg, int64_t byte)
+void	transform_b(t_arg *arg, int64_t byte)
 {
 	size_t		prec;
 	char		*output;
 	int64_t		tmp_int_64;
 	size_t		count;
 
-	transform_r_init_prec(&prec, arg);
+	transform_b_init_prec(&prec, arg);
 	if (prec == 0)
 		return ;
 	output = (char *)malloc(sizeof(char) * prec + 1);

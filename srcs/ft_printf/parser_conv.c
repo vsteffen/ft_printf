@@ -14,9 +14,9 @@
 
 int8_t		parser_conv5(t_data *data, char char_analyse)
 {
-	if (char_analyse == 'r')
+	if (char_analyse == 'b')
 	{
-		transform_r(data->current, (int64_t)va_arg(data->ap, int64_t));
+		transform_b(data->current, (int64_t)va_arg(data->ap, int64_t));
 		return (0);
 	}
 	return (1);

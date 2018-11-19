@@ -107,7 +107,7 @@ void						transform_big_x(t_arg *arg, uintmax_t var_uintmax);
 void						transform_n(t_data *data, intmax_t *var_int_max);
 void						transform_f(t_arg *arg, double var_float);
 void						transform_p(t_arg *arg, void *ptr);
-void						transform_r(t_arg *arg, int64_t byte);
+void						transform_b(t_arg *arg, int64_t byte);
 
 char						*ft_dtoa_printf(t_arg *arg, double nb, \
 	uint8_t precision);
